@@ -11,7 +11,7 @@
 #include "EasyCryptoPrivMatrix.hpp"
 
 EasyCryptoLibBad::EasyCryptoLibBad()
-  : revCrypto(new EasyCryptoPrivReverse()), matCrypto(new EasyCryptoPrivMatrix())
+: revCrypto(new EasyCryptoPrivReverse()), matCrypto(new EasyCryptoPrivMatrix())
 {
 }
 
@@ -19,36 +19,36 @@ EasyCryptoLibBad::~EasyCryptoLibBad() {
 }
 
 void EasyCryptoLibBad::encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
-	revCrypto->decrypt(toEncrypt, toStoreTo);
+   revCrypto->decrypt(toEncrypt, toStoreTo);
 }
 
 void EasyCryptoLibBad::encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo) {
-	matCrypto->decrypt(toEncrypt, toStoreTo);
+   matCrypto->decrypt(toEncrypt, toStoreTo);
 }
 
 void EasyCryptoLibBad::decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
-	revCrypto->decrypt(toEncrypt, toStoreTo);
+   revCrypto->decrypt(toEncrypt, toStoreTo);
 }
 
 void EasyCryptoLibBad::decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo) {
-	matCrypto->decrypt(toEncrypt, toStoreTo);
+   matCrypto->decrypt(toEncrypt, toStoreTo);
 }
 
 
 void EasyCryptoLibBad::encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m) {
-	if (m == Method::Reverse) {
-		encryptWithReverse(toEncrypt, toStoreTo);
-	} else if (m == Method::Matrix) {
-		toStoreTo = "Not supported";
-		encryptWithMatrix(toEncrypt, toStoreTo);
-	}
+   if (m == Method::Reverse) {
+      encryptWithReverse(toEncrypt, toStoreTo);
+   } else if (m == Method::Matrix) {
+      toStoreTo = "Not supported";
+      encryptWithMatrix(toEncrypt, toStoreTo);
+   }
 }
 
 void EasyCryptoLibBad::decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m) {
-	if (m == Method::Reverse) {
-		decryptWithReverse(toDecrypt, toStoreTo);
-	} else if (m == Method::Matrix) {
-		toStoreTo = "Not supported";
-		decryptWithMatrix(toDecrypt, toStoreTo);
-	}
+   if (m == Method::Reverse) {
+      decryptWithReverse(toDecrypt, toStoreTo);
+   } else if (m == Method::Matrix) {
+      toStoreTo = "Not supported";
+      decryptWithMatrix(toDecrypt, toStoreTo);
+   }
 }

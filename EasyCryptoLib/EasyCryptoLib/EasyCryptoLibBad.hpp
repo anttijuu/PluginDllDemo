@@ -20,26 +20,26 @@ class EasyCryptoPrivMatrix;
 class EasyCryptoLibBad
 {
 private:
-	std::unique_ptr<EasyCryptoPrivReverse> revCrypto;
-	std::unique_ptr<EasyCryptoPrivMatrix> matCrypto;
-	
+   std::unique_ptr<EasyCryptoPrivReverse> revCrypto;
+   std::unique_ptr<EasyCryptoPrivMatrix> matCrypto;
+   
 public:
-	EasyCryptoLibBad();
-	~EasyCryptoLibBad();
-	
-	enum Method {
-		Reverse,
-		Matrix,
-	};
-	virtual void encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
-	virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
-	
-	virtual void decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
-	virtual void decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
-	
-	virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
-	virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m);
-	
+   EasyCryptoLibBad();
+   ~EasyCryptoLibBad();
+   
+   enum Method {
+      Reverse,
+      Matrix,
+   };
+   virtual void encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
+   virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
+   
+   virtual void decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
+   virtual void decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
+   
+   virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
+   virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m);
+   
 };
 
 

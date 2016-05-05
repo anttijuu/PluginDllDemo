@@ -17,9 +17,9 @@
 
 class EasyCryptoPrivReverse : public EasyCryptoPriv
 {
-	public:
-	virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
-	virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
+public:
+   virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
+   virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
 };
 
 #pragma GCC visibility pop
