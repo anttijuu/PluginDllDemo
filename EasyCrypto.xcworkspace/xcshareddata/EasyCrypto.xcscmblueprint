@@ -1,0 +1,29 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "78BF6F9E04417F626750D1C5CFA2A3C2351E15B8" : 0,
+    "79415A39B73B1D0B3A5FACB4AFC5F89B93266EA7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2EE6A755-45E7-4C33-B9C5-FCADB10E9492",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "78BF6F9E04417F626750D1C5CFA2A3C2351E15B8" : "EasyCrypto\/EasyCryptoLib\/",
+    "79415A39B73B1D0B3A5FACB4AFC5F89B93266EA7" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "EasyCrypto",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "EasyCrypto.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/anttijuu\/easycrypto.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78BF6F9E04417F626750D1C5CFA2A3C2351E15B8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/ipsoulu\/testrepo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "79415A39B73B1D0B3A5FACB4AFC5F89B93266EA7"
+    }
+  ]
+}
