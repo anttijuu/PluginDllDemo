@@ -19,11 +19,11 @@ EasyCryptoLibBad::~EasyCryptoLibBad() {
 }
 
 void EasyCryptoLibBad::encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
-   revCrypto->decrypt(toEncrypt, toStoreTo);
+   revCrypto->encrypt(toEncrypt, toStoreTo);
 }
 
 void EasyCryptoLibBad::encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo) {
-   matCrypto->decrypt(toEncrypt, toStoreTo);
+   matCrypto->encrypt(toEncrypt, toStoreTo);
 }
 
 void EasyCryptoLibBad::decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {

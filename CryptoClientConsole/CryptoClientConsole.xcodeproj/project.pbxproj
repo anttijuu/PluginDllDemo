@@ -24,11 +24,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		318DE2C01CDBF21C00799A13 /* EasyCryptoLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoLib.hpp; sourceTree = "<group>"; };
+		318DE2C11CDBF22000799A13 /* EasyCryptoLibBad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoLibBad.hpp; sourceTree = "<group>"; };
 		3194F9091CD9F7CC00333416 /* CryptoClientConsole */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CryptoClientConsole; sourceTree = BUILT_PRODUCTS_DIR; };
 		3194F90C1CD9F7CC00333416 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3194F9141CDA00B700333416 /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEasyCryptoLib.dylib; path = "../../../../Library/Developer/Xcode/DerivedData/EasyCrypto-gdmctpvgqfuwuyaksslxtmvdulbq/Build/Products/Debug/libEasyCryptoLib.dylib"; sourceTree = "<group>"; };
-		3194F9241CDA43D600333416 /* EasyCryptoLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoLib.hpp; sourceTree = "<group>"; };
-		3194F9251CDA43DB00333416 /* EasyCryptoLibBad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoLibBad.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +63,8 @@
 		3194F90B1CD9F7CC00333416 /* CryptoClientConsole */ = {
 			isa = PBXGroup;
 			children = (
-				3194F9251CDA43DB00333416 /* EasyCryptoLibBad.hpp */,
-				3194F9241CDA43D600333416 /* EasyCryptoLib.hpp */,
+				318DE2C01CDBF21C00799A13 /* EasyCryptoLib.hpp */,
+				318DE2C11CDBF22000799A13 /* EasyCryptoLibBad.hpp */,
 				3194F90C1CD9F7CC00333416 /* main.cpp */,
 			);
 			path = CryptoClientConsole;
@@ -250,6 +250,7 @@
 				3194F9121CD9F7CC00333416 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

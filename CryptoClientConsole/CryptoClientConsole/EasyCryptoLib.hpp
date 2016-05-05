@@ -17,13 +17,14 @@
 
 class EasyCrypto
 {
-	public:
-	enum Method {
-		Reverse,
-		Matrix
-	};
-	static void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
-	static void decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m);
+public:
+   enum Method {
+      Reverse,
+      Matrix
+   };
+   
+   static void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
+   static void decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m);
 };
 
 #pragma GCC visibility pop
