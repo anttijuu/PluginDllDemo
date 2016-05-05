@@ -33,7 +33,6 @@ void EasyCryptoPrivMatrix::encrypt(const std::string & toEncrypt, std::string & 
       }
    }
    if (tmp.length() > 0) {
-      std::cout << std::endl << "** toStoreTo: " << toStoreTo << " tmp: " << tmp << std::endl;
       toStoreTo += tmp;
    }
 }
@@ -59,7 +58,6 @@ void EasyCryptoPrivMatrix::decrypt(const std::string & toDecrypt, std::string & 
       }
    }
    if (tmp.length() > 0) {
-      std::cout << std::endl << "** toStoreTo: " << toStoreTo << " tmp: " << tmp << std::endl;
       toStoreTo = tmp + toStoreTo;
    }
 }
