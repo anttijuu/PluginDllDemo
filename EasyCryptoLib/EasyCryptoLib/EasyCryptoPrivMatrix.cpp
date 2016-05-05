@@ -7,7 +7,6 @@
 //
 
 #include <cmath>
-#include <vector>
 
 #include "EasyCryptoPrivMatrix.hpp"
 
