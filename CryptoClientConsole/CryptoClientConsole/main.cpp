@@ -16,15 +16,26 @@ void usingBadLib();
 
 int main(int argc, const char * argv[]) {
 
-	usingGoodLib();
-	usingBadLib();
+   bool userWantsIt = false;
+   do {
+      usingGoodLib();
+      usingBadLib();
+      
+      std::string result;
+      std::cout << "Press y and enter to continue, or just enter to quit: ";
+      std::getline(std::cin, result);
+      if (result.compare("y") == 0) {
+         userWantsIt = true;
+      }
+   } while (userWantsIt);
+   std::cout << "Thanks and bye! " << std::endl;
 	
 	return 0;
 }
 
 
 void usingGoodLib() {
-	std::cout << "Welcome to Good EasyCrypto(tm)!" << std::endl;
+   std::cout << std::endl << "Welcome to Good EasyCrypto(tm)!" << std::endl;
 	std::cout << "Enter text to encrypt: ";
 	
 	std::string userString;
