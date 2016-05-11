@@ -17,6 +17,8 @@ class EasyCryptoPrivMatrix;
 /* The classes below are exported */
 #pragma GCC visibility push(default)
 
+// TODO: add version number query
+
 class EasyCryptoLibBad
 {
 private:

@@ -20,6 +20,7 @@ class EasyCryptoPriv
 public:
    virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo) = 0;
    virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo) = 0;
+   virtual const std::string & method() const = 0;
    
    virtual ~EasyCryptoPriv() {};
 };

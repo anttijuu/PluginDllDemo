@@ -11,6 +11,12 @@
 
 #include "EasyCryptoPrivMatrix.hpp"
 
+const std::string EasyCryptoPrivMatrix::methodName("matrix");
+
+
+const std::string & EasyCryptoPrivMatrix::method() const {
+   return methodName;
+}
 
 void EasyCryptoPrivMatrix::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
    toStoreTo = "";

@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:EasyCryptoClient/EasyCryptoClient.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:EasyCryptoServer/EasyCryptoServer.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:CryptoClientConsole/CryptoClientConsole.xcodeproj">
    </FileRef>
    <FileRef

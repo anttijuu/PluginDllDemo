@@ -18,8 +18,13 @@
 class EasyCryptoPrivMatrix : public EasyCryptoPriv
 {
 public:
+   
    virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
    virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
+   virtual const std::string & method() const;
+   
+private:
+   static const std::string methodName;
 };
 
 #pragma GCC visibility pop
