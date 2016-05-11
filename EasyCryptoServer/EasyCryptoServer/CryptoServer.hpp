@@ -17,6 +17,10 @@
 
 using boost::asio::ip::udp;
 
+namespace Json {
+   class Value;
+}
+
 class CryptoServer
 {
 public:
@@ -25,7 +29,7 @@ public:
 private:
    void doReceive();
    void doSendResponse(std::size_t length);
-   
+   std::string handleRequest(int msgType, const Json::Value & value);
 private:
    udp::socket socket_;
    udp::endpoint sender_endpoint_;

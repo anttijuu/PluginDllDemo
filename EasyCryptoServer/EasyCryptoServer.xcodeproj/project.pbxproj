@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		313BDFE81CE1DD1D00255C4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 313BDFE71CE1DD1D00255C4E /* main.cpp */; };
 		313BDFF01CE1E1EB00255C4E /* CryptoServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 313BDFEE1CE1E1EB00255C4E /* CryptoServer.cpp */; };
-		313BDFF21CE1E87300255C4E /* libEasyCryptoLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 313BDFF11CE1E87300255C4E /* libEasyCryptoLib.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 		313BDFF61CE20CBE00255C4E /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */; };
 		313BE0031CE2161500255C4E /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 313BE0021CE2161500255C4E /* libboost_system.dylib */; };
+		313BE0261CE3262A00255C4E /* libEasyCryptoLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 313BE0251CE3262A00255C4E /* libEasyCryptoLib.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,12 +31,13 @@
 		313BDFE71CE1DD1D00255C4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		313BDFEE1CE1E1EB00255C4E /* CryptoServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CryptoServer.cpp; sourceTree = "<group>"; };
 		313BDFEF1CE1E1EB00255C4E /* CryptoServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CryptoServer.hpp; sourceTree = "<group>"; };
-		313BDFF11CE1E87300255C4E /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEasyCryptoLib.dylib; path = "../../../../Library/Developer/Xcode/DerivedData/EasyCrypto-gdmctpvgqfuwuyaksslxtmvdulbq/Build/Products/Debug/libEasyCryptoLib.dylib"; sourceTree = "<group>"; };
 		313BDFF31CE20CAA00255C4E /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "json-forwards.h"; path = "../../../jsoncpp/dist/json/json-forwards.h"; sourceTree = "<group>"; };
 		313BDFF41CE20CAA00255C4E /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json.h; path = ../../../jsoncpp/dist/json/json.h; sourceTree = "<group>"; };
 		313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jsoncpp.cpp; path = ../../../jsoncpp/dist/jsoncpp.cpp; sourceTree = "<group>"; };
 		313BE0021CE2161500255C4E /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libboost_system.dylib; sourceTree = "<group>"; };
 		313BE0201CE2554F00255C4E /* Version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Version.hpp; sourceTree = "<group>"; };
+		313BE0241CE3222400255C4E /* EasyCryptoLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoLib.hpp; sourceTree = "<group>"; };
+		313BE0251CE3262A00255C4E /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEasyCryptoLib.dylib; path = "../../../../Library/Developer/Xcode/DerivedData/EasyCrypto-gdmctpvgqfuwuyaksslxtmvdulbq/Build/Products/Debug/libEasyCryptoLib.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				313BDFF21CE1E87300255C4E /* libEasyCryptoLib.dylib in Frameworks */,
+				313BE0261CE3262A00255C4E /* libEasyCryptoLib.dylib in Frameworks */,
 				313BE0031CE2161500255C4E /* libboost_system.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,8 +56,8 @@
 		313BDFDB1CE1DD1D00255C4E = {
 			isa = PBXGroup;
 			children = (
+				313BE0251CE3262A00255C4E /* libEasyCryptoLib.dylib */,
 				313BE0021CE2161500255C4E /* libboost_system.dylib */,
-				313BDFF11CE1E87300255C4E /* libEasyCryptoLib.dylib */,
 				313BDFE61CE1DD1D00255C4E /* EasyCryptoServer */,
 				313BDFE51CE1DD1D00255C4E /* Products */,
 			);
@@ -73,6 +74,7 @@
 		313BDFE61CE1DD1D00255C4E /* EasyCryptoServer */ = {
 			isa = PBXGroup;
 			children = (
+				313BE0241CE3222400255C4E /* EasyCryptoLib.hpp */,
 				313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */,
 				313BE0201CE2554F00255C4E /* Version.hpp */,
 				313BDFF31CE20CAA00255C4E /* json-forwards.h */,
