@@ -28,7 +28,7 @@ private:
    
 public:
    EasyCryptoLibBad();
-   ~EasyCryptoLibBad();
+   virtual ~EasyCryptoLibBad();
    
    enum Method {
       Reverse,
