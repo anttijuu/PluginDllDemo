@@ -12,8 +12,8 @@
 #include <string>
 #include <memory>
 
-class EasyCryptoPrivReverse;
-class EasyCryptoPrivMatrix;
+#include "EasyCryptoPrivReverse.hpp"
+#include "EasyCryptoPrivMatrix.hpp"
 
 /* The classes below are exported */
 #pragma GCC visibility push(default)
