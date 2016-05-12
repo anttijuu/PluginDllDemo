@@ -6,6 +6,8 @@
 //  Copyright © 2016 Antti Juustila. All rights reserved.
 //
 
+#include <algorithm>
+
 #include "EasyCryptoPrivReverse.hpp"
 
 const std::string EasyCryptoPrivReverse::methodName("reverse");
