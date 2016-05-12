@@ -102,7 +102,7 @@ void CryptoServer::doSendResponse(std::size_t length) {
 std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) {
    Json::Value response(Json::objectValue);
    switch (msgType) {
-      case 1: {
+      case 1: { // capabilities request
          std::cout << "setting msgtype" << std::endl;
          response["msgtype"] = "2";
          std::cout << "setting version" << std::endl;
@@ -119,10 +119,42 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::cout << "done with constructing response" << std::endl;
          break;
       }
-      case 3: {
+      case 3: { // encryption request
+         std::cout << "setting msgtype" << std::endl;
+         response["msgtype"] = "4";
+         std::string plainText = value["text"].asString();
+         std::string method = value["method"].asString();
+         std::string encrypted;
+         // Todo: check that method is in the list of supported methods
+         if (method == "matrix") {
+            EasyCrypto::encrypt(plainText, encrypted, EasyCrypto::Method::Matrix);
+         } else if (method == "reverse") {
+            EasyCrypto::encrypt(plainText, encrypted, EasyCrypto::Method::Reverse);
+         } else {
+            encrypted = "Not supported";
+         }
+         response["text"] = encrypted;
+         response["requestid"] = value["requestid"].asInt();
+         std::cout << "done with constructing response" << std::endl;
          break;
       }
       case 5: {
+         std::cout << "setting msgtype" << std::endl;
+         response["msgtype"] = "6";
+         std::string encrypted = value["text"].asString();
+         std::string method = value["method"].asString();
+         std::string plainText;
+         // Todo: check that method is in the list of supported methods
+         if (method == "matrix") {
+            EasyCrypto::decrypt(encrypted, plainText, EasyCrypto::Method::Matrix);
+         } else if (method == "reverse") {
+            EasyCrypto::decrypt(encrypted, plainText, EasyCrypto::Method::Reverse);
+         } else {
+            encrypted = "Not supported";
+         }
+         response["text"] = plainText;
+         response["requestid"] = value["requestid"].asInt();
+         std::cout << "done with constructing response" << std::endl;
          break;
       }
       default: {

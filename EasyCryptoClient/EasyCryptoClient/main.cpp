@@ -9,6 +9,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <cstdio>
+#include <chrono>
+#include <iomanip>
+#include <sstream>
+
 #include <boost/asio.hpp>
 /*
 // query to server about capabilities
@@ -71,6 +76,8 @@ private:
    udp::resolver resolver;
    udp::endpoint endpoint;
    
+   std::chrono::system_clock::time_point started;
+   
 };
 
 enum { max_length = 4096 };
@@ -84,12 +91,12 @@ static const std::string parameterInt("%d");
 int main (int argc, char* argv[]) {
    Client client;
    
-   client.mainFunc(argc, argv);
+   return client.mainFunc(argc, argv);
 }
 
 Client::Client()
 : s(io_service, udp::endpoint(udp::v4(), 0)), resolver(io_service) {
-   
+   started = std::chrono::system_clock::now();
 }
 
 int Client::mainFunc(int argc, char* argv[])
@@ -179,7 +186,11 @@ void Client::handleEncryptionRequest() {
    std::cout << "Give the method of encryption: ";
    std::getline(std::cin, method);
    
-   msg.replace(msg.rfind(parameterInt),parameterStr.length(), "123456");
+   std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+   std::stringstream str;
+   str << std::chrono::duration_cast<std::chrono::milliseconds>(now-started).count();
+
+   msg.replace(msg.rfind(parameterInt),parameterStr.length(), str.str());
    msg.replace(msg.rfind(parameterStr),parameterStr.length(), method);
    msg.replace(msg.rfind(parameterStr),parameterStr.length(), text);
    std::cout << "Sending: " << msg << std::endl;
@@ -214,7 +225,11 @@ void Client::handleDecryptionRequest() {
    std::cout << "Give the method of decryption: ";
    std::getline(std::cin, method);
    
-   msg.replace(msg.rfind(parameterInt),parameterStr.length(), "123456");
+   std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+   std::stringstream str;
+   str << std::chrono::duration_cast<std::chrono::milliseconds>(now-started).count();
+   
+   msg.replace(msg.rfind(parameterInt),parameterStr.length(), str.str());
    msg.replace(msg.rfind(parameterStr),parameterStr.length(), method);
    msg.replace(msg.rfind(parameterStr),parameterStr.length(), text);
    std::cout << "Sending: " << msg << std::endl;
