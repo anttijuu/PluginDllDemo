@@ -8,6 +8,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
 #include "EasyCryptoPrivMatrix.hpp"
 
