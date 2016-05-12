@@ -81,15 +81,16 @@ void CryptoServer::doSendResponse(std::size_t length) {
    std::string response(data_, length);
    Json::Value value;
    std::stringstream str(response);
-   str >> value;
-   if (value.isObject()) {
-      int msgType = value["msgtype"].asInt();
-      std::cout << "msgtype value: " << msgType << std::endl;
-      response = handleRequest(msgType, value);
+   try {
+      str >> value;
+      if (value.isObject()) {
+         int msgType = value["msgtype"].asInt();
+         std::cout << "msgtype value: " << msgType << std::endl;
+         response = handleRequest(msgType, value);
+      }
+   } catch (std::exception & e) {
+      response = "invalid json message structure from client";
    }
-   // do encryption/decryption
-   // construct json reply
-   // send back json reply
    
    std::cout << "Sending response : " << response << std::endl;
    socket_.async_send_to(boost::asio::buffer(response, response.length()), sender_endpoint_,
@@ -104,7 +105,7 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
    switch (msgType) {
       case 1: { // capabilities request
          std::cout << "setting msgtype" << std::endl;
-         response["msgtype"] = "2";
+         response["msgtype"] = 2;
          std::cout << "setting version" << std::endl;
          response["version"] = EasyCrypto::version();
          Json::Value methodsArray(Json::arrayValue);
@@ -121,7 +122,7 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
       }
       case 3: { // encryption request
          std::cout << "setting msgtype" << std::endl;
-         response["msgtype"] = "4";
+         response["msgtype"] = 4;
          std::string plainText = value["text"].asString();
          std::string method = value["method"].asString();
          std::string encrypted;
@@ -140,7 +141,7 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
       }
       case 5: {
          std::cout << "setting msgtype" << std::endl;
-         response["msgtype"] = "6";
+         response["msgtype"] = 6;
          std::string encrypted = value["text"].asString();
          std::string method = value["method"].asString();
          std::string plainText;

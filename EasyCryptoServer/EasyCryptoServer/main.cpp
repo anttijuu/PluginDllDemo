@@ -11,13 +11,6 @@
 
 #include "CryptoServer.hpp"
 
-// TODO: specify JSON structures
-// - query server capabilities (crypto methods) + lib version number
-// - send text to be en/decrypted (with a method)
-// - reply from the server with en/decrypted text
-// TODO: implement JSON parsing and creation
-// TODO: implement datagram socket API for receiving requests and replying
-
 int main(int argc, const char * argv[]) {
    try
    {

@@ -15,6 +15,9 @@
 #include <sstream>
 
 #include <boost/asio.hpp>
+
+#include "json.h"
+
 /*
 // query to server about capabilities
 {
@@ -82,6 +85,7 @@ private:
 
 enum { max_length = 4096 };
 static const std::string clientVersion("1.0.0");
+// TODO remove these and start using the Json::Value also for client sending msgs to server.
 static const std::string queryMsg("{\"msgtype\" : 1, \"version\" : \"%s\"}");
 static const std::string encryptMsg("{\"msgtype\" : 3, \"text\" : \"%s\", \"method\" : \"%s\", \"requestid\" : %d}");
 static const std::string decryptMsg("{\"msgtype\" : 5,\"text\"  : \"%s\", \"method\" : \"%s\",\"requestid\" : %d }");
@@ -199,10 +203,23 @@ void Client::handleEncryptionRequest() {
    char reply[max_length];
    udp::endpoint sender_endpoint;
    size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
-   std::cout << "Encrypted text is: ";
-   std::cout.write(reply, reply_length);
-   std::cout << std::endl;
-   
+
+   try {
+      std::string response(reply, reply_length);
+      std::stringstream stream(response);
+      Json::Value value;
+      stream >> value;
+      if (value.isObject()) {
+         int msgType = value["msgtype"].asInt();
+         if (msgType == 4) {
+            std::cout << "Encrypted text is: ";
+            std::cout << value["text"].asString() << std::endl;
+         }
+      }
+   } catch (std::exception & e) {
+      std::cout << "Exception, problems with the received json data" << std::endl;
+      std::cout << e.what() << std::endl;
+   }
 }
 
 void Client::handleDecryptionRequest() {

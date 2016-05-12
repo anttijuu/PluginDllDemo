@@ -9,6 +9,17 @@
 #ifndef CryptoServer_hpp
 #define CryptoServer_hpp
 
+/*
+ For background information, see
+ https://github.com/open-source-parsers/jsoncpp
+ http://open-source-parsers.github.io/jsoncpp-docs/doxygen/index.html
+ 
+ and
+ 
+ http://www.boost.org
+ http://www.boost.org/users/history/version_1_60_0.html
+ */
+
 
 #include <cstdlib>
 #include <iostream>
