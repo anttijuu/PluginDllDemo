@@ -8,6 +8,7 @@
  */
 
 #include <iostream>
+#include <memory>
 
 #include "EasyCryptoLib.hpp"
 #include "EasyCryptoPrivReverse.hpp"
@@ -24,38 +25,30 @@ const std::string & EasyCrypto::methods() {
 }
 
 void EasyCrypto::encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m) {
-   EasyCryptoPriv * theImpl = nullptr;
    switch (m) {
       case Method::Reverse: {
-         theImpl = new EasyCryptoPrivReverse();
+         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
          theImpl->encrypt(toEncrypt, toStoreTo);
-         delete theImpl;
          break;
       }
       case Method::Matrix: {
-         toStoreTo = "Not supported";
-         theImpl = new EasyCryptoPrivMatrix();
+         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
          theImpl->encrypt(toEncrypt, toStoreTo);
-         delete theImpl;
          break;
       }
    }
 }
 
 void EasyCrypto::decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m) {
-   EasyCryptoPriv * theImpl = nullptr;
    switch (m) {
       case Method::Reverse: {
-         theImpl = new EasyCryptoPrivReverse();
+         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
          theImpl->decrypt(toDecrypt, toStoreTo);
-         delete theImpl;
          break;
       }
       case Method::Matrix: {
-         toStoreTo = "Not supported";
-         theImpl = new EasyCryptoPrivMatrix();
+         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
          theImpl->decrypt(toDecrypt, toStoreTo);
-         delete theImpl;
          break;
       }
    }
