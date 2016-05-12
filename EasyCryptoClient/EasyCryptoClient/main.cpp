@@ -13,50 +13,13 @@
 #include <chrono>
 #include <iomanip>
 #include <sstream>
+#include <stdexcept>
+#include <vector>
 
 #include <boost/asio.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "json.h"
-
-/*
-// query to server about capabilities
-{
-   "msgtype" : 1,
-   "version" : 1.0.0
-}
-// server response for query message 1
-{
-   "msgtype" : 2,
-   "version" : 1.0.1,
-   "methods  : [reverse,matrix]
-}
-// request to encrypt data
-{
-   "msgtype" : 3,
-   "text"    : "Text to encrypt",
-   "method"  : "matrix",
-   "requestid" : 12422231241
-}
-// response to encrypt data msg
-{
-   "msgtype" : 4,
-   "text"    : "dfawie afwea adf",
-   "requestid" : 12422231241
-}
-// request to decrypt data
-{
-   "msgtype" : 5,
-   "text"    : "dfawie afwea adf",
-   "method"  : "matrix",
-   "requestid" : 12422231241
-}
-// response to decrypt data msg
-{
-   "msgtype" : 6,
-   "text"    : "Text to encrypt",
-   "requestid" : 12422231241
-}
-*/
 
 using boost::asio::ip::udp;
 
@@ -64,12 +27,18 @@ class Client {
 public:
    Client();
    int mainFunc(int argc, char * argv[]);
-
+   
 private:
    
    void handleCapabilityRequest();
    void handleEncryptionRequest();
    void handleDecryptionRequest();
+   
+   bool isMethodSupported(const std::string & method) const;
+   void printSupportedMethods() const;
+   int createRequestId() const;
+   void printJsonMsg(const Json::Value & json) const;
+   std::string askMethodOfEncryption() const;
    
 private:
    boost::asio::io_service io_service;
@@ -80,17 +49,13 @@ private:
    udp::endpoint endpoint;
    
    std::chrono::system_clock::time_point started;
+   std::vector<std::string> supportedMethods;
    
+   bool printDetails;
 };
 
 enum { max_length = 4096 };
 static const std::string clientVersion("1.0.0");
-// TODO remove these and start using the Json::Value also for client sending msgs to server.
-static const std::string queryMsg("{\"msgtype\" : 1, \"version\" : \"%s\"}");
-static const std::string encryptMsg("{\"msgtype\" : 3, \"text\" : \"%s\", \"method\" : \"%s\", \"requestid\" : %d}");
-static const std::string decryptMsg("{\"msgtype\" : 5,\"text\"  : \"%s\", \"method\" : \"%s\",\"requestid\" : %d }");
-static const std::string parameterStr("%s");
-static const std::string parameterInt("%d");
 
 int main (int argc, char* argv[]) {
    Client client;
@@ -99,32 +64,30 @@ int main (int argc, char* argv[]) {
 }
 
 Client::Client()
-: s(io_service, udp::endpoint(udp::v4(), 0)), resolver(io_service) {
+: s(io_service, udp::endpoint(udp::v4(), 0)), resolver(io_service), printDetails(false) {
    started = std::chrono::system_clock::now();
 }
 
-int Client::mainFunc(int argc, char* argv[])
-{
-   try
-   {
-      if (argc != 3)
-      {
-         std::cerr << "Usage: EasyCryptoClient <host> <port>\n";
-         return 1;
-      }
-      
-      endpoint = *resolver.resolve({udp::v4(), argv[1], argv[2]});
-      
-      int command = 0;
-      char request[max_length];
-      do {
+int Client::mainFunc(int argc, char* argv[]) {
+   if (argc != 3) {
+      std::cerr << "Usage: EasyCryptoClient <host> <port>\n";
+      return 1;
+   }
+   
+   endpoint = *resolver.resolve({udp::v4(), argv[1], argv[2]});
+   
+   int command = 0;
+   char request[max_length];
+   do {
+      try {
+         std::cout << std::endl << "---------------------------------" << std::endl;
          std::cout << "Menu of commands" << std::endl;
-         std::cout << "1) Send capability request to server" << std::endl;
-         std::cout << "2) Send encryption request to server" << std::endl;
-         std::cout << "3) Send decryption request to server" << std::endl;
-         std::cout << "0) Exit client" << std::endl;
-         std::cout << "Menu of commands" << std::endl;
-         std::cout << "Enter command: ";
+         std::cout << "1  >> Send capability request to server" << std::endl;
+         std::cout << "2  >> Send encryption request to server" << std::endl;
+         std::cout << "3  >> Send decryption request to server" << std::endl;
+         std::cout << "99 >> Toggle print details" << std::endl;
+         std::cout << "0 or Enter >> Exit client" << std::endl;
+         std::cout << "Enter command >> ";
          std::cin.getline(request, max_length);
          command = std::atoi(request);
          switch (command) {
@@ -140,123 +103,186 @@ int Client::mainFunc(int argc, char* argv[])
                handleDecryptionRequest();
                break;
             }
+            case 99: {
+               printDetails = !printDetails;
+               break;
+            }
             default: {
                break;
             }
          }
-         
-      } while (command > 0);
-   }
-   catch (std::exception& e)
-   {
-      std::cerr << "Exception: " << e.what() << "\n";
-   }
+      } catch (std::exception& e) {
+         std::cerr << "SOS SOS SOS SOS SOS SOS SOS SOS SOS SOS SOS SOS SOS SOS SOS " << std::endl;
+         std::cerr << "Exception: " << e.what() << std::endl;
+      }
+   } while (command > 0);
+   
    std::cout << "Bye!" << std::endl;
    return 0;
 }
 
 void Client::handleCapabilityRequest() {
-   std::string msg;
-   msg = queryMsg;
-   msg.replace(msg.rfind(parameterStr),parameterStr.length(), clientVersion);
    std::cout << " *** Sending Capability Message to Server *** " << std::endl;
-   std::cout << "Sending: " << msg << std::endl;
-   s.send_to(boost::asio::buffer(msg), endpoint);
+   
+   Json::Value message(Json::objectValue);
+   message["msgtype"] = 1;
+   message["version"] = clientVersion;
+   
+   printJsonMsg(message);
+   
+   s.send_to(boost::asio::buffer(message.toStyledString()), endpoint);
    
    char reply[max_length];
    udp::endpoint sender_endpoint;
    size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
-   std::cout << "Reply is: ";
-   std::cout.write(reply, reply_length);
-   std::cout << std::endl;
+   
+   std::string response(reply, reply_length);
+   std::stringstream stream(response);
+   Json::Value value;
+   stream >> value;
+   printJsonMsg(value);
+   if (value.isObject()) {
+      int msgType = value["msgtype"].asInt();
+      if (msgType == 2) {
+         supportedMethods.clear();
+         Json::Value array(Json::arrayValue);
+         array = value["methods"];
+         for (Json::ArrayIndex index = 0; index < array.size(); index++) {
+            std::string method = array[index].asString();
+            supportedMethods.push_back(method);
+         }
+         printSupportedMethods();
+      } else {
+         throw new std::invalid_argument("wrong response to msgtype 1 from server");
+      }
+   }
 }
 
 void Client::handleEncryptionRequest() {
-   /*
-    {
-    "msgtype" : 3,
-    "text"    : "%s",
-    "method"  : "%s",
-    "requestid" : %d
-    }
-    */
    std::cout << " *** Sending Message to Encrypt to Server *** " << std::endl;
-   std::string msg;
    std::string text;
    std::string method;
-   msg = encryptMsg;
    std::cout << "Give the text to encrypt: ";
    std::getline(std::cin, text);
-   std::cout << "Give the method of encryption: ";
-   std::getline(std::cin, method);
    
-   std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-   std::stringstream str;
-   str << std::chrono::duration_cast<std::chrono::milliseconds>(now-started).count();
+   method = askMethodOfEncryption();
+   
+   int requestId = createRequestId();
+   
+   Json::Value message(Json::objectValue);
+   message["msgtype"] = 3;
+   message["text"] = text;
+   message["method"] = method;
+   message["requestid"] = requestId;
 
-   msg.replace(msg.rfind(parameterInt),parameterStr.length(), str.str());
-   msg.replace(msg.rfind(parameterStr),parameterStr.length(), method);
-   msg.replace(msg.rfind(parameterStr),parameterStr.length(), text);
-   std::cout << "Sending: " << msg << std::endl;
-   s.send_to(boost::asio::buffer(msg), endpoint);
+   printJsonMsg(message);
+   
+   s.send_to(boost::asio::buffer(message.toStyledString()), endpoint);
    
    char reply[max_length];
    udp::endpoint sender_endpoint;
    size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
-
-   try {
-      std::string response(reply, reply_length);
-      std::stringstream stream(response);
-      Json::Value value;
-      stream >> value;
-      if (value.isObject()) {
-         int msgType = value["msgtype"].asInt();
-         if (msgType == 4) {
-            std::cout << "Encrypted text is: ";
-            std::cout << value["text"].asString() << std::endl;
-         }
+   
+   std::string response(reply, reply_length);
+   std::stringstream stream(response);
+   Json::Value value;
+   stream >> value;
+   printJsonMsg(value);
+   if (value.isObject()) {
+      int msgType = value["msgtype"].asInt();
+      if (msgType == 4) {
+         std::cout << "Encrypted text is: ";
+         std::cout << value["text"].asString() << std::endl;
+      } else {
+         throw new std::invalid_argument("wrong response to msgtype 3 from server");
       }
-   } catch (std::exception & e) {
-      std::cout << "Exception, problems with the received json data" << std::endl;
-      std::cout << e.what() << std::endl;
    }
 }
 
 void Client::handleDecryptionRequest() {
-/*
- // request to decrypt data
-   {
-      "msgtype" : 5,
-      "text"    : "dfawie afwea adf"
-      "method"  : "matrix",
-      "requestid" : 12422231241
-   }
-*/
-   std::cout << " *** Sending Message to Decrypt to Server *** " << std::endl;
-   std::string msg;
    std::string text;
    std::string method;
-   msg = decryptMsg;
    std::cout << "Give the text to decrypt: ";
    std::getline(std::cin, text);
-   std::cout << "Give the method of decryption: ";
-   std::getline(std::cin, method);
    
-   std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-   std::stringstream str;
-   str << std::chrono::duration_cast<std::chrono::milliseconds>(now-started).count();
+   method = askMethodOfEncryption();
    
-   msg.replace(msg.rfind(parameterInt),parameterStr.length(), str.str());
-   msg.replace(msg.rfind(parameterStr),parameterStr.length(), method);
-   msg.replace(msg.rfind(parameterStr),parameterStr.length(), text);
-   std::cout << "Sending: " << msg << std::endl;
-   s.send_to(boost::asio::buffer(msg), endpoint);
+   int requestId = createRequestId();
+
+   Json::Value message(Json::objectValue);
+   message["msgtype"] = 5;
+   message["text"] = text;
+   message["method"] = method;
+   message["requestid"] = requestId;
+   
+   printJsonMsg(message);
+   
+   s.send_to(boost::asio::buffer(message.toStyledString()), endpoint);
    
    char reply[max_length];
    udp::endpoint sender_endpoint;
    size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
-   std::cout << "Decrypted text is: ";
-   std::cout.write(reply, reply_length);
-   std::cout << std::endl;
    
+   std::string response(reply, reply_length);
+   std::stringstream stream(response);
+   Json::Value value;
+   stream >> value;
+   printJsonMsg(value);
+   if (value.isObject()) {
+      int msgType = value["msgtype"].asInt();
+      if (msgType == 6) {
+         std::cout << "Decrypted text is: ";
+         std::cout << value["text"].asString() << std::endl;
+      } else {
+         throw new std::invalid_argument("wrong response to msgtype 5 from server");
+      }
+   }
+}
+
+bool Client::isMethodSupported(const std::string & method) const {
+   for (std::string m : supportedMethods) {
+      if (m == method) {
+         return true;
+      }
+   }
+   return false;
+}
+
+void Client::printSupportedMethods() const {
+   std::cout << "Supported encryption methods are: ";
+   for (std::string m : supportedMethods) {
+      std::cout << " " << m;
+   }
+   std::cout << std::endl;
+}
+
+int Client::createRequestId() const {
+   std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+   std::stringstream str;
+   str << std::chrono::duration_cast<std::chrono::milliseconds>(now-started).count();
+   int requestId = 0;
+   str >> requestId;
+   return requestId;
+}
+
+void Client::printJsonMsg(const Json::Value & json) const {
+   if (printDetails) {
+      std::cout << json.toStyledString() << std::endl;
+   }
+}
+
+std::string Client::askMethodOfEncryption() const {
+   std::string method;
+   bool methodOK = false;
+   do {
+      std::cout << "Give the method of encryption: ";
+      std::getline(std::cin, method);
+      methodOK = isMethodSupported(method);
+      if (!methodOK) {
+         std::cout << "Not supported, select from: ";
+         printSupportedMethods();
+      }
+      
+   } while (!methodOK);
+   return method;
 }
