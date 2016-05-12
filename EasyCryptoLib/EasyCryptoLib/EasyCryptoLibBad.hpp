@@ -10,6 +10,7 @@
 #define EasyCryptoLibBad_h
 
 #include <string>
+#include <memory>
 
 class EasyCryptoPrivReverse;
 class EasyCryptoPrivMatrix;
