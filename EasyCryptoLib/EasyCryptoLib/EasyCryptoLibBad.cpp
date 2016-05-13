@@ -50,7 +50,6 @@ void EasyCryptoLibBad::encrypt(const std::string & toEncrypt, std::string & toSt
    if (m == Method::Reverse) {
       encryptWithReverse(toEncrypt, toStoreTo);
    } else if (m == Method::Matrix) {
-      toStoreTo = "Not supported";
       encryptWithMatrix(toEncrypt, toStoreTo);
    }
 }
@@ -59,7 +58,6 @@ void EasyCryptoLibBad::decrypt(const std::string & toDecrypt, std::string & toSt
    if (m == Method::Reverse) {
       decryptWithReverse(toDecrypt, toStoreTo);
    } else if (m == Method::Matrix) {
-      toStoreTo = "Not supported";
       decryptWithMatrix(toDecrypt, toStoreTo);
    }
 }

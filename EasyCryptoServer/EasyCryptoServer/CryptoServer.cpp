@@ -19,6 +19,11 @@
 
 CryptoServer::CryptoServer(boost::asio::io_service & io_service, short port)
 : socket_(io_service, udp::endpoint(udp::v4(), port)) {
+   std::string methods = EasyCrypto::EasyCryptoLib::methods();
+   
+   std::string meths = EasyCrypto::EasyCryptoLib::methods();
+   boost::split(supportedMethods, meths, boost::is_any_of(",;:"));
+
    doReceive();
 }
 
@@ -83,10 +88,8 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::cout << "setting version" << std::endl;
          response["version"] = EasyCrypto::EasyCryptoLib::version();
          Json::Value methodsArray(Json::arrayValue);
-         std::vector<std::string> methods;
-         std::string meths = EasyCrypto::EasyCryptoLib::methods();
-         boost::split(methods, meths, boost::is_any_of(",;:"));
-         for (std::string method : methods) {
+
+         for (std::string method : supportedMethods) {
             std::cout << "appending methods" << std::endl;
             methodsArray.append(method);
          }
@@ -101,11 +104,8 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::string plainText = value["text"].asString();
          std::string method = value["method"].asString();
          std::string encrypted;
-         // Todo: check that method is in the list of supported methods
-         if (method == "matrix") {
-            EasyCrypto::EasyCryptoLib::encrypt(plainText, encrypted, EasyCrypto::EasyCryptoLib::Method::Matrix);
-         } else if (method == "reverse") {
-            EasyCrypto::EasyCryptoLib::encrypt(plainText, encrypted, EasyCrypto::EasyCryptoLib::Method::Reverse);
+         if (isMethodSupported(method)) {
+            EasyCrypto::EasyCryptoLib::encrypt(plainText, encrypted, method);
          } else {
             encrypted = "Not supported";
          }
@@ -120,11 +120,8 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::string encrypted = value["text"].asString();
          std::string method = value["method"].asString();
          std::string plainText;
-         // Todo: check that method is in the list of supported methods
-         if (method == "matrix") {
-            EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, EasyCrypto::EasyCryptoLib::Method::Matrix);
-         } else if (method == "reverse") {
-            EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, EasyCrypto::EasyCryptoLib::Method::Reverse);
+         if (isMethodSupported(method)) {
+            EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, method);
          } else {
             encrypted = "Not supported";
          }
@@ -140,3 +137,13 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
    std::cout << "convert response to string" << std::endl;
    return response.toStyledString();
 }
+
+bool CryptoServer::isMethodSupported(const std::string & method) const {
+   for (std::string m : supportedMethods) {
+      if (m == method) {
+         return true;
+      }
+   }
+   return false;
+}
+
