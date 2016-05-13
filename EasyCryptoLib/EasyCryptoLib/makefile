@@ -22,6 +22,11 @@ $(EXECUTABLE) : $(OBJECTS)
 .cpp.o: *.hpp
 	$(CC) $(CFLAGS) $< -o $@
 
+install:
+	cp -f libEasyCrypto.so /usr/lib
+	cp -f EasyCryptoLib.hpp /usr/include
+	cp -f EasyCryptoLibBad.hpp /usr/include
+
 clean:
 	-rm -f $(OBJECTS) $(EXECUTABLE)
  
