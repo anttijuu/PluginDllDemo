@@ -53,7 +53,7 @@
 #include <string>
 
 #include "CryptoServer.hpp"
-#include "json.h"
+#include <json/json.h>
 #include "EasyCryptoLib.hpp"
 
 CryptoServer::CryptoServer(boost::asio::io_service & io_service, short port)
