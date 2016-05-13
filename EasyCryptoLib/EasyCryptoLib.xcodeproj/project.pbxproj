@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3194F8F41CD86D9200333416 /* EasyCryptoLib.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3194F8F31CD86D9200333416 /* EasyCryptoLib.hpp */; };
+		3141684B1CE60FDC004D091C /* EasyCryptoLib.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3194F8F31CD86D9200333416 /* EasyCryptoLib.hpp */; };
+		3141684C1CE60FDC004D091C /* EasyCryptoLibBad.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3194F91B1CDA1D9100333416 /* EasyCryptoLibBad.hpp */; };
+		3141684F1CE61227004D091C /* libEasyCryptoLib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3194F8F01CD86D9200333416 /* libEasyCryptoLib.dylib */; };
 		3194F8F61CD86D9200333416 /* EasyCryptoPriv.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3194F8F51CD86D9200333416 /* EasyCryptoPriv.hpp */; };
 		3194F8F81CD86D9200333416 /* EasyCryptoLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3194F8F71CD86D9200333416 /* EasyCryptoLib.cpp */; };
 		3194F9191CDA092100333416 /* EasyCryptoPrivReverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3194F9171CDA092100333416 /* EasyCryptoPrivReverse.cpp */; };
@@ -16,6 +18,30 @@
 		3194F91F1CDA1DD000333416 /* EasyCryptoPrivMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3194F91D1CDA1DD000333416 /* EasyCryptoPrivMatrix.hpp */; };
 		3194F9221CDA3E4E00333416 /* EasyCryptoLibBad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3194F9211CDA3E4E00333416 /* EasyCryptoLibBad.cpp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3141684A1CE60FB4004D091C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/local/include;
+			dstSubfolderSpec = 0;
+			files = (
+				3141684B1CE60FDC004D091C /* EasyCryptoLib.hpp in CopyFiles */,
+				3141684C1CE60FDC004D091C /* EasyCryptoLibBad.hpp in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3141684E1CE61212004D091C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/local/lib;
+			dstSubfolderSpec = 0;
+			files = (
+				3141684F1CE61227004D091C /* libEasyCryptoLib.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3194F8F01CD86D9200333416 /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libEasyCryptoLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,7 +107,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3194F8F61CD86D9200333416 /* EasyCryptoPriv.hpp in Headers */,
-				3194F8F41CD86D9200333416 /* EasyCryptoLib.hpp in Headers */,
 				3194F91A1CDA092100333416 /* EasyCryptoPrivReverse.hpp in Headers */,
 				3194F91F1CDA1DD000333416 /* EasyCryptoPrivMatrix.hpp in Headers */,
 			);
@@ -97,6 +122,8 @@
 				3194F8EC1CD86D9200333416 /* Sources */,
 				3194F8ED1CD86D9200333416 /* Frameworks */,
 				3194F8EE1CD86D9200333416 /* Headers */,
+				3141684A1CE60FB4004D091C /* CopyFiles */,
+				3141684E1CE61212004D091C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -279,6 +306,7 @@
 				3194F8FD1CD86D9200333416 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

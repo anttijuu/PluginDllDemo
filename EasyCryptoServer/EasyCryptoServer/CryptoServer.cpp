@@ -11,9 +11,11 @@
 #include <vector>
 #include <string>
 
-#include "CryptoServer.hpp"
 #include <json/json.h>
-#include "EasyCryptoLib.hpp"
+
+#include <EasyCryptoLib.hpp>
+
+#include "CryptoServer.hpp"
 
 CryptoServer::CryptoServer(boost::asio::io_service & io_service, short port)
 : socket_(io_service, udp::endpoint(udp::v4(), port)) {
@@ -79,10 +81,11 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::cout << "setting msgtype" << std::endl;
          response["msgtype"] = 2;
          std::cout << "setting version" << std::endl;
-         response["version"] = EasyCrypto::version();
+         response["version"] = EasyCrypto::EasyCryptoLib::version();
          Json::Value methodsArray(Json::arrayValue);
          std::vector<std::string> methods;
-         boost::split(methods, EasyCrypto::methods(), boost::is_any_of(",;:"));
+         std::string meths = EasyCrypto::EasyCryptoLib::methods();
+         boost::split(methods, meths, boost::is_any_of(",;:"));
          for (std::string method : methods) {
             std::cout << "appending methods" << std::endl;
             methodsArray.append(method);
@@ -100,9 +103,9 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::string encrypted;
          // Todo: check that method is in the list of supported methods
          if (method == "matrix") {
-            EasyCrypto::encrypt(plainText, encrypted, EasyCrypto::Method::Matrix);
+            EasyCrypto::EasyCryptoLib::encrypt(plainText, encrypted, EasyCrypto::EasyCryptoLib::Method::Matrix);
          } else if (method == "reverse") {
-            EasyCrypto::encrypt(plainText, encrypted, EasyCrypto::Method::Reverse);
+            EasyCrypto::EasyCryptoLib::encrypt(plainText, encrypted, EasyCrypto::EasyCryptoLib::Method::Reverse);
          } else {
             encrypted = "Not supported";
          }
@@ -119,9 +122,9 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::string plainText;
          // Todo: check that method is in the list of supported methods
          if (method == "matrix") {
-            EasyCrypto::decrypt(encrypted, plainText, EasyCrypto::Method::Matrix);
+            EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, EasyCrypto::EasyCryptoLib::Method::Matrix);
          } else if (method == "reverse") {
-            EasyCrypto::decrypt(encrypted, plainText, EasyCrypto::Method::Reverse);
+            EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, EasyCrypto::EasyCryptoLib::Method::Reverse);
          } else {
             encrypted = "Not supported";
          }

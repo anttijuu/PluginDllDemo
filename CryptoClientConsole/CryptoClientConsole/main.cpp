@@ -8,8 +8,8 @@
 
 #include <iostream>
 
-#include "EasyCryptoLib.hpp"
-#include "EasyCryptoLibBad.hpp"
+#include <EasyCryptoLib.hpp>
+#include <EasyCryptoLibBad.hpp>
 
 void usingGoodLib();
 void usingBadLib();
@@ -42,18 +42,20 @@ void usingGoodLib() {
    std::string result;
    std::getline(std::cin, userString);
    
-   EasyCrypto::encrypt(userString, result, EasyCrypto::Method::Reverse);
+   using namespace EasyCrypto;
+   
+   EasyCryptoLib::encrypt(userString, result, EasyCryptoLib::Method::Reverse);
    std::cout << "Text encrypted with Reverse method: ";
    std::cout << result << std::endl;
    std::cout << "Decrypting back to original: ";
-   EasyCrypto::decrypt(result, userString, EasyCrypto::Method::Reverse);
+   EasyCryptoLib::decrypt(result, userString, EasyCryptoLib::Method::Reverse);
    std::cout << userString << std::endl << std::endl;
    
-   EasyCrypto::encrypt(userString, result, EasyCrypto::Method::Matrix);
+   EasyCryptoLib::encrypt(userString, result, EasyCryptoLib::Method::Matrix);
    std::cout << "Text encrypted with Matrix method: ";
    std::cout << result << std::endl;
    std::cout << "Decrypting back to original: ";
-   EasyCrypto::decrypt(result, userString, EasyCrypto::Method::Matrix);
+   EasyCryptoLib::decrypt(result, userString, EasyCryptoLib::Method::Matrix);
    std::cout << userString << std::endl << std::endl;
    
 }
@@ -66,6 +68,8 @@ void usingBadLib() {
    std::string userString;
    std::string result;
    std::getline(std::cin, userString);
+   
+   using namespace EasyCrypto;
    
    std::unique_ptr<EasyCryptoLibBad> crypter(new EasyCryptoLibBad());
    
