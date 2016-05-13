@@ -221,7 +221,10 @@
 		313BE0151CE2179D00255C4E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /Users/juustila/boost_1_60_0;
+				HEADER_SEARCH_PATHS = (
+					/Users/juustila/boost_1_60_0,
+					/usr/local/include,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -233,7 +236,10 @@
 		313BE0161CE2179D00255C4E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /Users/juustila/boost_1_60_0;
+				HEADER_SEARCH_PATHS = (
+					/Users/juustila/boost_1_60_0,
+					/usr/local/include,
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
