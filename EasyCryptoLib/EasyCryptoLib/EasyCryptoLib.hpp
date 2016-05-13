@@ -15,19 +15,24 @@
 /* The classes below are exported from the dynamic link library */
 #pragma GCC visibility push(default)
 
+namespace EasyCrypto {
+   
+
 /**
- This header file is the public interface to the crypting library. The library 
+ This class is the public interface to the crypting library. The library
  supports multiple encrypting methods and also decrypts the encrypted text back
  to plain text.<br />
  All the methods in this class are static, so there is no need to instantiate the class.
  Implementation creates necessary internal objects which do the actual encrypting
  and decrypting.<br />
- Build the code in the library as a dylib (dll). For client app development,
- provide this header file, with the .dylib (.dll) file, and nothing more.
+ Build the code in the library as a dynamic library. In Mac OS X, they are called .dylib's
+ and in Linux, shared libraries (.so). In Windows, they are DLLs. For client app development,
+ provide this header file, with the library binary file (.dylib, .so or .dll) file, and nothing more.
  Client app developers use these two files when using the functionality of the library.
  @author Antti Juustila
+ @version 1.0.0
  */
-class EasyCrypto
+class EasyCryptoLib
 {
 public:
    /*! Different supported crypto methods */
@@ -58,8 +63,10 @@ public:
    /** To query the supported en/decryption methods of the library.
     @returns The supported methods in the form "matrix,reverse".
     */
-   static const std::string & methods();
+   static std::string methods();
 };
+
+} // namespace
 
 #pragma GCC visibility pop
 

@@ -12,8 +12,9 @@
 
 #include "EasyCryptoPrivMatrix.hpp"
 
-const std::string EasyCryptoPrivMatrix::methodName("matrix");
+namespace EasyCrypto {
 
+const std::string EasyCryptoPrivMatrix::methodName("matrix");
 
 const std::string & EasyCryptoPrivMatrix::method() const {
    return methodName;
@@ -68,3 +69,5 @@ void EasyCryptoPrivMatrix::decrypt(const std::string & toDecrypt, std::string & 
       toStoreTo = tmp + toStoreTo;
    }
 }
+   
+} // namespace

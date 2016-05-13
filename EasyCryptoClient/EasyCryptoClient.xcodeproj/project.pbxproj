@@ -29,8 +29,6 @@
 		313BE0101CE2179D00255C4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		313BE0171CE219B500255C4E /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libboost_system.dylib; sourceTree = "<group>"; };
 		314168441CE458FF004D091C /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jsoncpp.cpp; path = ../../../jsoncpp/dist/jsoncpp.cpp; sourceTree = "<group>"; };
-		314168461CE45914004D091C /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "json-forwards.h"; path = "../../../jsoncpp/dist/json/json-forwards.h"; sourceTree = "<group>"; };
-		314168471CE45914004D091C /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json.h; path = ../../../jsoncpp/dist/json/json.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +63,6 @@
 		313BE00F1CE2179D00255C4E /* EasyCryptoClient */ = {
 			isa = PBXGroup;
 			children = (
-				314168461CE45914004D091C /* json-forwards.h */,
-				314168471CE45914004D091C /* json.h */,
 				314168441CE458FF004D091C /* jsoncpp.cpp */,
 				313BE0101CE2179D00255C4E /* main.cpp */,
 			);

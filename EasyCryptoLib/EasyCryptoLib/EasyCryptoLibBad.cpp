@@ -10,6 +10,9 @@
 #include "EasyCryptoPrivReverse.hpp"
 #include "EasyCryptoPrivMatrix.hpp"
 
+namespace EasyCrypto {
+
+
 EasyCryptoLibBad::EasyCryptoLibBad()
 : revCrypto(new EasyCryptoPrivReverse()), matCrypto(new EasyCryptoPrivMatrix())
 {
@@ -17,6 +20,14 @@ EasyCryptoLibBad::EasyCryptoLibBad()
 
 EasyCryptoLibBad::~EasyCryptoLibBad() {
 }
+   
+std::string EasyCryptoLibBad::methods() {
+   std::string methods;
+   methods = revCrypto->method();
+   methods = methods + "," + matCrypto->method();
+   return methods;
+}
+
 
 void EasyCryptoLibBad::encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
    revCrypto->encrypt(toEncrypt, toStoreTo);
@@ -52,3 +63,6 @@ void EasyCryptoLibBad::decrypt(const std::string & toDecrypt, std::string & toSt
       decryptWithMatrix(toDecrypt, toStoreTo);
    }
 }
+
+
+} // namespace

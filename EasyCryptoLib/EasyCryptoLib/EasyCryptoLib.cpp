@@ -14,17 +14,23 @@
 #include "EasyCryptoPrivReverse.hpp"
 #include "EasyCryptoPrivMatrix.hpp"
 
-const std::string & EasyCrypto::version() {
+namespace EasyCrypto {
+
+const std::string & EasyCryptoLib::version() {
    static const std::string versionNumber("1.0.0");
    return versionNumber;
 }
 
-const std::string & EasyCrypto::methods() {
-   static const std::string methodsStr("matrix,reverse");
-   return methodsStr;
+std::string EasyCryptoLib::methods() {
+   std::string methods;
+   std::unique_ptr<EasyCryptoPriv> theImpl1(new EasyCryptoPrivReverse());
+   methods = theImpl1->method();
+   std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
+   methods = methods + "," + theImpl2->method();
+   return methods;
 }
 
-void EasyCrypto::encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m) {
+void EasyCryptoLib::encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m) {
    switch (m) {
       case Method::Reverse: {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
@@ -39,7 +45,7 @@ void EasyCrypto::encrypt(const std::string & toEncrypt, std::string & toStoreTo,
    }
 }
 
-void EasyCrypto::decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m) {
+void EasyCryptoLib::decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m) {
    switch (m) {
       case Method::Reverse: {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
@@ -54,3 +60,4 @@ void EasyCrypto::decrypt(const std::string & toDecrypt, std::string & toStoreTo,
    }
 }
 
+} // namespace

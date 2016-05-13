@@ -12,14 +12,17 @@
 #include <string>
 #include <memory>
 
-class EasyCryptoPrivReverse;
-class EasyCryptoPrivMatrix;
 
 /* The classes below are exported */
 #pragma GCC visibility push(default)
 
 // TODO: add version number query
 
+namespace EasyCrypto {
+
+class EasyCryptoPrivReverse;
+class EasyCryptoPrivMatrix;
+   
 class EasyCryptoLibBad
 {
 private:
@@ -43,8 +46,14 @@ public:
    virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
    virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m);
    
+   /** To query the supported en/decryption methods of the library.
+    @returns The supported methods in the form "matrix,reverse".
+    */
+   std::string methods();
+
 };
 
+} // namespace
 
 #pragma GCC visibility pop
 

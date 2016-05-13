@@ -6,47 +6,6 @@
 //  Copyright © 2016 Antti Juustila. All rights reserved.
 //
 
-/*
- // query to server about capabilities
- {
- "msgtype" : 1,
- "version" : 1.0.0
- }
- // server response for query message 1
- {
- "msgtype" : 2,
- "version" : 1.0.1,
- "methods  : [reverse,matrix]
- }
- // request to encrypt data
- {
- "msgtype" : 3,
- "text"    : "Text to encrypt"
- "method"  : "matrix",
- "requestid" : 12422231241
- }
- // response to encrypt data msg
- {
- "msgtype" : 4,
- "text"    : "dfawie afwea adf",
- "requestid" : 12422231241
- }
- // request to decrypt data
- {
- "msgtype" : 5,
- "text"    : "dfawie afwea adf"
- "method"  : "matrix",
- "requestid" : 12422231241
- }
- // response to decrypt data msg
- {
- "msgtype" : 6,
- "text"    : "Text to encrypt",
- "requestid" : 12422231241
- }
- 
- 
- */
 
 #include <boost/algorithm/string.hpp>
 #include <vector>
@@ -76,8 +35,21 @@ void CryptoServer::doReceive() {
                               });
 }
 
+ /**
+  Handles the received JSON from the client and produces an
+  appropriate JSON response and sends it back to the client.
+  Steps include:
+  <ul><li>Parse the json request from data_ by creating a string 
+  from data_ and putting it to a stringstream.</li>
+  <li>Stream the string to Json::Value.</li>
+  <li>Check if the value isObject, and then if yes,</li>
+  <li>Read what kind of message arrived.</li>
+  <li>Then handle the request from the client.</li></ul>
+  Handling should produce a string which then is sent
+ back to the client using socket_.async_send_to.
+  @param length The length of the data_.
+*/
 void CryptoServer::doSendResponse(std::size_t length) {
-   // parse the json request
    std::string response(data_, length);
    Json::Value value;
    std::stringstream str(response);

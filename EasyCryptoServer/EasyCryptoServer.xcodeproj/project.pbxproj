@@ -31,8 +31,6 @@
 		313BDFE71CE1DD1D00255C4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		313BDFEE1CE1E1EB00255C4E /* CryptoServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CryptoServer.cpp; sourceTree = "<group>"; };
 		313BDFEF1CE1E1EB00255C4E /* CryptoServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CryptoServer.hpp; sourceTree = "<group>"; };
-		313BDFF31CE20CAA00255C4E /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "json-forwards.h"; path = "../../../jsoncpp/dist/json/json-forwards.h"; sourceTree = "<group>"; };
-		313BDFF41CE20CAA00255C4E /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json.h; path = ../../../jsoncpp/dist/json/json.h; sourceTree = "<group>"; };
 		313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jsoncpp.cpp; path = ../../../jsoncpp/dist/jsoncpp.cpp; sourceTree = "<group>"; };
 		313BE0021CE2161500255C4E /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libboost_system.dylib; sourceTree = "<group>"; };
 		313BE0241CE3222400255C4E /* EasyCryptoLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoLib.hpp; sourceTree = "<group>"; };
@@ -75,8 +73,6 @@
 			children = (
 				313BE0241CE3222400255C4E /* EasyCryptoLib.hpp */,
 				313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */,
-				313BDFF31CE20CAA00255C4E /* json-forwards.h */,
-				313BDFF41CE20CAA00255C4E /* json.h */,
 				313BDFEE1CE1E1EB00255C4E /* CryptoServer.cpp */,
 				313BDFEF1CE1E1EB00255C4E /* CryptoServer.hpp */,
 				313BDFE71CE1DD1D00255C4E /* main.cpp */,

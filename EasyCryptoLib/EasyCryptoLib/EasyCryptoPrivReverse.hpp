@@ -15,6 +15,8 @@
 
 #pragma GCC visibility push(hidden)
 
+namespace EasyCrypto {
+
 class EasyCryptoPrivReverse : public EasyCryptoPriv
 {
 public:
@@ -27,6 +29,8 @@ public:
 private:
    static const std::string methodName;
 };
+
+} //namespace
 
 #pragma GCC visibility pop
 
