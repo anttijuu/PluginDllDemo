@@ -13,7 +13,6 @@ SOURCES = ./EasyCryptoLibBad.cpp \
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = libEasyCrypto.so
 
-# all: $(OBJECTS) $(EXECUTABLE)
 all: $(EXECUTABLE)
 
 $(EXECUTABLE) : $(OBJECTS)
