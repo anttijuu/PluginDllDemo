@@ -35,26 +35,20 @@ namespace EasyCrypto {
 class EasyCryptoLib
 {
 public:
-   /*! Different supported crypto methods */
-   enum Method {
-      Reverse, /*!< Simply reverses the provided text. */
-      Matrix   /*!< Splits the text into a matrix of characters and transforms the matrix. */
-   };
-   
    /*
     Encrypts the given plaintext and stores it to the parameter to be used by the caller.
     @param toEncrypt Text to encrypt.
     @param toStoreTo A string to store the ecrypted text to.
     @param m The method of encryption.
     */
-   static void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
+   static void encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method);
    /*
     Decrypts the given encrypted text and stores it to the parameter to be used by the caller.
     @param toDecrypt Text to decrypt.
     @param toStoreTo A string to store the derypted plain text to.
     @param m The method of decryption.
     */
-   static void decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m);
+   static void decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method);
    
    /** To query the version of the library.
     @returns The library version number in the form "1.0.0".

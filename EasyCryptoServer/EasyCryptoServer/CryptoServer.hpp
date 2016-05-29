@@ -41,11 +41,17 @@ private:
    void doReceive();
    void doSendResponse(std::size_t length);
    std::string handleRequest(int msgType, const Json::Value & value);
+   
+   bool isMethodSupported(const std::string & method) const;
+
 private:
    udp::socket socket_;
    udp::endpoint sender_endpoint_;
    enum { max_length = 4096 };
    char data_[max_length];
+   
+   std::vector<std::string> supportedMethods;
+
 };
 
 

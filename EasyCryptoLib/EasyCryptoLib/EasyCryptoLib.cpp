@@ -15,49 +15,40 @@
 #include "EasyCryptoPrivMatrix.hpp"
 
 namespace EasyCrypto {
-
-const std::string & EasyCryptoLib::version() {
-   static const std::string versionNumber("1.0.0");
-   return versionNumber;
-}
-
-std::string EasyCryptoLib::methods() {
-   std::string methods;
-   std::unique_ptr<EasyCryptoPriv> theImpl1(new EasyCryptoPrivReverse());
-   methods = theImpl1->method();
-   std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
-   methods = methods + "," + theImpl2->method();
-   return methods;
-}
-
-void EasyCryptoLib::encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m) {
-   switch (m) {
-      case Method::Reverse: {
+   
+   const std::string & EasyCryptoLib::version() {
+      static const std::string versionNumber("1.0.0");
+      return versionNumber;
+   }
+   
+   std::string EasyCryptoLib::methods() {
+      std::string methods;
+      std::unique_ptr<EasyCryptoPriv> theImpl1(new EasyCryptoPrivReverse());
+      methods = theImpl1->method();
+      std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
+      methods = methods + "," + theImpl2->method();
+      return methods;
+   }
+   
+   void EasyCryptoLib::encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method) {
+      if (method == "reverse") {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
          theImpl->encrypt(toEncrypt, toStoreTo);
-         break;
-      }
-      case Method::Matrix: {
+      } else if (method == "matrix") {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
          theImpl->encrypt(toEncrypt, toStoreTo);
-         break;
       }
    }
-}
-
-void EasyCryptoLib::decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m) {
-   switch (m) {
-      case Method::Reverse: {
+   
+   
+   void EasyCryptoLib::decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method) {
+      if (method == "reverse") {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
          theImpl->decrypt(toDecrypt, toStoreTo);
-         break;
-      }
-      case Method::Matrix: {
+      }else if (method == "matrix") {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
          theImpl->decrypt(toDecrypt, toStoreTo);
-         break;
       }
    }
-}
-
+   
 } // namespace

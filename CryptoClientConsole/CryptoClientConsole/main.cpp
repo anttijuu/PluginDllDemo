@@ -26,6 +26,8 @@ int main(int argc, const char * argv[]) {
       std::getline(std::cin, result);
       if (result.compare("y") == 0) {
          userWantsIt = true;
+      } else {
+         userWantsIt = false;
       }
    } while (userWantsIt);
    std::cout << "Thanks and bye! " << std::endl;
@@ -44,18 +46,18 @@ void usingGoodLib() {
    
    using namespace EasyCrypto;
    
-   EasyCryptoLib::encrypt(userString, result, EasyCryptoLib::Method::Reverse);
+   EasyCryptoLib::encrypt(userString, result, "reverse");
    std::cout << "Text encrypted with Reverse method: ";
    std::cout << result << std::endl;
    std::cout << "Decrypting back to original: ";
-   EasyCryptoLib::decrypt(result, userString, EasyCryptoLib::Method::Reverse);
+   EasyCryptoLib::decrypt(result, userString, "reverse");
    std::cout << userString << std::endl << std::endl;
    
-   EasyCryptoLib::encrypt(userString, result, EasyCryptoLib::Method::Matrix);
+   EasyCryptoLib::encrypt(userString, result, "matrix");
    std::cout << "Text encrypted with Matrix method: ";
    std::cout << result << std::endl;
    std::cout << "Decrypting back to original: ";
-   EasyCryptoLib::decrypt(result, userString, EasyCryptoLib::Method::Matrix);
+   EasyCryptoLib::decrypt(result, userString, "matrix");
    std::cout << userString << std::endl << std::endl;
    
 }
