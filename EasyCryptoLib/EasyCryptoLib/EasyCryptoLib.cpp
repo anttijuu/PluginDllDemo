@@ -25,8 +25,8 @@ namespace EasyCrypto {
       std::string methods;
       std::unique_ptr<EasyCryptoPriv> theImpl1(new EasyCryptoPrivReverse());
       methods = theImpl1->method();
-//      std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
-//      methods = methods + "," + theImpl2->method();
+      std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
+      methods = methods + "," + theImpl2->method();
       return methods;
    }
    
@@ -34,9 +34,9 @@ namespace EasyCrypto {
       if (method == "reverse") {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
          theImpl->encrypt(toEncrypt, toStoreTo);
-//      } else if (method == "matrix") {
-//         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
-//         theImpl->encrypt(toEncrypt, toStoreTo);
+      } else if (method == "matrix") {
+         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
+         theImpl->encrypt(toEncrypt, toStoreTo);
       }
    }
    
@@ -45,9 +45,9 @@ namespace EasyCrypto {
       if (method == "reverse") {
          std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
          theImpl->decrypt(toDecrypt, toStoreTo);
-//      }else if (method == "matrix") {
-//         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
-//         theImpl->decrypt(toDecrypt, toStoreTo);
+      }else if (method == "matrix") {
+         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
+         theImpl->decrypt(toDecrypt, toStoreTo);
       }
    }
    
