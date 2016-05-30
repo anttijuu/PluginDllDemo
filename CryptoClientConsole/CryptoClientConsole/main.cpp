@@ -53,12 +53,12 @@ void usingGoodLib() {
    EasyCryptoLib::decrypt(result, userString, "reverse");
    std::cout << userString << std::endl << std::endl;
    
-   EasyCryptoLib::encrypt(userString, result, "matrix");
-   std::cout << "Text encrypted with Matrix method: ";
-   std::cout << result << std::endl;
-   std::cout << "Decrypting back to original: ";
-   EasyCryptoLib::decrypt(result, userString, "matrix");
-   std::cout << userString << std::endl << std::endl;
+//   EasyCryptoLib::encrypt(userString, result, "matrix");
+//   std::cout << "Text encrypted with Matrix method: ";
+//   std::cout << result << std::endl;
+//   std::cout << "Decrypting back to original: ";
+//   EasyCryptoLib::decrypt(result, userString, "matrix");
+//   std::cout << userString << std::endl << std::endl;
    
 }
 
@@ -82,11 +82,11 @@ void usingBadLib() {
    crypter->decrypt(result, userString, EasyCryptoLibBad::Method::Reverse);
    std::cout << userString << std::endl << std::endl;
    
-   crypter->encrypt(userString, result, EasyCryptoLibBad::Method::Matrix);
-   std::cout << "Text encrypted with Matrix method: ";
-   std::cout << result << std::endl;
-   std::cout << "Decrypting back to original: ";
-   crypter->decrypt(result, userString, EasyCryptoLibBad::Method::Matrix);
-   std::cout << userString << std::endl << std::endl;
+//   crypter->encrypt(userString, result, EasyCryptoLibBad::Method::Matrix);
+//   std::cout << "Text encrypted with Matrix method: ";
+//   std::cout << result << std::endl;
+//   std::cout << "Decrypting back to original: ";
+//   crypter->decrypt(result, userString, EasyCryptoLibBad::Method::Matrix);
+//   std::cout << userString << std::endl << std::endl;
    
 }

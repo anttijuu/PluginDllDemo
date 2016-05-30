@@ -15,6 +15,7 @@
 /* The classes below are exported from the dynamic link library */
 #pragma GCC visibility push(default)
 
+
 namespace EasyCrypto {
    
 
