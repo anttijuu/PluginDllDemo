@@ -21,6 +21,8 @@
  along with EasyCryptoLib.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <memory>
+
 #include "EasyCryptoLib.hpp"
 #include "EasyCryptoPrivReverse.hpp"
 #include "EasyCryptoPrivMatrix.hpp"
