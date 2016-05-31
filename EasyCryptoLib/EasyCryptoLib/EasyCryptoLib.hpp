@@ -50,16 +50,18 @@ namespace EasyCrypto {
 class EasyCryptoLib
 {
 public:
+   /*! The result codes of encryption and decryption. */
    enum Result {
-      ESuccess,
-      EError,
-      ENotSupported
+      ESuccess,      /*!< Text was successfully en/decrypted. */
+      EError,        /*!< There was an error with en/decryption. */
+      ENotSupported  /*!< The method of en/decription is not supported by the library */
    };
    /**
     Encrypts the given plaintext and stores it to the parameter to be used by the caller.
     @param toEncrypt Text to encrypt.
     @param toStoreTo A string to store the ecrypted text to.
     @param m The method of encryption.
+    @returns Returns success code of the encryption. See Result enum for details.
     */
    static Result encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method);
    /**
@@ -67,6 +69,7 @@ public:
     @param toDecrypt Text to decrypt.
     @param toStoreTo A string to store the derypted plain text to.
     @param m The method of decryption.
+    @returns Returns success code of the decryption. See Result enum for details.
     */
    static Result decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method);
    
