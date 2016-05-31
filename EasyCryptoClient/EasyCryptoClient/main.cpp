@@ -206,8 +206,11 @@ void Client::handleEncryptionRequest() {
       if (msgType == 4) {
          std::cout << "Encrypted text is: ";
          std::cout << value["text"].asString() << std::endl;
+      } else if (msgType == 999) {
+         std::cout << "ERROR from server: ";
+         std::cout << value["text"].asString() << std::endl;
       } else {
-         throw new std::invalid_argument("wrong response to msgtype 3 from server");
+         std::cout << "UNEXPECTED happened, don't know what to do... :/" << std::endl;
       }
    }
 }
@@ -246,8 +249,11 @@ void Client::handleDecryptionRequest() {
       if (msgType == 6) {
          std::cout << "Decrypted text is: ";
          std::cout << value["text"].asString() << std::endl;
+      } else if (msgType == 999) {
+         std::cout << "ERROR from server: ";
+         std::cout << value["text"].asString() << std::endl;
       } else {
-         throw new std::invalid_argument("wrong response to msgtype 5 from server");
+         std::cout << "UNEXPECTED happened, don't know what to do... :/" << std::endl;
       }
    }
 }
@@ -286,15 +292,15 @@ void Client::printJsonMsg(const Json::Value & json) const {
 
 std::string Client::askMethodOfEncryption() const {
    std::string method;
-   bool methodOK = false;
+   bool methodOK = true;
    do {
       std::cout << "Give the method of encryption: ";
       std::getline(std::cin, method);
-      methodOK = isMethodSupported(method);
-      if (!methodOK) {
-         std::cout << "Not supported, select from: ";
-         printSupportedMethods();
-      }
+//      methodOK = isMethodSupported(method);
+//      if (!methodOK) {
+//         std::cout << "Not supported, select from: ";
+//         printSupportedMethods();
+//      }
       
    } while (!methodOK);
    return method;

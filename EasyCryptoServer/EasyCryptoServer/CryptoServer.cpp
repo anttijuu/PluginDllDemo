@@ -19,10 +19,7 @@
 
 CryptoServer::CryptoServer(boost::asio::io_service & io_service, short port)
 : socket_(io_service, udp::endpoint(udp::v4(), port)) {
-   std::string methods = EasyCrypto::EasyCryptoLib::methods();
    
-   std::string meths = EasyCrypto::EasyCryptoLib::methods();
-   boost::split(supportedMethods, meths, boost::is_any_of(",;:"));
 
    doReceive();
 }
@@ -80,14 +77,18 @@ void CryptoServer::doSendResponse(std::size_t length) {
 }
 
 std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) {
+   using namespace EasyCrypto;
+   
    Json::Value response(Json::objectValue);
    switch (msgType) {
       case 1: { // capabilities request
-         std::cout << "setting msgtype" << std::endl;
          response["msgtype"] = 2;
-         std::cout << "setting version" << std::endl;
-         response["version"] = EasyCrypto::EasyCryptoLib::version();
+         response["version"] = EasyCryptoLib::version();
          Json::Value methodsArray(Json::arrayValue);
+
+         std::string meths = EasyCrypto::EasyCryptoLib::methods();
+         std::vector<std::string> supportedMethods;
+         boost::split(supportedMethods, meths, boost::is_any_of(",;:"));
 
          for (std::string method : supportedMethods) {
             std::cout << "appending methods" << std::endl;
@@ -99,38 +100,73 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          break;
       }
       case 3: { // encryption request
-         std::cout << "setting msgtype" << std::endl;
-         response["msgtype"] = 4;
          std::string plainText = value["text"].asString();
          std::string method = value["method"].asString();
          std::string encrypted;
-         if (isMethodSupported(method)) {
-            EasyCrypto::EasyCryptoLib::encrypt(plainText, encrypted, method);
-         } else {
-            encrypted = "Not supported";
-         }
-         response["text"] = encrypted;
+
+         EasyCryptoLib::Result r = EasyCryptoLib::encrypt(plainText, encrypted, method);
+         
          response["requestid"] = value["requestid"].asInt();
+         switch (r) {
+            case EasyCryptoLib::ESuccess: {
+               response["msgtype"] = 4;
+               response["text"] = encrypted;
+               break;
+            }
+            case EasyCryptoLib::EError: {
+               response["msgtype"] = 999;
+               response["text"] = "ERROR IN ENCRYPTION";
+               std::cout << "Error with reverse method!" << std::endl;
+               break;
+            }
+            default:
+            case EasyCryptoLib::ENotSupported: {
+               response["msgtype"] = 999;
+               response["text"] = "NOT SUPPORTED";
+               std::cout << "Method not supported!" << std::endl;
+               break;
+            }
+         }
          std::cout << "done with constructing response" << std::endl;
          break;
       }
-      case 5: {
-         std::cout << "setting msgtype" << std::endl;
-         response["msgtype"] = 6;
+      case 5: { // decryption request
          std::string encrypted = value["text"].asString();
          std::string method = value["method"].asString();
          std::string plainText;
-         if (isMethodSupported(method)) {
-            EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, method);
-         } else {
-            encrypted = "Not supported";
-         }
-         response["text"] = plainText;
+         
+         EasyCryptoLib::Result r = EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, method);
+
          response["requestid"] = value["requestid"].asInt();
+         switch (r) {
+            case EasyCryptoLib::ESuccess: {
+               response["msgtype"] = 6;
+               response["text"] = plainText;
+               std::cout << "Success with decryption method!" << std::endl;
+               break;
+            }
+            case EasyCryptoLib::EError: {
+               response["msgtype"] = 999;
+               response["text"] = "ERROR IN DECRYPTION";
+               std::cout << "Error with decryption method!" << std::endl;
+               break;
+            }
+            default:
+            case EasyCryptoLib::ENotSupported: {
+               response["msgtype"] = 999;
+               response["text"] = "NOT SUPPORTED";
+               std::cout << "Method not supported!" << std::endl;
+               break;
+            }
+         }
          std::cout << "done with constructing response" << std::endl;
          break;
       }
       default: {
+         response["requestid"] = value["requestid"].asInt();
+         response["msgtype"] = 999;
+         response["text"] = "NOT SUPPORTED";
+         std::cout << "Message type not supported!" << std::endl;
          break;
       }
    }
@@ -138,12 +174,4 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
    return response.toStyledString();
 }
 
-bool CryptoServer::isMethodSupported(const std::string & method) const {
-   for (std::string m : supportedMethods) {
-      if (m == method) {
-         return true;
-      }
-   }
-   return false;
-}
 
