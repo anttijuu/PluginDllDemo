@@ -24,6 +24,7 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#include <stdexcept>
 
 #include "EasyCryptoPrivMatrix.hpp"
 
@@ -55,7 +56,7 @@ void EasyCryptoPrivMatrix::encrypt(const std::string & toEncrypt, std::string & 
    }
    for (int outer = 0; outer < matrixWidth; outer++) {
       toStoreTo += toRotate.substr(outer,1);
-      for (int inner = outer+matrixWidth; inner < toRotate.length(); inner += matrixWidth) {
+      for (unsigned int inner = outer+matrixWidth; inner < toRotate.length(); inner += matrixWidth) {
          toStoreTo += toRotate.substr(inner,1);
       }
    }
@@ -83,7 +84,7 @@ void EasyCryptoPrivMatrix::decrypt(const std::string & toDecrypt, std::string & 
    }
    for (int outer = 0; outer < matrixWidth; outer++) {
       toStoreTo += toRotate.substr(outer,1);
-      for (int inner = outer+matrixWidth; inner < toRotate.length(); inner += matrixWidth) {
+      for (unsigned int inner = outer+matrixWidth; inner < toRotate.length(); inner += matrixWidth) {
          toStoreTo += toRotate.substr(inner,1);
       }
    }
