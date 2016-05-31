@@ -1,5 +1,5 @@
 IDIR=.
-BOOSTDIR=/home/antti/workspace/boost_1_60_0
+BOOSTDIR=/media/antti/workspace/boost_1_60_0
 CC=g++
 LIBS=/usr/lib/libboost_system.so.1.60.0
 
