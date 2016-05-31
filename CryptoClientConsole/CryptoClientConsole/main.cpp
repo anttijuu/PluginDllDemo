@@ -81,40 +81,40 @@ void usingGoodLib() {
    }
    
    // Using matrix method
-   r = EasyCryptoLib::encrypt(userString, result, "matrix");
-   switch (r) {
-      case EasyCryptoLib::ESuccess: {
-         std::cout << "Text encrypted with Matrix method: ";
-         std::cout << result << std::endl;
-         break;
-      }
-      case EasyCryptoLib::EError: {
-         std::cout << "Error with matrix method!" << std::endl;
-         break;
-      }
-      case EasyCryptoLib::ENotSupported: {
-         std::cout << "Not supported!" << std::endl;
-         break;
-      }
-   }
-
-   std::cout << "Decrypting back to original: ";
-   r = EasyCryptoLib::decrypt(result, userString, "matrix");
-   switch (r) {
-      case EasyCryptoLib::ESuccess: {
-         std::cout << "Text decrypted with Matrix method: ";
-         std::cout << userString << std::endl << std::endl;
-         break;
-      }
-      case EasyCryptoLib::EError: {
-         std::cout << "Error with matrix method!" << std::endl;
-         break;
-      }
-      case EasyCryptoLib::ENotSupported: {
-         std::cout << "Not supported!" << std::endl;
-         break;
-      }
-   }
+//   r = EasyCryptoLib::encrypt(userString, result, "matrix");
+//   switch (r) {
+//      case EasyCryptoLib::ESuccess: {
+//         std::cout << "Text encrypted with Matrix method: ";
+//         std::cout << result << std::endl;
+//         break;
+//      }
+//      case EasyCryptoLib::EError: {
+//         std::cout << "Error with matrix method!" << std::endl;
+//         break;
+//      }
+//      case EasyCryptoLib::ENotSupported: {
+//         std::cout << "Not supported!" << std::endl;
+//         break;
+//      }
+//   }
+//
+//   std::cout << "Decrypting back to original: ";
+//   r = EasyCryptoLib::decrypt(result, userString, "matrix");
+//   switch (r) {
+//      case EasyCryptoLib::ESuccess: {
+//         std::cout << "Text decrypted with Matrix method: ";
+//         std::cout << userString << std::endl << std::endl;
+//         break;
+//      }
+//      case EasyCryptoLib::EError: {
+//         std::cout << "Error with matrix method!" << std::endl;
+//         break;
+//      }
+//      case EasyCryptoLib::ENotSupported: {
+//         std::cout << "Not supported!" << std::endl;
+//         break;
+//      }
+//   }
    
    // Using a method that is unsupported
    std::cout << "Trying to use an unsupported method..." << std::endl;
@@ -165,18 +165,18 @@ void usingBadLib() {
       std::cout << "Exception: " << e.what() << std::endl;
    }
    
-   try {
-      crypter->encrypt(userString, result, EasyCryptoLibBad::Method::Matrix);
-      std::cout << "Text encrypted with Matrix method: ";
-      std::cout << result << std::endl;
-      std::cout << "Decrypting back to original: ";
-      crypter->decrypt(result, userString, EasyCryptoLibBad::Method::Matrix);
-      std::cout << userString << std::endl << std::endl;
-   } catch (not_supported & e) {
-      std::cout << "Exception, not supported: " << e.what() << std::endl;
-   } catch (std::exception & e) {
-      std::cout << "Exception: " << e.what() << std::endl;
-   }
+//   try {
+//      crypter->encrypt(userString, result, EasyCryptoLibBad::Method::Matrix);
+//      std::cout << "Text encrypted with Matrix method: ";
+//      std::cout << result << std::endl;
+//      std::cout << "Decrypting back to original: ";
+//      crypter->decrypt(result, userString, EasyCryptoLibBad::Method::Matrix);
+//      std::cout << userString << std::endl << std::endl;
+//   } catch (not_supported & e) {
+//      std::cout << "Exception, not supported: " << e.what() << std::endl;
+//   } catch (std::exception & e) {
+//      std::cout << "Exception: " << e.what() << std::endl;
+//   }
    
    std::cout << "Trying to use an unsupported method..." << std::endl;
    try {
