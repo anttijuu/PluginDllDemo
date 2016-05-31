@@ -44,25 +44,39 @@ namespace EasyCrypto {
       return methods;
    }
    
-   void EasyCryptoLib::encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method) {
-      if (method == "reverse") {
-         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
-         theImpl->encrypt(toEncrypt, toStoreTo);
-      } else if (method == "matrix") {
-         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
-         theImpl->encrypt(toEncrypt, toStoreTo);
+   EasyCryptoLib::Result EasyCryptoLib::encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method) {
+      try {
+         if (method == "reverse") {
+            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
+            theImpl->encrypt(toEncrypt, toStoreTo);
+            return ESuccess;
+         } else if (method == "matrix") {
+            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
+            theImpl->encrypt(toEncrypt, toStoreTo);
+            return ESuccess;
+         }
+      } catch (std::exception & e) {
+         return EError;
       }
+      return ENotSupported;
    }
    
    
-   void EasyCryptoLib::decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method) {
-      if (method == "reverse") {
-         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
-         theImpl->decrypt(toDecrypt, toStoreTo);
-      }else if (method == "matrix") {
-         std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
-         theImpl->decrypt(toDecrypt, toStoreTo);
+   EasyCryptoLib::Result EasyCryptoLib::decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method) {
+      try {
+         if (method == "reverse") {
+            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
+            theImpl->decrypt(toDecrypt, toStoreTo);
+            return ESuccess;
+         }else if (method == "matrix") {
+            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
+            theImpl->decrypt(toDecrypt, toStoreTo);
+            return ESuccess;
+         }
+      } catch (std::exception & e) {
+         return EError;
       }
+      return ENotSupported;
    }
    
 } // namespace

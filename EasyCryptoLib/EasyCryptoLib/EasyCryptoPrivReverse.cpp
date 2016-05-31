@@ -30,11 +30,17 @@ namespace EasyCrypto {
 const std::string EasyCryptoPrivReverse::methodName("reverse");
 
 void EasyCryptoPrivReverse::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
+   if (toEncrypt.length() < 1) {
+      throw std::runtime_error("Empty string");
+   }
    toStoreTo = toEncrypt;
    std::reverse(toStoreTo.begin(), toStoreTo.end());
 };
 
 void EasyCryptoPrivReverse::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
+   if (toDecrypt.length() < 1) {
+      throw std::runtime_error("Empty string");
+   }
    encrypt(toDecrypt, toStoreTo);
 }
 

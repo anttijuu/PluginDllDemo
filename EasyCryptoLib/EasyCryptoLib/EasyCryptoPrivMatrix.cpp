@@ -36,6 +36,10 @@ const std::string & EasyCryptoPrivMatrix::method() const {
 }
 
 void EasyCryptoPrivMatrix::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
+   if (toEncrypt.length() < 1) {
+      throw std::runtime_error("Empty string");
+   }
+
    toStoreTo = "";
    int matrixWidth = std::floor(std::sqrt(toEncrypt.length()));
    
@@ -61,6 +65,9 @@ void EasyCryptoPrivMatrix::encrypt(const std::string & toEncrypt, std::string & 
 }
 
 void EasyCryptoPrivMatrix::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
+   if (toDecrypt.length() < 1) {
+      throw std::runtime_error("Empty string");
+   }
    toStoreTo = "";
    int matrixWidth = std::floor(std::sqrt(toDecrypt.length()));
    

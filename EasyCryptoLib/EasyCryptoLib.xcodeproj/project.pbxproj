@@ -44,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		315F3ACE1CFD6E1E005F22FC /* EasyCryptoExceptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoExceptions.hpp; sourceTree = "<group>"; };
 		3194F8F01CD86D9200333416 /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libEasyCryptoLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		3194F8F31CD86D9200333416 /* EasyCryptoLib.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoLib.hpp; sourceTree = "<group>"; };
 		3194F8F51CD86D9200333416 /* EasyCryptoPriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoPriv.hpp; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 				3194F91C1CDA1DD000333416 /* EasyCryptoPrivMatrix.cpp */,
 				3194F91B1CDA1D9100333416 /* EasyCryptoLibBad.hpp */,
 				3194F9211CDA3E4E00333416 /* EasyCryptoLibBad.cpp */,
+				315F3ACE1CFD6E1E005F22FC /* EasyCryptoExceptions.hpp */,
 			);
 			path = EasyCryptoLib;
 			sourceTree = "<group>";

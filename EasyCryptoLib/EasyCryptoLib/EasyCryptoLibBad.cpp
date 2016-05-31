@@ -24,6 +24,7 @@
 #include "EasyCryptoLibBad.hpp"
 #include "EasyCryptoPrivReverse.hpp"
 #include "EasyCryptoPrivMatrix.hpp"
+#include "EasyCryptoExceptions.hpp"
 
 namespace EasyCrypto {
 
@@ -66,6 +67,8 @@ void EasyCryptoLibBad::encrypt(const std::string & toEncrypt, std::string & toSt
       encryptWithReverse(toEncrypt, toStoreTo);
    } else if (m == Method::Matrix) {
       encryptWithMatrix(toEncrypt, toStoreTo);
+   } else {
+      throw not_supported();
    }
 }
 
@@ -74,6 +77,8 @@ void EasyCryptoLibBad::decrypt(const std::string & toDecrypt, std::string & toSt
       decryptWithReverse(toDecrypt, toStoreTo);
    } else if (m == Method::Matrix) {
       decryptWithMatrix(toDecrypt, toStoreTo);
+   } else {
+      throw not_supported();
    }
 }
 

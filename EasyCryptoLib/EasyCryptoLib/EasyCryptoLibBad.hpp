@@ -50,12 +50,14 @@ public:
       Reverse,
       Matrix,
    };
+private:
    virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
    virtual void encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
    
    virtual void decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
    virtual void decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
    
+public:
    virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
    virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo, Method m);
    
