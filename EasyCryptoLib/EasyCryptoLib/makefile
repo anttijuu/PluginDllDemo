@@ -1,14 +1,13 @@
 IDIR=.
-BOOSTDIR=/home/antti/workspace/boost_1_60_0
 CC=g++
 
-CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR) -I$(BOOSTDIR)
+CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR)
 LFLAGS = -shared -Wall -o libEasyCrypto.so
 
-SOURCES = ./EasyCryptoLibBad.cpp \
-./EasyCryptoLib.cpp \
+SOURCES = ./EasyCryptoLib.cpp \
 ./EasyCryptoPrivMatrix.cpp \
 ./EasyCryptoPrivReverse.cpp
+./EasyCryptoLibBad.cpp \
 
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = libEasyCrypto.so
@@ -22,9 +21,9 @@ $(EXECUTABLE) : $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 install:
-	cp -f libEasyCrypto.so /usr/lib
-	cp -f EasyCryptoLib.hpp /usr/include
-	cp -f EasyCryptoLibBad.hpp /usr/include
+	cp -f libEasyCrypto.so /usr/local/lib
+	cp -f EasyCryptoLib.hpp /usr/local/include
+	cp -f EasyCryptoLibBad.hpp /usr/local/include
 
 clean:
 	-rm -f $(OBJECTS) $(EXECUTABLE)
