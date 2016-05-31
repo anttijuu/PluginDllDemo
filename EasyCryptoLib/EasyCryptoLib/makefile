@@ -6,8 +6,8 @@ LFLAGS = -shared -Wall -o libEasyCrypto.so
 
 SOURCES = ./EasyCryptoLib.cpp \
 ./EasyCryptoPrivMatrix.cpp \
-./EasyCryptoPrivReverse.cpp
-./EasyCryptoLibBad.cpp \
+./EasyCryptoPrivReverse.cpp \
+./EasyCryptoLibBad.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = libEasyCrypto.so
