@@ -1,9 +1,8 @@
 IDIR=.
-BOOSTDIR=/home/antti/workspace/boost_1_60_0
 CC=g++
-LIBS=/usr/lib/libEasyCrypto.so
+LIBS=/usr/local/lib/libEasyCrypto.so
 
-CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR) -I$(BOOSTDIR)
+CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR)
 LFLAGS = -Wall
 
 SOURCES = ./main.cpp
