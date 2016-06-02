@@ -6,7 +6,7 @@ LIBS=/usr/lib/libboost_system.so.1.60.0
 CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR) -I$(BOOSTDIR)
 LFLAGS = -std=c++11 -Wall -lm -ldl -pthread -lpthread
 
-SOURCES = ./main.cpp ./jsoncpp.cpp
+SOURCES = ./Client.cpp ./jsoncpp.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = EasyCryptoClient
