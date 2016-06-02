@@ -21,41 +21,9 @@
 
 #include <json/json.h>
 
-using boost::asio::ip::udp;
-
-/////////////////////////////////////////////////////////////////////////////////////////
+#include "Client.hpp"
 
 
-class Client {
-public:
-   Client();
-   int mainFunc(int argc, char * argv[]);
-   
-private:
-   
-   void handleCapabilityRequest();
-   void handleEncryptionRequest();
-   void handleDecryptionRequest();
-   
-   bool isMethodSupported(const std::string & method) const;
-   void printSupportedMethods() const;
-   int createRequestId() const;
-   void printJsonMsg(const Json::Value & json) const;
-   std::string askMethodOfEncryption() const;
-   
-private:
-   boost::asio::io_service io_service;
-   
-   udp::socket s;
-   
-   udp::resolver resolver;
-   udp::endpoint endpoint;
-   
-   std::chrono::system_clock::time_point started;
-   std::vector<std::string> supportedMethods;
-   
-   bool printDetails;
-};
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -75,6 +43,8 @@ int main (int argc, char* argv[]) {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
+
+using boost::asio::ip::udp;
 
 Client::Client()
 : s(io_service, udp::endpoint(udp::v4(), 0)), resolver(io_service), printDetails(false) {

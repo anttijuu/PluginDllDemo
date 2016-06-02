@@ -29,6 +29,7 @@
 		313BE0101CE2179D00255C4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		313BE0171CE219B500255C4E /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libboost_system.dylib; sourceTree = "<group>"; };
 		314168441CE458FF004D091C /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jsoncpp.cpp; path = ../../../jsoncpp/dist/jsoncpp.cpp; sourceTree = "<group>"; };
+		315F3ACF1D0003F8005F22FC /* Client.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Client.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 			children = (
 				314168441CE458FF004D091C /* jsoncpp.cpp */,
 				313BE0101CE2179D00255C4E /* main.cpp */,
+				315F3ACF1D0003F8005F22FC /* Client.hpp */,
 			);
 			path = EasyCryptoClient;
 			sourceTree = "<group>";
