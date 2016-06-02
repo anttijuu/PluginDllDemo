@@ -31,6 +31,7 @@ int main(int argc, const char * argv[]) {
       io_service.run();
    } catch (std::exception & e) {
       std::cerr << "Exception: " << e.what() << "\n";
+      return EXIT_FAILURE;
    }
-   return 0;
+   return EXIT_SUCCESS;
 }

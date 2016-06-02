@@ -54,7 +54,7 @@ Client::Client()
 int Client::mainFunc(int argc, char* argv[]) {
    if (argc != 3) {
       std::cerr << "Usage: EasyCryptoClient <host> <port>\n";
-      return 1;
+      return EXIT_FAILURE;
    }
    
    endpoint = *resolver.resolve({udp::v4(), argv[1], argv[2]});
@@ -106,7 +106,7 @@ int Client::mainFunc(int argc, char* argv[]) {
    } while (command > 0);
    
    std::cout << "Bye!" << std::endl;
-   return 0;
+   return EXIT_SUCCESS;
 }
 
 void Client::handlePingMessage() {
