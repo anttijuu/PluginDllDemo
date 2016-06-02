@@ -25,7 +25,7 @@
 
 #include "EasyCryptoLib.hpp"
 #include "EasyCryptoPrivReverse.hpp"
-#include "EasyCryptoPrivMatrix.hpp"
+//#include "EasyCryptoPrivMatrix.hpp"
 
 namespace EasyCrypto {
    
@@ -38,8 +38,8 @@ namespace EasyCrypto {
       std::string methods;
       std::unique_ptr<EasyCryptoPriv> theImpl1(new EasyCryptoPrivReverse());
       methods = theImpl1->method();
-      std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
-      methods = methods + "," + theImpl2->method();
+//      std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
+//      methods = methods + "," + theImpl2->method();
       return methods;
    }
    
@@ -49,10 +49,10 @@ namespace EasyCrypto {
             std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
             theImpl->encrypt(toEncrypt, toStoreTo);
             return ESuccess;
-         } else if (method == "matrix") {
-            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
-            theImpl->encrypt(toEncrypt, toStoreTo);
-            return ESuccess;
+//         } else if (method == "matrix") {
+//            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
+//            theImpl->encrypt(toEncrypt, toStoreTo);
+//            return ESuccess;
          }
       } catch (std::exception & e) {
          return EError;
@@ -67,10 +67,10 @@ namespace EasyCrypto {
             std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
             theImpl->decrypt(toDecrypt, toStoreTo);
             return ESuccess;
-         } else if (method == "matrix") {
-            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
-            theImpl->decrypt(toDecrypt, toStoreTo);
-            return ESuccess;
+//         } else if (method == "matrix") {
+//            std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
+//            theImpl->decrypt(toDecrypt, toStoreTo);
+//            return ESuccess;
          }
       } catch (std::exception & e) {
          return EError;
