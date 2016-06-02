@@ -11,7 +11,6 @@ SOURCES = ./main.cpp ./CryptoServer.cpp ./jsoncpp.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = EasyCryptoServer
 
-# all: $(OBJECTS) $(EXECUTABLE)
 all: $(EXECUTABLE)
 
 $(EXECUTABLE) : $(OBJECTS)

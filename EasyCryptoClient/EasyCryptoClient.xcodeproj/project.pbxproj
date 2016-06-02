@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		313BE0111CE2179D00255C4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 313BE0101CE2179D00255C4E /* main.cpp */; };
+		313BE0111CE2179D00255C4E /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 313BE0101CE2179D00255C4E /* Client.cpp */; };
 		313BE0181CE219B500255C4E /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 313BE0171CE219B500255C4E /* libboost_system.dylib */; };
 		314168451CE458FF004D091C /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314168441CE458FF004D091C /* jsoncpp.cpp */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		313BE00D1CE2179D00255C4E /* EasyCryptoClient */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EasyCryptoClient; sourceTree = BUILT_PRODUCTS_DIR; };
-		313BE0101CE2179D00255C4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		313BE0101CE2179D00255C4E /* Client.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
 		313BE0171CE219B500255C4E /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libboost_system.dylib; sourceTree = "<group>"; };
 		314168441CE458FF004D091C /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jsoncpp.cpp; path = ../../../jsoncpp/dist/jsoncpp.cpp; sourceTree = "<group>"; };
 		315F3ACF1D0003F8005F22FC /* Client.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Client.hpp; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				314168441CE458FF004D091C /* jsoncpp.cpp */,
-				313BE0101CE2179D00255C4E /* main.cpp */,
+				313BE0101CE2179D00255C4E /* Client.cpp */,
 				315F3ACF1D0003F8005F22FC /* Client.hpp */,
 			);
 			path = EasyCryptoClient;
@@ -127,7 +127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				313BE0111CE2179D00255C4E /* main.cpp in Sources */,
+				313BE0111CE2179D00255C4E /* Client.cpp in Sources */,
 				314168451CE458FF004D091C /* jsoncpp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

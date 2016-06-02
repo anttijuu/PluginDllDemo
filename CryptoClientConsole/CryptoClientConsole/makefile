@@ -10,7 +10,6 @@ SOURCES = ./main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = EasyCryptoConsole
 
-# all: $(OBJECTS) $(EXECUTABLE)
 all: $(EXECUTABLE)
 
 $(EXECUTABLE) : $(OBJECTS)

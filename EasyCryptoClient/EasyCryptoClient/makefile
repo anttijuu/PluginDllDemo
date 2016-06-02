@@ -11,7 +11,6 @@ SOURCES = ./main.cpp ./jsoncpp.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 EXECUTABLE = EasyCryptoClient
 
-# all: $(OBJECTS) $(EXECUTABLE)
 all: $(EXECUTABLE)
 
 $(EXECUTABLE) : $(OBJECTS)
