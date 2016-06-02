@@ -9,20 +9,9 @@
 #ifndef Client_h
 #define Client_h
 
-//#include <cstdlib>
-//#include <cstring>
-//#include <iostream>
-//#include <cstdio>
 #include <chrono>
-//#include <iomanip>
-//#include <sstream>
-//#include <stdexcept>
-//#include <vector>
 
 #include <boost/asio.hpp>
-//#include <boost/algorithm/string.hpp>
-
-//#include <json/json.h>
 
 namespace Json {
    class Value;
