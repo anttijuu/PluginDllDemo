@@ -68,6 +68,7 @@ int Client::mainFunc(int argc, char* argv[]) {
          std::cout << "1  >> Send capability request to server" << std::endl;
          std::cout << "2  >> Send encryption request to server" << std::endl;
          std::cout << "3  >> Send decryption request to server" << std::endl;
+         std::cout << "88  >> Send ping to server" << std::endl;
          std::cout << "99 >> Toggle print details" << std::endl;
          std::cout << "0 or Enter >> Exit client" << std::endl;
          std::cout << "Enter command >> ";
@@ -86,6 +87,10 @@ int Client::mainFunc(int argc, char* argv[]) {
                handleDecryptionRequest();
                break;
             }
+            case 88: {
+               handlePingMessage();
+               break;
+            }
             case 99: {
                printDetails = !printDetails;
                break;
@@ -102,6 +107,18 @@ int Client::mainFunc(int argc, char* argv[]) {
    
    std::cout << "Bye!" << std::endl;
    return 0;
+}
+
+void Client::handlePingMessage() {
+   std::cout << " *** Sending Ping Message to Server *** " << std::endl;
+   const std::string pingMsg("ping");
+   s.send_to(boost::asio::buffer(pingMsg), endpoint);
+   char reply[max_length];
+   udp::endpoint sender_endpoint;
+   size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
+
+   std::string response(reply, reply_length);
+   std::cout << "Server response to ping is: " << response << std::endl;
 }
 
 void Client::handleCapabilityRequest() {

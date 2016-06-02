@@ -30,6 +30,7 @@ private:
    void handleCapabilityRequest();
    void handleEncryptionRequest();
    void handleDecryptionRequest();
+   void handlePingMessage();
    
    bool isMethodSupported(const std::string & method) const;
    void printSupportedMethods() const;

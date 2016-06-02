@@ -67,7 +67,7 @@ namespace EasyCrypto {
             std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivReverse());
             theImpl->decrypt(toDecrypt, toStoreTo);
             return ESuccess;
-         }else if (method == "matrix") {
+         } else if (method == "matrix") {
             std::unique_ptr<EasyCryptoPriv> theImpl(new EasyCryptoPrivMatrix());
             theImpl->decrypt(toDecrypt, toStoreTo);
             return ESuccess;

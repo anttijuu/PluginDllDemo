@@ -19,8 +19,6 @@
 
 CryptoServer::CryptoServer(boost::asio::io_service & io_service, short port)
 : socket_(io_service, udp::endpoint(udp::v4(), port)) {
-   
-
    doReceive();
 }
 
@@ -55,19 +53,23 @@ void CryptoServer::doReceive() {
 */
 void CryptoServer::doSendResponse(std::size_t length) {
    std::string response(data_, length);
-   Json::Value value;
-   std::stringstream str(response);
-   try {
-      str >> value;
-      if (value.isObject()) {
-         int msgType = value["msgtype"].asInt();
-         std::cout << "msgtype value: " << msgType << std::endl;
-         response = handleRequest(msgType, value);
+   if (response == "ping") {
+      response = "pong";
+   } else {
+      Json::Value value;
+      std::stringstream str(response);
+      try {
+         str >> value;
+         if (value.isObject()) {
+            int msgType = value["msgtype"].asInt();
+            std::cout << "msgtype value: " << msgType << std::endl;
+            response = handleRequest(msgType, value);
+         }
+      } catch (std::exception & e) {
+         response = "invalid json message structure from client";
       }
-   } catch (std::exception & e) {
-      response = "invalid json message structure from client";
+      
    }
-   
    std::cout << "Sending response : " << response << std::endl;
    socket_.async_send_to(boost::asio::buffer(response, response.length()), sender_endpoint_,
                          [this](boost::system::error_code /*ec*/, std::size_t /*bytes_sent*/)
