@@ -34,12 +34,12 @@
 namespace EasyCrypto {
 
 class EasyCryptoPrivReverse;
-//class EasyCryptoPrivMatrix;
+class EasyCryptoPrivMatrix;
    
 class EasyCryptoLibBad
 {
 private:
-//   std::unique_ptr<EasyCryptoPrivMatrix> matCrypto;
+   std::unique_ptr<EasyCryptoPrivMatrix> matCrypto;
    std::unique_ptr<EasyCryptoPrivReverse> revCrypto;
    
 public:
@@ -48,13 +48,13 @@ public:
    
    enum Method {
       Reverse,
-//      Matrix,
+      Matrix,
    };
 private:
-//   virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
+   virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
    virtual void encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
    
-//   virtual void decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
+   virtual void decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
    virtual void decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
    
 public:
