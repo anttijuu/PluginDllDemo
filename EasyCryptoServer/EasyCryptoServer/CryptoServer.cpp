@@ -88,7 +88,7 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          response["version"] = EasyCryptoLib::version();
          Json::Value methodsArray(Json::arrayValue);
 
-         std::string meths = EasyCrypto::EasyCryptoLib::methods();
+         std::string meths = EasyCryptoLib::methods();
          std::vector<std::string> supportedMethods;
          boost::split(supportedMethods, meths, boost::is_any_of(",;:"));
 
