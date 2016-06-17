@@ -23,5 +23,6 @@ Tehtävänä on suunnitella JSON API ja toteuttaa simppeli udp server ja client 
     * Mihin serveri asennetaan..?
     * Tähän liittyen, kunkin oma salausplugin (jokaiselle uniikki nimi) asennetaan serverille myös.
 * Lisäpainotusta API:n dokumentaatioon
+* Myös versiointiin lisäpainotusta, mm. Version -luokan koodaus.
 * lib:iin tuki Win-DLL:lle
 * Serveristä todellinen async -versio
