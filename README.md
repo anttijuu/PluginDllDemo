@@ -16,12 +16,12 @@ Tehtävänä on suunnitella JSON API ja toteuttaa simppeli udp server ja client 
 ## TODO
 
 * Laita vaatimus testeistä clientin päässä tehtävänantoon.
-** Itse asiassa, tee clientista yksikkötestausta (vaikka Catch) käyttävä, ei ns. user app. 
-** Testit .json -tiedostoina luetaan, ainakin osin?
+   * Itse asiassa, tee clientista yksikkötestausta (vaikka Catch) käyttävä, ei ns. user app. 
+   * Testit .json -tiedostoina luetaan, ainakin osin?
 * Toteuta kukin salausmenetelmä boost.DLL:n plugineilla
 * Aloitusseminaarissa suunnitellaan yhteinen JSON API serverille, jonka minä toteutan serverin päähän >> yhteinen serveri testeille, kullakin oma client?
-** Mihin serveri asennetaan..?
-** Tähän liittyen, kunkin oma salausplugin (jokaiselle uniikki nimi) asennetaan serverille myös.
+   * Mihin serveri asennetaan..?
+   * Tähän liittyen, kunkin oma salausplugin (jokaiselle uniikki nimi) asennetaan serverille myös.
 * Lisäpainotusta API:n dokumentaatioon
 * lib:iin tuki Win-DLL:lle
-* Serveristä todellinen async -versio.
+* Serveristä todellinen async -versio
