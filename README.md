@@ -25,4 +25,5 @@ Tehtävänä on suunnitella JSON API ja toteuttaa simppeli udp server ja client 
 * Lisäpainotusta API:n dokumentaatioon
 * Myös versiointiin lisäpainotusta, mm. Version -luokan koodaus.
 * lib:iin tuki Win-DLL:lle
+* Tämä käyttöön? https://github.com/nlohmann/json
 * Serveristä todellinen async -versio
