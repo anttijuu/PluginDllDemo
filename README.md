@@ -27,3 +27,4 @@ Tehtävänä on suunnitella JSON API ja toteuttaa simppeli udp server ja client 
 * lib:iin tuki Win-DLL:lle
 * Tämä käyttöön? https://github.com/nlohmann/json
 * Serveristä todellinen async -versio
+* Perustele paremmin kielivalinta - C++ on ainoa kieli jolla voi tehdä alustariippumatonta koodia kaikkiin yleisiin käyttiksiin sekä desktop, server että mobiilipuolella, ja että C++ on kuitenkin yleisimpien kielten joukossa, ei mikään marginaalikieli.
