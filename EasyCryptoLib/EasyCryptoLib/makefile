@@ -1,8 +1,11 @@
+#
+#
+
 IDIR=.
 CC=g++
 
 CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR) -DEC_DLL -DEC_DLL_EXPORTS -fvisibility=hidden -fvisibility-inlines-hidden
-LFLAGS =  -shared  -fvisibility=hidden -fvisibility-inlines-hidden -Wall -o libEasyCrypto.dylib
+LFLAGS =  -shared -Wall -fvisibility=hidden -fvisibility-inlines-hidden -o libEasyCrypto.dylib
 
 SOURCES = ./EasyCryptoLib.cpp \
 ./EasyCryptoPrivMatrix.cpp \
