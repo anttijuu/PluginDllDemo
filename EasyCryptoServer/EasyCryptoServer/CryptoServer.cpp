@@ -56,6 +56,9 @@ void CryptoServer::doSendResponse(std::size_t length) {
    if (response == "ping") {
       response = "pong";
    } else {
+      // Remove starting from here when giving code to students...
+      // From the string, create a json "thing" and handle the request, creating a response.
+      // Send the response to the server using the code after the else branch (see the code...).
       Json::Value value;
       std::stringstream str(response);
       try {
@@ -65,19 +68,23 @@ void CryptoServer::doSendResponse(std::size_t length) {
             std::cout << "msgtype value: " << msgType << std::endl;
             response = handleRequest(msgType, value);
          }
+        // ..until here, code removed when giving code to students.
       } catch (std::exception & e) {
          response = "invalid json message structure from client";
       }
       
    }
-   std::cout << "Sending response : " << response << std::endl;
-   socket_.async_send_to(boost::asio::buffer(response, response.length()), sender_endpoint_,
-                         [this](boost::system::error_code /*ec*/, std::size_t /*bytes_sent*/)
-                         {
-                            doReceive();
-                         });
+   if (response.length() > 0) {
+      std::cout << "Sending response : " << response << std::endl;
+      socket_.async_send_to(boost::asio::buffer(response, response.length()), sender_endpoint_,
+                            [this](boost::system::error_code /*ec*/, std::size_t /*bytes_sent*/)
+                            {
+                               doReceive();
+                            });
+   }
 }
 
+// Remove the whole method below when giving code to students.
 std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) {
    using namespace EasyCrypto;
    

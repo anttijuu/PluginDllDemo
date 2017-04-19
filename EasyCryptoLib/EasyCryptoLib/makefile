@@ -1,8 +1,8 @@
 IDIR=.
 CC=g++
 
-CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR)
-LFLAGS = -shared -Wall -o libEasyCrypto.dylib
+CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR) -DEC_DLL -DEC_DLL_EXPORTS -fvisibility=hidden -fvisibility-inlines-hidden
+LFLAGS =  -shared  -fvisibility=hidden -fvisibility-inlines-hidden -Wall -o libEasyCrypto.dylib
 
 SOURCES = ./EasyCryptoLib.cpp \
 ./EasyCryptoPrivMatrix.cpp \
@@ -24,12 +24,14 @@ install:
 	cp -f libEasyCrypto.dylib /usr/local/lib
 	cp -f EasyCryptoLib.hpp /usr/local/include
 	cp -f EasyCryptoLibBad.hpp /usr/local/include
+	cp -f ECMasterHeader.hpp /usr/local/include
 
 clean:
 	rm -f $(OBJECTS) $(EXECUTABLE)
 	rm -f /usr/local/lib/libEasyCrypto.dylib
 	rm -f /usr/local/include/EasyCryptoLib.hpp
 	rm -r /usr/local/include/EasyCryptoLibBad.hpp
+	rm -r /usr/local/include/ECMasterHeader.hpp
 
 .PHONY:
 	all clean

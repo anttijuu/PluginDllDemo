@@ -27,16 +27,15 @@
 #include <string>
 #include <memory>
 
+#include "ECMasterHeader.hpp"
 
-/* The classes below are exported */
-#pragma GCC visibility push(default)
 
 namespace EasyCrypto {
 
-class EasyCryptoPrivReverse;
-class EasyCryptoPrivMatrix;
+class EC_LOCAL EasyCryptoPrivReverse;
+class EC_LOCAL EasyCryptoPrivMatrix;
    
-class EasyCryptoLibBad
+class EC_API EasyCryptoLibBad
 {
 private:
    std::unique_ptr<EasyCryptoPrivMatrix> matCrypto;
@@ -51,11 +50,11 @@ public:
       Matrix,
    };
 private:
-   virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
-   virtual void encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
+   EC_LOCAL virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
+   EC_LOCAL virtual void encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
    
-   virtual void decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
-   virtual void decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
+   EC_LOCAL virtual void decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);
+   EC_LOCAL virtual void decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo);
    
 public:
    virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo, Method m);
@@ -67,7 +66,6 @@ public:
 
 } // namespace
 
-#pragma GCC visibility pop
 
 
 #endif /* EasyCryptoLibBad_h */

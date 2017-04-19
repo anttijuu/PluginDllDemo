@@ -31,7 +31,9 @@ private:
    void handleEncryptionRequest();
    void handleDecryptionRequest();
    void handlePingMessage();
+   void sendTestRequests();
    
+   // Remove all methods here from code given to students.
    bool isMethodSupported(const std::string & method) const;
    void printSupportedMethods() const;
    int createRequestId() const;
@@ -46,9 +48,9 @@ private:
    boost::asio::ip::udp::resolver resolver;
    boost::asio::ip::udp::endpoint endpoint;
    
+   
    std::chrono::system_clock::time_point started;
    std::vector<std::string> supportedMethods;
-   
    bool printDetails;
 };
 #endif /* Client_h */

@@ -17,6 +17,7 @@
 		3194F91E1CDA1DD000333416 /* EasyCryptoPrivMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3194F91C1CDA1DD000333416 /* EasyCryptoPrivMatrix.cpp */; };
 		3194F91F1CDA1DD000333416 /* EasyCryptoPrivMatrix.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3194F91D1CDA1DD000333416 /* EasyCryptoPrivMatrix.hpp */; };
 		3194F9221CDA3E4E00333416 /* EasyCryptoLibBad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3194F9211CDA3E4E00333416 /* EasyCryptoLibBad.cpp */; };
+		865D39111EA797210088F9BB /* ECMasterHeader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 865D39101EA797210088F9BB /* ECMasterHeader.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +56,7 @@
 		3194F91C1CDA1DD000333416 /* EasyCryptoPrivMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EasyCryptoPrivMatrix.cpp; sourceTree = "<group>"; };
 		3194F91D1CDA1DD000333416 /* EasyCryptoPrivMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EasyCryptoPrivMatrix.hpp; sourceTree = "<group>"; };
 		3194F9211CDA3E4E00333416 /* EasyCryptoLibBad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EasyCryptoLibBad.cpp; sourceTree = "<group>"; };
+		865D39101EA797210088F9BB /* ECMasterHeader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ECMasterHeader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		3194F8F21CD86D9200333416 /* EasyCryptoLib */ = {
 			isa = PBXGroup;
 			children = (
+				865D39101EA797210088F9BB /* ECMasterHeader.hpp */,
 				3194F8F31CD86D9200333416 /* EasyCryptoLib.hpp */,
 				3194F8F71CD86D9200333416 /* EasyCryptoLib.cpp */,
 				3194F8F51CD86D9200333416 /* EasyCryptoPriv.hpp */,
@@ -109,6 +112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3194F8F61CD86D9200333416 /* EasyCryptoPriv.hpp in Headers */,
+				865D39111EA797210088F9BB /* ECMasterHeader.hpp in Headers */,
 				3194F91A1CDA092100333416 /* EasyCryptoPrivReverse.hpp in Headers */,
 				3194F91F1CDA1DD000333416 /* EasyCryptoPrivMatrix.hpp in Headers */,
 			);
@@ -142,7 +146,7 @@
 		3194F8E81CD86D9200333416 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Antti Juustila";
 				TargetAttributes = {
 					3194F8EF1CD86D9200333416 = {
@@ -196,8 +200,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -240,8 +246,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -271,6 +279,10 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					EC_DLL_EXPORTS,
+					EC_DLL,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -284,6 +296,10 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					EC_DLL_EXPORTS,
+					EC_DLL,
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

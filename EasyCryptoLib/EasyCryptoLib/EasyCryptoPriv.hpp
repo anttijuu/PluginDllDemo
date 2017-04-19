@@ -26,8 +26,8 @@
 
 #include <string>
 
-/* The classes below are not exported */
-#pragma GCC visibility push(hidden)
+#include "ECMasterHeader.hpp"
+
 
 namespace EasyCrypto {
 
@@ -37,7 +37,7 @@ namespace EasyCrypto {
  @author Antti Juustila
  @version 1.0.0
  */
-class EasyCryptoPriv
+class EC_LOCAL EasyCryptoPriv
 {
 public:
    /*
@@ -63,6 +63,5 @@ public:
    
 } // namespace
 
-#pragma GCC visibility pop
 
 #endif // __EasyCryptoPriv_hpp

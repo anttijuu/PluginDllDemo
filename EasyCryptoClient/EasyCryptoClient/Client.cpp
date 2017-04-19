@@ -48,6 +48,7 @@ using boost::asio::ip::udp;
 
 Client::Client()
 : s(io_service, udp::endpoint(udp::v4(), 0)), resolver(io_service), printDetails(false) {
+   // Remove the line below from code given to students.
    started = std::chrono::system_clock::now();
 }
 
@@ -68,6 +69,7 @@ int Client::mainFunc(int argc, char* argv[]) {
          std::cout << "1  >> Send capability request to server" << std::endl;
          std::cout << "2  >> Send encryption request to server" << std::endl;
          std::cout << "3  >> Send decryption request to server" << std::endl;
+         std::cout << "77 >> Send test json message requests to server" << std::endl;
          std::cout << "88  >> Send ping to server" << std::endl;
          std::cout << "99 >> Toggle print details" << std::endl;
          std::cout << "0 or Enter >> Exit client" << std::endl;
@@ -85,6 +87,10 @@ int Client::mainFunc(int argc, char* argv[]) {
             }
             case 3: {
                handleDecryptionRequest();
+               break;
+            }
+            case 77: {
+               sendTestRequests();
                break;
             }
             case 88: {
@@ -124,6 +130,8 @@ void Client::handlePingMessage() {
 void Client::handleCapabilityRequest() {
    std::cout << " *** Sending Capability Message to Server *** " << std::endl;
    
+   // Remove all code below in this method from code given to students.
+   
    Json::Value message(Json::objectValue);
    message["msgtype"] = 1;
    message["version"] = clientVersion;
@@ -160,6 +168,9 @@ void Client::handleCapabilityRequest() {
 
 void Client::handleEncryptionRequest() {
    std::cout << " *** Sending Message to Encrypt to Server *** " << std::endl;
+   
+   // Remove all code below in this method from code given to students.
+
    std::string text;
    std::string method;
    std::cout << "Give the text to encrypt: ";
@@ -203,6 +214,10 @@ void Client::handleEncryptionRequest() {
 }
 
 void Client::handleDecryptionRequest() {
+   std::cout << " *** Sending Message to Decrypt to Server *** " << std::endl;
+
+   // Remove all code below in this method from code given to students.
+
    std::string text;
    std::string method;
    std::cout << "Give the text to decrypt: ";
@@ -245,6 +260,12 @@ void Client::handleDecryptionRequest() {
    }
 }
 
+void Client::sendTestRequests() {
+   // TODO: Implement json test requests (correct and incorrect ones) and send them to the server.
+   // Check that responses are as expected. Print out the results of the tests.
+}
+
+// Remove all methods below from code given to students.
 bool Client::isMethodSupported(const std::string & method) const {
    for (std::string m : supportedMethods) {
       if (m == method) {

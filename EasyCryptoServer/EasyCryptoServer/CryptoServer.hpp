@@ -28,6 +28,7 @@ public:
 private:
    void doReceive();
    void doSendResponse(std::size_t length);
+   // Remove the method below when giving code to students
    std::string handleRequest(int msgType, const Json::Value & value);
    
 private:

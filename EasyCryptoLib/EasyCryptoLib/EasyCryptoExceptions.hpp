@@ -24,12 +24,11 @@
 #ifndef EasyCryptoExceptions_h
 #define EasyCryptoExceptions_h
 
-/* The classes below are not exported */
-#pragma GCC visibility push(hidden)
+#include "ECMasterHeader.hpp"
 
 namespace EasyCrypto {
    
-class not_supported : public std::logic_error
+class EC_API not_supported : public std::logic_error
 {
 public:
    not_supported() : std::logic_error("Not supported") {}
@@ -37,6 +36,5 @@ public:
 
 } // namespace
 
-#pragma GCC visibility pop
 
 #endif /* EasyCryptoExceptions_h */

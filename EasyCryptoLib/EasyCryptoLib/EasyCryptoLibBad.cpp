@@ -30,7 +30,8 @@ namespace EasyCrypto {
 
 
 EasyCryptoLibBad::EasyCryptoLibBad()
-   : revCrypto(new EasyCryptoPrivReverse()), matCrypto(new EasyCryptoPrivMatrix())
+   : revCrypto(new EasyCryptoPrivReverse())
+    , matCrypto(new EasyCryptoPrivMatrix())
 {
 }
 
@@ -45,19 +46,19 @@ std::string EasyCryptoLibBad::methods() {
 }
 
 
-void EasyCryptoLibBad::encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
+EC_LOCAL void EasyCryptoLibBad::encryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
    revCrypto->encrypt(toEncrypt, toStoreTo);
 }
 
-void EasyCryptoLibBad::encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo) {
+EC_LOCAL void EasyCryptoLibBad::encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo) {
    matCrypto->encrypt(toEncrypt, toStoreTo);
 }
 
-void EasyCryptoLibBad::decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
+EC_LOCAL void EasyCryptoLibBad::decryptWithReverse(const std::string & toEncrypt, std::string & toStoreTo) {
    revCrypto->decrypt(toEncrypt, toStoreTo);
 }
 
-void EasyCryptoLibBad::decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo) {
+EC_LOCAL void EasyCryptoLibBad::decryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo) {
    matCrypto->decrypt(toEncrypt, toStoreTo);
 }
 

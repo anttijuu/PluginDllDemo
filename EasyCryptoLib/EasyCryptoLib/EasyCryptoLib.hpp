@@ -26,9 +26,7 @@
 
 #include <string>
 
-/* The classes below are exported from the dynamic link library */
-#pragma GCC visibility push(default)
-
+#include "ECMasterHeader.hpp"
 
 namespace EasyCrypto {
    
@@ -47,7 +45,7 @@ namespace EasyCrypto {
  @author Antti Juustila
  @version 1.0.0
  */
-class EasyCryptoLib
+class EC_API EasyCryptoLib
 {
 public:
    /*! The result codes of encryption and decryption. */
@@ -84,7 +82,5 @@ public:
 };
 
 } // namespace
-
-#pragma GCC visibility pop
 
 #endif

@@ -26,6 +26,7 @@
 
 #include "EasyCryptoPrivReverse.hpp"
 
+
 namespace EasyCrypto {
 
 const std::string EasyCryptoPrivReverse::methodName("reverse");
@@ -50,3 +51,4 @@ const std::string & EasyCryptoPrivReverse::method() const {
 }
 
 } // namespace
+

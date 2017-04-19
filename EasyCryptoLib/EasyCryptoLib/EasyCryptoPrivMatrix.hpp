@@ -32,7 +32,7 @@
 
 namespace EasyCrypto {
 
-class EasyCryptoPrivMatrix : public EasyCryptoPriv
+class EC_LOCAL EasyCryptoPrivMatrix : public EasyCryptoPriv
 {
 public:
    
@@ -46,6 +46,5 @@ private:
 
 } //namespace
 
-#pragma GCC visibility pop
 
 #endif /* EasyCryptoPrivMatrix_hpp */

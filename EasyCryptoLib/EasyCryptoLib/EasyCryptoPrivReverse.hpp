@@ -28,13 +28,16 @@
 
 #include "EasyCryptoPriv.hpp"
 
-#pragma GCC visibility push(hidden)
+#include "ECMasterHeader.hpp"
 
 namespace EasyCrypto {
 
-class EasyCryptoPrivReverse : public EasyCryptoPriv
+class EC_LOCAL EasyCryptoPrivReverse : public EasyCryptoPriv
 {
 public:
+   
+   EasyCryptoPrivReverse() {};
+   EasyCryptoPrivReverse(const EasyCryptoPrivReverse &) = delete;
    
    virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
    virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
@@ -47,6 +50,5 @@ private:
 
 } //namespace
 
-#pragma GCC visibility pop
 
 #endif /* EasyCryptoPrivReverse_hpp */
