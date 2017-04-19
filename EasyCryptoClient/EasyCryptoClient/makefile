@@ -1,9 +1,9 @@
 IDIR=.
-BOOSTDIR=/media/antti/workspace/boost_1_60_0
+SYSDIR=/usr/local/include
 CC=g++
-LIBS=/usr/lib/libboost_system.so.1.60.0
+LIBS=/usr/local/lib/libboost_system.dylib
 
-CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR) -I$(BOOSTDIR)
+CFLAGS = -c -std=c++11 -fPIC -g -Wall -pthread -I$(IDIR) -I$(SYSDIR)
 LFLAGS = -std=c++11 -Wall -lm -ldl -pthread -lpthread
 
 SOURCES = ./Client.cpp ./jsoncpp.cpp
