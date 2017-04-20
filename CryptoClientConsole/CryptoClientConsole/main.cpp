@@ -8,8 +8,8 @@
 
 #include <iostream>
 
-#include <EasyCryptoLib.hpp>
-#include <EasyCryptoLibBad.hpp>
+#include <EasyCrypto/EasyCryptoLib.hpp>
+#include <EasyCrypto/EasyCryptoLibBad.hpp>
 
 void usingGoodLib();
 void usingBadLib();
