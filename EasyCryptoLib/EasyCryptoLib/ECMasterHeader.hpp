@@ -15,7 +15,7 @@
 #define EC_HELPER_DLL_EXPORT __declspec(dllexport)
 #define EC_HELPER_DLL_LOCAL
 #else
-#if __GNUC__ >= 4 || defined __llvm__ || defined __clang__
+#if __GNUC__ >= 4 || defined __llvm__ || defined __clang__ || defined __APPLE__
 #define EC_HELPER_DLL_IMPORT __attribute__ ((visibility ("default")))
 #define EC_HELPER_DLL_EXPORT __attribute__ ((visibility ("default")))
 #define EC_HELPER_DLL_LOCAL  __attribute__ ((visibility ("hidden")))
