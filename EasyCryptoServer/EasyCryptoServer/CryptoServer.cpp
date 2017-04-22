@@ -13,7 +13,7 @@
 
 #include <json/json.h>
 
-#include <EasyCryptoLib.hpp>
+#include <EasyCrypto/EasyCryptoLib.hpp>
 
 #include "CryptoServer.hpp"
 
