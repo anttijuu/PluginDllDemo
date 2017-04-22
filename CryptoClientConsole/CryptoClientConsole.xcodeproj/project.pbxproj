@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3194F90D1CD9F7CC00333416 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3194F90C1CD9F7CC00333416 /* main.cpp */; };
-		3194F9151CDA00B700333416 /* libEasyCryptoLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3194F9141CDA00B700333416 /* libEasyCryptoLib.dylib */; };
+		86F121891EAB7859009D743D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86F121881EAB7859009D743D /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,8 +24,7 @@
 
 /* Begin PBXFileReference section */
 		3194F9091CD9F7CC00333416 /* CryptoClientConsole */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CryptoClientConsole; sourceTree = BUILT_PRODUCTS_DIR; };
-		3194F90C1CD9F7CC00333416 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		3194F9141CDA00B700333416 /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEasyCryptoLib.dylib; path = "../../../../Library/Developer/Xcode/DerivedData/EasyCrypto-gdmctpvgqfuwuyaksslxtmvdulbq/Build/Products/Debug/libEasyCryptoLib.dylib"; sourceTree = "<group>"; };
+		86F121881EAB7859009D743D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +32,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3194F9151CDA00B700333416 /* libEasyCryptoLib.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +41,6 @@
 		3194F9001CD9F7CC00333416 = {
 			isa = PBXGroup;
 			children = (
-				3194F9141CDA00B700333416 /* libEasyCryptoLib.dylib */,
 				3194F90B1CD9F7CC00333416 /* CryptoClientConsole */,
 				3194F90A1CD9F7CC00333416 /* Products */,
 			);
@@ -61,7 +57,7 @@
 		3194F90B1CD9F7CC00333416 /* CryptoClientConsole */ = {
 			isa = PBXGroup;
 			children = (
-				3194F90C1CD9F7CC00333416 /* main.cpp */,
+				86F121881EAB7859009D743D /* main.cpp */,
 			);
 			path = CryptoClientConsole;
 			sourceTree = "<group>";
@@ -122,7 +118,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3194F90D1CD9F7CC00333416 /* main.cpp in Sources */,
+				86F121891EAB7859009D743D /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
