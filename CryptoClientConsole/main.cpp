@@ -137,7 +137,7 @@ void usingGoodLib() {
    
 }
 
-#include "../../EasyCryptoLib/EasyCryptoLib/EasyCryptoExceptions.hpp"
+#include "../../EasyCryptoLib/EasyCryptoExceptions.hpp"
 
 void usingBadLib() {
    std::cout << "==============================" << std::endl;
