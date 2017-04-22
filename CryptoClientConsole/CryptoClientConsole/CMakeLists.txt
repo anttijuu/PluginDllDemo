@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(CryptoClientConsole)
 add_executable(CryptoClientConsole main.cpp)
-set(CMAKE_CXX_FLAGS "-Wall -std=c++11 -stdlib=libc++ -DEC_DLL ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-Wall -std=c++11 -DEC_DLL ${CMAKE_CXX_FLAGS}")
 find_library(EASYCRYPTO EasyCrypto)
 target_link_libraries(CryptoClientConsole ${EASYCRYPTO})

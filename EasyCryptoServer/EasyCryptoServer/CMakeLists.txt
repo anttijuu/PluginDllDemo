@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(EasyCryptoServer)
 add_executable(EasyCryptoServer main.cpp CryptoServer.cpp jsoncpp.cpp)
-set(CMAKE_CXX_FLAGS "-Wall -std=c++11 -stdlib=libc++ -DEC_DLL ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-Wall -std=c++11 -DEC_DLL ${CMAKE_CXX_FLAGS}")
 find_library(EASYCRYPTO EasyCrypto)
 target_link_libraries(EasyCryptoServer ${EASYCRYPTO})
 find_library(BOOSTS boost_system)
