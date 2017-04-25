@@ -32,12 +32,18 @@ namespace EasyCrypto {
    
 
 /**
+
  This class is the public interface to the crypting library. The library
  supports multiple encrypting methods and also decrypts the encrypted text back
  to plain text.<br />
  All the methods in this class are static, so there is no need to instantiate the class.
  Implementation creates necessary internal objects which do the actual encrypting
  and decrypting.<br />
+ Usage:
+ -# Query encryption methods you can use by calling methods(). Resulting string lists the methods separated by comma.</li>
+ -# Encrypt by calling encrypt() using one of the methods returned by methods()</li>
+ -# Decrypt by calling decrypt() using the same method which was used in encrypt()</li>
+ 
  Build the code in the library as a dynamic library. In Mac OS X, they are called .dylib's
  and in Linux, shared libraries (.so). In Windows, they are DLLs. For client app development,
  provide this header file, with the library binary file (.dylib, .so or .dll) file, and nothing more.
