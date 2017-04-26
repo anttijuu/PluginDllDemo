@@ -47,7 +47,7 @@ public:
    
    enum Method {
       Reverse,
-      Matrix,
+      Matrix
    };
 private:
    EC_LOCAL virtual void encryptWithMatrix(const std::string & toEncrypt, std::string & toStoreTo);

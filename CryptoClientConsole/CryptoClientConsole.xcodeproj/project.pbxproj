@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		315C93261EAF880400D9F149 /* libEasyCryptoLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 315C93251EAF880400D9F149 /* libEasyCryptoLib.dylib */; };
 		86F121891EAB7859009D743D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86F121881EAB7859009D743D /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		315C93221EAF86F400D9F149 /* libEasyCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEasyCrypto.dylib; path = ../EasyCryptoLib/libEasyCrypto.dylib; sourceTree = "<group>"; };
+		315C93251EAF880400D9F149 /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEasyCryptoLib.dylib; path = "../../../../Library/Developer/Xcode/DerivedData/EasyCrypto-gdmctpvgqfuwuyaksslxtmvdulbq/Build/Products/Debug/libEasyCryptoLib.dylib"; sourceTree = "<group>"; };
 		3194F9091CD9F7CC00333416 /* CryptoClientConsole */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CryptoClientConsole; sourceTree = BUILT_PRODUCTS_DIR; };
 		86F121881EAB7859009D743D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -32,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				315C93261EAF880400D9F149 /* libEasyCryptoLib.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		315C93241EAF880400D9F149 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				315C93251EAF880400D9F149 /* libEasyCryptoLib.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3194F9001CD9F7CC00333416 = {
 			isa = PBXGroup;
 			children = (
+				315C93221EAF86F400D9F149 /* libEasyCrypto.dylib */,
 				3194F90B1CD9F7CC00333416 /* CryptoClientConsole */,
 				3194F90A1CD9F7CC00333416 /* Products */,
+				315C93241EAF880400D9F149 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,10 +179,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LIBRARY_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				"PRELINK_LIBS[arch=*]" = /usr/local/library/libEasyCryptoLib.dylib;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -207,7 +220,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LIBRARY_SEARCH_PATHS = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
