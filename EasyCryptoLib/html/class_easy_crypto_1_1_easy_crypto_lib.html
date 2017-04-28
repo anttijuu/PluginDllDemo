@@ -72,7 +72,8 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_easy_crypto_lib_8hpp_source.html">EasyCryptoLib.hpp</a>&gt;</code></p>
+<p>This class is the public interface to the crypting library.  
+ <a href="class_easy_crypto_1_1_easy_crypto_lib.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -94,14 +95,16 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a1d3b8111d80ab8cccb2294e8da3115f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class is the public interface to the crypting library. The library supports multiple encrypting methods and also decrypts the encrypted text back to plain text.<br />
+<div class="textblock"><p>This class is the public interface to the crypting library. </p>
+<p>The library supports multiple encrypting methods and also decrypts the encrypted text back to plain text.<br />
  All the methods in this class are static, so there is no need to instantiate the class. Implementation creates necessary internal objects which do the actual encrypting and decrypting.<br />
- Usage:</p><ol type="1">
+</p>
+<p>Usage:</p><ol type="1">
 <li>Query encryption methods you can use by calling <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a1d3b8111d80ab8cccb2294e8da3115f6">methods()</a>. Resulting string lists the methods separated by comma.</li>
 <li>Encrypt by calling <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a0bb13278fff62c0d0c7a58128827d465">encrypt()</a> using one of the methods returned by <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a1d3b8111d80ab8cccb2294e8da3115f6">methods()</a></li>
 <li>Decrypt by calling <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#afaf2ae4427d2250b7749e256b15e9fc9">decrypt()</a> using the same method which was used in <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a0bb13278fff62c0d0c7a58128827d465">encrypt()</a></li>
 </ol>
-<p>Build the code in the library as a dynamic library. In Mac OS X, they are called .dylib's and in Linux, shared libraries (.so). In Windows, they are DLLs. For client app development, provide this header file, with the library binary file (.dylib, .so or .dll) file, and nothing more. Client app developers use these two files when using the functionality of the library. </p><dl class="section author"><dt>Author</dt><dd>Antti Juustila </dd></dl>
+<p>Build the code in the library as a dynamic library. In Mac OS X, they are called .dylib's and in Linux, shared libraries (.so). In Windows, they are DLLs. For client app development, provide the public header files, with the library binary file (.dylib, .so or .dll) file, and nothing else. Client app developers use these files when using the functionality of the library. </p><dl class="section author"><dt>Author</dt><dd>Antti Juustila </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0.0 </dd></dl>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="aa4d987a1506921445812aa61e6e57e1b"></a>
@@ -252,7 +255,7 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>To query the supported en/decryption methods of the library. </p><dl class="section return"><dt>Returns</dt><dd>The supported methods in the form "matrix,reverse". </dd></dl>
+<p>To query the supported en/decryption methods of the library. Method returns the supported method names separated by comma. </p><dl class="section return"><dt>Returns</dt><dd>The supported methods in the form "matrix,reverse". </dd></dl>
 
 </div>
 </div>
@@ -282,10 +285,6 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_easy_crypto_lib_8hpp_source.html">EasyCryptoLib.hpp</a></li>
-<li>EasyCryptoLib.cpp</li>
-</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
