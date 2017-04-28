@@ -14,7 +14,6 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 
-using boost::asio::ip::udp;
 
 namespace Json {
    class Value;
@@ -32,8 +31,8 @@ private:
    std::string handleRequest(int msgType, const Json::Value & value);
    
 private:
-   udp::socket socket_;
-   udp::endpoint sender_endpoint_;
+   boost::asio::ip::udp::socket socket_;
+   boost::asio::ip::udp::endpoint sender_endpoint_;
    enum { max_length = 4096 };
    char data_[max_length];
    
