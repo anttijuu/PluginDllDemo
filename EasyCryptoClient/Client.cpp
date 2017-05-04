@@ -304,11 +304,11 @@ std::string Client::askMethodOfEncryption() const {
    do {
       std::cout << "Give the method of encryption: ";
       std::getline(std::cin, method);
-//      methodOK = isMethodSupported(method);
-//      if (!methodOK) {
-//         std::cout << "Not supported, select from: ";
-//         printSupportedMethods();
-//      }
+      methodOK = isMethodSupported(method);
+      if (!methodOK) {
+         std::cout << "Not supported, select from: ";
+         printSupportedMethods();
+      }
       
    } while (!methodOK);
    return method;
