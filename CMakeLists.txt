@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.0)
+project(EasyCrypto)
+add_subdirectory(EasyCryptoLib)
+add_subdirectory(CryptoClientConsole)
+add_subdirectory(EasyCryptoServer)
+add_subdirectory(EasyCryptoClient)
