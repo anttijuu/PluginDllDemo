@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(EasyCryptoClient)
+include_directories(/usr/local/include)
 add_executable(EasyCryptoClient Client.cpp jsoncpp.cpp)
 set(CMAKE_CXX_FLAGS "-Wall -std=c++11 -pthread -DEC_DLL ${CMAKE_CXX_FLAGS}")
 find_library(EASYCRYPTO EasyCrypto)

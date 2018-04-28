@@ -13,6 +13,8 @@ Tehtävänä on suunnitella JSON API ja toteuttaa simppeli udp server ja client 
 
 ## TODO
 
+* Muokkaa toteutusta niin että Lib:n puolella ei ole yhtään merkkijonoa kovakoodattu jossa salausmenetelmän nimi
+* Plugin dll:n toteutusesimerkki https://bitbucket.org/ipsoulu/ohra17mod1-2017-010
 * Laita vaatimus testeistä clientin päässä tehtävänantoon.
     * Itse asiassa, tee clientista yksikkötestausta (vaikka Catch) käyttävä, ei ns. user app. 
     * Testit .json -tiedostoina luetaan, ainakin osin?
