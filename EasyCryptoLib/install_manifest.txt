@@ -1,4 +1,0 @@
-/usr/local/lib/libEasyCrypto.dylib
-/usr/local/include/EasyCrypto/ECMasterHeader.hpp
-/usr/local/include/EasyCrypto/EasyCryptoLib.hpp
-/usr/local/include/EasyCrypto/EasyCryptoLibBad.hpp
