@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		313BDFF61CE20CBE00255C4E /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */; };
 		313BE0031CE2161500255C4E /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 313BE0021CE2161500255C4E /* libboost_system.dylib */; };
 		313BE0261CE3262A00255C4E /* libEasyCryptoLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 313BE0251CE3262A00255C4E /* libEasyCryptoLib.dylib */; };
 		315C93201EAF86AE00D9F149 /* CryptoServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 315C931D1EAF86AE00D9F149 /* CryptoServer.cpp */; };
 		315C93211EAF86AE00D9F149 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 315C931F1EAF86AE00D9F149 /* main.cpp */; };
+		86179AEB1EB33B3D0041509C /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86179AEA1EB33B3D0041509C /* jsoncpp.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,12 +28,12 @@
 
 /* Begin PBXFileReference section */
 		313BDFE41CE1DD1D00255C4E /* EasyCryptoServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EasyCryptoServer; sourceTree = BUILT_PRODUCTS_DIR; };
-		313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jsoncpp.cpp; path = ../../../jsoncpp/dist/jsoncpp.cpp; sourceTree = "<group>"; };
 		313BE0021CE2161500255C4E /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libboost_system.dylib; sourceTree = "<group>"; };
 		313BE0251CE3262A00255C4E /* libEasyCryptoLib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEasyCryptoLib.dylib; path = "../../../../Library/Developer/Xcode/DerivedData/EasyCrypto-gdmctpvgqfuwuyaksslxtmvdulbq/Build/Products/Debug/libEasyCryptoLib.dylib"; sourceTree = "<group>"; };
 		315C931D1EAF86AE00D9F149 /* CryptoServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CryptoServer.cpp; sourceTree = SOURCE_ROOT; };
 		315C931E1EAF86AE00D9F149 /* CryptoServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CryptoServer.hpp; sourceTree = SOURCE_ROOT; };
 		315C931F1EAF86AE00D9F149 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		86179AEA1EB33B3D0041509C /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,10 +70,10 @@
 		313BDFE61CE1DD1D00255C4E /* EasyCryptoServer */ = {
 			isa = PBXGroup;
 			children = (
+				86179AEA1EB33B3D0041509C /* jsoncpp.cpp */,
 				315C931D1EAF86AE00D9F149 /* CryptoServer.cpp */,
 				315C931E1EAF86AE00D9F149 /* CryptoServer.hpp */,
 				315C931F1EAF86AE00D9F149 /* main.cpp */,
-				313BDFF51CE20CBE00255C4E /* jsoncpp.cpp */,
 			);
 			path = EasyCryptoServer;
 			sourceTree = "<group>";
@@ -134,7 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				313BDFF61CE20CBE00255C4E /* jsoncpp.cpp in Sources */,
+				86179AEB1EB33B3D0041509C /* jsoncpp.cpp in Sources */,
 				315C93201EAF86AE00D9F149 /* CryptoServer.cpp in Sources */,
 				315C93211EAF86AE00D9F149 /* main.cpp in Sources */,
 			);

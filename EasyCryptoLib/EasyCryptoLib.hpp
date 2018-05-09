@@ -33,12 +33,14 @@ namespace EasyCrypto {
 
 /**
 
- This class is the public interface to the crypting library. The library
- supports multiple encrypting methods and also decrypts the encrypted text back
+ @brief This class is the public interface to the crypting library.
+ 
+ The library supports multiple encrypting methods and also decrypts the encrypted text back
  to plain text.<br />
  All the methods in this class are static, so there is no need to instantiate the class.
  Implementation creates necessary internal objects which do the actual encrypting
  and decrypting.<br />
+ 
  Usage:
  -# Query encryption methods you can use by calling methods(). Resulting string lists the methods separated by comma.</li>
  -# Encrypt by calling encrypt() using one of the methods returned by methods()</li>
@@ -46,8 +48,8 @@ namespace EasyCrypto {
  
  Build the code in the library as a dynamic library. In Mac OS X, they are called .dylib's
  and in Linux, shared libraries (.so). In Windows, they are DLLs. For client app development,
- provide this header file, with the library binary file (.dylib, .so or .dll) file, and nothing more.
- Client app developers use these two files when using the functionality of the library.
+ provide the public header files, with the library binary file (.dylib, .so or .dll) file, and nothing else.
+ Client app developers use these files when using the functionality of the library.
  @author Antti Juustila
  @version 1.0.0
  */
@@ -81,7 +83,7 @@ public:
     @returns The library version number in the form "1.0.0".
     */
    static const std::string & version();
-   /** To query the supported en/decryption methods of the library.
+   /** To query the supported en/decryption methods of the library. Method returns the supported method names separated by comma.
     @returns The supported methods in the form "matrix,reverse".
     */
    static std::string methods();

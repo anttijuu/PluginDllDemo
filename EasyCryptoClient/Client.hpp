@@ -52,5 +52,8 @@ private:
    std::chrono::system_clock::time_point started;
    std::vector<std::string> supportedMethods;
    bool printDetails;
+   
+   enum { max_length = 4096 };
+
 };
 #endif /* Client_h */

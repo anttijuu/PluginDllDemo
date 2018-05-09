@@ -28,8 +28,6 @@
 
 #include "EasyCryptoPriv.hpp"
 
-#pragma GCC visibility push(hidden)
-
 namespace EasyCrypto {
 
 class EC_LOCAL EasyCryptoPrivMatrix : public EasyCryptoPriv
