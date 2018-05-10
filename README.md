@@ -13,6 +13,22 @@ Tehtävänä on suunnitella JSON API ja toteuttaa simppeli udp server ja client 
 
 ## TODO
 
+Vuoden 2018 kommentit:
+
+* Win -työkaluohjeet ja make filet
+* Testipenkit lib ja server clientin tilalta, Catch tai jotain.
+    * näistä uudet videot
+    * buildaus bitbucketiin?
+* Youtube -video työkalujen asennuksista (Ubuntu?)
+* Yksityiskohtaisemmat ohjeet boost:n kääntämisestä, varsinkin Win?
+* Ehkä myös staattiset kirjastot? Yleensäkin keskittyminen enemmän kirjastopuolelle.
+* Loppuseminaarissa käännetään kaikki tehdyt kirjastot kolmessa os:ssä ja katsotaan toimivatko ristiin eri testipenkkien/clientien kanssa?
+* Lähtökohtakoodi bitbucketiin (jotkut yritykset blokkaavat google driven esim).
+* Linux-ohjeeseen cmake asennus: sudo apt-get install cmake
+* Boostin kääntämistä voi huomattavasti nopeuttaa kääntämällä se monisäikeisesti (ks. https://stackoverflow.com/q/33566782/1079869) ja konffaamalla virtuaalikoneelle (mikäli käyttää VirtualBoxia tai vastaavaa) käyttöön enemmän muistia ja prosessoreita. Minulla Boost kääntyi aluksi monta tuntia (!) mutta näiden kahden asian jälkeen kääntämiseen ei mennyt kovin montaa minuuttia.
+
+Vanhemmat kommentit:
+
 * Muokkaa toteutusta niin että Lib:n puolella ei ole yhtään merkkijonoa kovakoodattu jossa salausmenetelmän nimi
 * Plugin dll:n toteutusesimerkki https://bitbucket.org/ipsoulu/ohra17mod1-2017-010
 * Laita vaatimus testeistä clientin päässä tehtävänantoon.
