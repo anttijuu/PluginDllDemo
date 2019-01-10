@@ -1,46 +1,24 @@
 # README #
 
-Harjoitustyö OhRa:n kirjastot ja API:t osuuteen. Paljon tästä koodista saavat valmiina, tässä on koko kokonaisuus, mutta opiskelijat tekevät tästä osia. Teemat:
+This system was a course project in the Study Program for Information Processing Science, University of Oulu. Course module where this project was used focused on libraries and APIs.
 
-* dynaamiset C++ kirjastot ja niiden binäärinen yhteensopivuus (demo)
-* API headerit, kirjastojen kääntäminen ja jakelu
-* nettipohjainen API käyttäen udp socket/boost ja JSON; näiden APIen intro
-* työkalut kirjastojen tekemiseen; makefile ja CMake
+Themes handled through this project are:
 
-Opiskelijat saavat valmiina dynaamisen simppelin salauskirjaston (.dylib) koodit. Aloitusseminaarissa demoan kahta vaihtoehtoista APIa, ja näytän miten pieni API-muutos rikkoo toisessa tapauksessa binääristä yhteensopivuutta ja miten toinen versio APIsta ei sitä tee. Jatkossa käytetään sitten sitä hyvää APIa.
+* dynamic (shared) libraries in C++ and the binary compatibility issues there (demo);
+* API headers, building a library and distributing it;
+* an API exposed over the internet, using udp sockets/boost and JSON;
+* tools for making cross-platform libraries using different compilers; CMake
 
-Tehtävänä on suunnitella JSON API ja toteuttaa simppeli udp server ja client jolla voidaan konsolipohjaisella sovelluksella pyytää serveriä salaamaan merkkijonoja ja purkamaan salaus käyttäen ko. APIa ja dynaamista kirjastoa. Myös iso osa serverin ja clientin verkkokoodista annetaan valmiina, koska aikataulu ja osaamistaso. Tärkeintä on että API ja kirjastoajattelu tulee tutuksi.
+Project includes a "bad" API to the library, and also a better one, which is more robust concerning API changes and binary compatibility.
+
+Student task is to study the binary compatibility issues, develop a new crypto method (as stupid as possible) and design the JSON API for the networked solution.
 
 ## TODO
 
-Vuoden 2018 kommentit:
+* Works on macOS and Ubuntu, check that also works on Windows
+* Perhaps create an unit test framework for the library and server and forget the client; use Catch or something.
+* Also demonstrate static libraries?
 
-* Win -työkaluohjeet ja make filet
-* Testipenkit lib ja server clientin tilalta, Catch tai jotain.
-    * näistä uudet videot
-    * buildaus bitbucketiin?
-* Youtube -video työkalujen asennuksista (Ubuntu?)
-* Yksityiskohtaisemmat ohjeet boost:n kääntämisestä, varsinkin Win?
-* Ehkä myös staattiset kirjastot? Yleensäkin keskittyminen enemmän kirjastopuolelle.
-* Loppuseminaarissa käännetään kaikki tehdyt kirjastot kolmessa os:ssä ja katsotaan toimivatko ristiin eri testipenkkien/clientien kanssa?
-* Lähtökohtakoodi bitbucketiin (jotkut yritykset blokkaavat google driven esim).
-* Linux-ohjeeseen cmake asennus: sudo apt-get install cmake
-* Boostin kääntämistä voi huomattavasti nopeuttaa kääntämällä se monisäikeisesti (ks. https://stackoverflow.com/q/33566782/1079869) ja konffaamalla virtuaalikoneelle (mikäli käyttää VirtualBoxia tai vastaavaa) käyttöön enemmän muistia ja prosessoreita. Minulla Boost kääntyi aluksi monta tuntia (!) mutta näiden kahden asian jälkeen kääntämiseen ei mennyt kovin montaa minuuttia.
+## Who to talk to
 
-Vanhemmat kommentit:
-
-* Muokkaa toteutusta niin että Lib:n puolella ei ole yhtään merkkijonoa kovakoodattu jossa salausmenetelmän nimi
-* Plugin dll:n toteutusesimerkki https://bitbucket.org/ipsoulu/ohra17mod1-2017-010
-* Laita vaatimus testeistä clientin päässä tehtävänantoon.
-    * Itse asiassa, tee clientista yksikkötestausta (vaikka Catch) käyttävä, ei ns. user app. 
-    * Testit .json -tiedostoina luetaan, ainakin osin?
-* Toteuta kukin salausmenetelmä boost.DLL:n plugineilla
-* Aloitusseminaarissa suunnitellaan yhteinen JSON API serverille, jonka minä toteutan serverin päähän >> yhteinen serveri testeille, kullakin oma client?
-    * Mihin serveri asennetaan..?
-    * Tähän liittyen, kunkin oma salausplugin (jokaiselle uniikki nimi) asennetaan serverille myös.
-* Lisäpainotusta API:n dokumentaatioon
-* Myös versiointiin lisäpainotusta, mm. Version -luokan koodaus.
-* lib:iin tuki Win-DLL:lle. Ainakin osin tehty, CMaken makefile pitää testata.
-* Tämä käyttöön? https://github.com/nlohmann/json
-* Serveristä todellinen async -versio
-* Perustele paremmin kielivalinta - C++ on ainoa kieli jolla voi tehdä alustariippumatonta koodia kaikkiin yleisiin käyttiksiin sekä desktop, server että mobiilipuolella, ja että C++ on kuitenkin yleisimpien kielten joukossa, ei mikään marginaalikieli.
+(c) Antti Juustila 2019
