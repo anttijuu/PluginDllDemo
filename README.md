@@ -18,11 +18,11 @@ Student task is to study the binary compatibility issues, develop a new crypto m
 * Boost-system
 * jsoncpp
 
-You need to download and install boost and build the system library at least. Also download jsoncpp, run the amalgamate.py script and install the headers to /usr/local/include.
+You need to download and install boost and build the system library at least. Also download jsoncpp, run the amalgamate.py script and install the header to /usr/local/include and the cpp file to each project's source code directory.
 
 ## Building
 
-First build Library:
+First build the library:
 
 1. cd EasyCryptoLib
 2. mkdir build
@@ -31,7 +31,7 @@ First build Library:
 5. make
 6. sudo make install
 
-Then build server:
+Then build the server:
 
 1. cd EasyCryptoServer
 2. mkdir build
