@@ -20,6 +20,35 @@ Student task is to study the binary compatibility issues, develop a new crypto m
 
 You need to download and install boost and build the system library at least. Also download jsoncpp, run the amalgamate.py script and install the headers to /usr/local/include.
 
+## Building
+
+First build Library:
+
+1. cd EasyCryptoLib
+2. mkdir build
+3. cd build
+4. cmake ..
+5. make
+6. sudo make install
+
+Then build server:
+
+1. cd EasyCryptoServer
+2. mkdir build
+3. cd build
+4. cmake ..
+5. make
+
+And then build the client
+
+1. cd EasyCryptoClient
+2. mkdir build
+3. cd build
+4. cmake ..
+5. make
+
+After this, go to server build dir and start the server. After this, start the client, providing the server ip address and port as a parameter.
+
 ## TODO
 
 * Works on macOS and Ubuntu, check that also works on Windows
