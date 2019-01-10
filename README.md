@@ -13,6 +13,13 @@ Project includes a "bad" API to the library, and also a better one, which is mor
 
 Student task is to study the binary compatibility issues, develop a new crypto method (as stupid as possible) and design the JSON API for the networked solution.
 
+## Dependencies
+
+* Boost-system
+* jsoncpp
+
+You need to download and install boost and build the system library at least. Also download jsoncpp, run the amalgamate.py script and install the headers to /usr/local/include.
+
 ## TODO
 
 * Works on macOS and Ubuntu, check that also works on Windows
