@@ -18,7 +18,15 @@ Student task is to study the binary compatibility issues, develop a new crypto m
 * Boost-system
 * jsoncpp
 
-You need to download and install boost and build the system library at least. Also download jsoncpp, run the amalgamate.py script and install the header to /usr/local/include and the cpp file to each project's source code directory.
+You need to download and install boost and build the system library at least. 
+
+Also download jsoncpp, run the amalgamate.py script and install the header directory json to /usr/local/include and the cpp file to each project's source code directory.
+
+Get jsoncpp from github in the root dir of your workspace (not in EasyCrypto directory):
+
+```
+git clone https://github.com/open-source-parsers/jsoncpp
+```
 
 ## Building
 
