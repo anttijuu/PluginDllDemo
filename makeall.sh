@@ -1,18 +1,27 @@
 cd EasyCryptoLib
-cmake .
+mkdir build
+cd build
+cmake ..
 make
 sudo make install
-cd ..
+cd ../..
 cd CryptoClientConsole
-cmake .
+mkdir build
+cd build
+cmake ..
 make
-cd ..
+cd ../..
 cd EasyCryptoServer
-cmake .
+mkdir build
+cd build
+cmake ..
 make
-cd ..
+cd ../..
 cd EasyCryptoClient
-cmake .
+mkdir build
+cd build
+cmake ..
 make
-cd ..
+cd ../..
+
 
