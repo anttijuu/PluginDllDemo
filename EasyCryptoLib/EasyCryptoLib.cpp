@@ -36,9 +36,7 @@ namespace EasyCrypto {
     
     std::string EasyCryptoLib::methods() {
         std::string methods;
-        // std::unique_ptr<EasyCryptoPriv> theImpl1(new EasyCryptoPrivReverse());
         methods = EasyCryptoPriv<EasyCryptoPrivReverse>::method();
-        // std::unique_ptr<EasyCryptoPriv> theImpl2(new EasyCryptoPrivMatrix());
         methods = methods + "," + EasyCryptoPriv<EasyCryptoPrivMatrix>::method();
         return methods;
     }

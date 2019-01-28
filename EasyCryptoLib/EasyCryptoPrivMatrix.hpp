@@ -37,7 +37,7 @@ namespace EasyCrypto {
         virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
         virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
         static std::string method();
-        
+                
     private:
         
     };
