@@ -1,7 +1,7 @@
 /*
  EasyCryptoPrivMatrix.hpp
  EasyCryptoLib
-
+ 
  Created by Antti Juustila on 4.5.2016.
  Copyright © 2016 Antti Juustila.
  
@@ -19,7 +19,7 @@
  
  You should have received a copy of the GNU Lesser General Public License
  along with EasyCryptoLib.  If not, see <http://www.gnu.org/licenses/>.
-
+ 
  */
 #ifndef EasyCryptoPrivMatrix_hpp
 #define EasyCryptoPrivMatrix_hpp
@@ -29,19 +29,19 @@
 #include "EasyCryptoPriv.hpp"
 
 namespace EasyCrypto {
-
-class EC_LOCAL EasyCryptoPrivMatrix : public EasyCryptoPriv
-{
-public:
-   
-   virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
-   virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
-   virtual const std::string & method() const;
-   
-private:
-   static const std::string methodName;
-};
-
+    
+    class EC_LOCAL EasyCryptoPrivMatrix : public EasyCryptoPriv<EasyCryptoPrivMatrix>
+    {
+    public:
+        
+        virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
+        virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
+        static std::string method();
+        
+    private:
+        
+    };
+    
 } //namespace
 
 
