@@ -42,6 +42,8 @@ Then teacher gives the *edited* source code (see below) to the students who will
 
 **IMPORTANT** On the server app side, teacher must remove the implementation of handling client responses. Look for comments starting `// Remove` for the code that must be removed before giving the code to the students.
 
+Also check code to remove from the header files of Client and Server.
+
 Only then the skeleton code of Client, Lib and Server can be given to the students. Do *not* share the code from Bitbucket or similar, since the git *version history* enables the students to go back to the version which *includes* these implementations. Copy the CMake and source files only, excluding the hidden .git directories where the version history is also located.
 
 It is then the student's responsibility to: 
