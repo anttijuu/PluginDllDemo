@@ -7,7 +7,6 @@
 //
 
 #include <iostream>
-#include <boost/asio.hpp>
 
 #include "CryptoServer.hpp"
 

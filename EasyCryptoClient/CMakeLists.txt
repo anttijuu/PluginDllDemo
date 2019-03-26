@@ -4,7 +4,7 @@ set(APP_NAME CryptoClient)
 
 find_package(Boost 1.68.0 REQUIRED COMPONENTS system)
 if (Boost_FOUND)
-   add_executable(${APP_NAME} Client.cpp jsoncpp.cpp)
+   add_executable(${APP_NAME} Client.cpp Client.hpp jsoncpp.cpp)
    target_include_directories(${APP_NAME} PUBLIC ${Boost_INCLUDE_DIRS})
    target_link_libraries(${APP_NAME} ${Boost_LIBRARIES})
    set_target_properties(${APP_NAME} PROPERTIES CXX_STANDARD 14)

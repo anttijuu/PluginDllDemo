@@ -56,9 +56,9 @@ void CryptoServer::doSendResponse(std::size_t length) {
    if (response == "ping") {
       response = "pong";
    } else {
-      // Remove starting from here when giving code to students...
       // From the string, create a json "thing" and handle the request, creating a response.
       // Send the response to the server using the code after the else branch (see the code...).
+      // Remove starting from here when giving code to students... leave the line "try {" though!
       Json::Value value;
       std::stringstream str(response);
       try {
