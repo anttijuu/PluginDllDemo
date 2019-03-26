@@ -1,7 +1,13 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 project(CryptoClientConsole)
-include_directories(/usr/local/include)
-add_executable(CryptoClientConsole main.cpp)
-set(CMAKE_CXX_FLAGS "-Wall -std=c++11 -DEC_DLL ${CMAKE_CXX_FLAGS}")
-find_library(EASYCRYPTO EasyCrypto)
-target_link_libraries(CryptoClientConsole ${EASYCRYPTO})
+set(APP_NAME CryptoConsole)
+
+find_package(EasyCrypto REQUIRED)
+
+add_executable(${APP_NAME} main.cpp)
+
+set_target_properties(${APP_NAME} PROPERTIES CXX_STANDARD 14)
+set_target_properties(${APP_NAME} PROPERTIES DEFINE_SYMBOL "EC_DLL")
+target_include_directories(${APP_NAME} PUBLIC ${EasyCrypto_INCLUDE_DIRS})
+target_link_libraries(${APP_NAME} EasyCrypto::EasyCrypto)
+

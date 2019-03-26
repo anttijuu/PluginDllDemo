@@ -1,3 +1,3 @@
 include(CMakeFindDependencyMacro)
 
-include("${CMAKE_CURRENT_LIST_DIR}/EasyCryptoLibTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/EasyCryptoTargets.cmake")
