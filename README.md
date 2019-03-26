@@ -57,7 +57,9 @@ It is the student's responsibility to
 * Boost-system
 * jsoncpp
 
-You need to download and install boost and build the system library at least. Note that when using Boost 1.69 or newer, building the system library is no longer needed.
+You need to download and install boost and build the system library at least. See instructions from Boost readme. Basically you must run the boostrap command and then the b2 command. After this, run b2 again with sudo and install to install it in the usual place /usr/local/include and /usr/local/lib. 
+
+Note that when using Boost 1.69 or newer, building the system library is no longer needed.
 
 Also get jsoncpp from github in the root dir of your workspace (*not* in EasyCrypto directory):
 
@@ -65,7 +67,7 @@ Also get jsoncpp from github in the root dir of your workspace (*not* in EasyCry
 git clone https://github.com/open-source-parsers/jsoncpp
 ```
 
-Then run the amalgamate.py script and install the header directory `json` to `/usr/local/include` and the cpp file to Client and Server directories of EasyCrypto project.
+Then run the amalgamate.py script and install (from the generated `dist`directory) the header subdirectory `json` to `/usr/local/include` and copy the `jsoncpp.cpp` file both to the Client and Server directories of EasyCrypto project.
 
 ## Building
 
@@ -78,7 +80,9 @@ First build the library:
 5. make
 6. sudo make install
 
-After this the library is "published" and can be used by the apps.
+After this the library is "published" to `/usr/local/include` and `/usr/local/lib` and can be used by the apps.
+
+What you want to teach to the students is that if the lib is not open source, you only share the *public headers* and the *binary lib* file to other developers (.so, .dll, .dylib), not all the source code. And when you deliver the system to the user, you only deliver the lib binary (.so, .dll, .dylib) and the app binary -- end users do not care about headers.
 
 Then build the server:
 
@@ -100,7 +104,7 @@ After this, go to server build dir and start the server: `./CryptoServer 10000` 
 
 ## TODO
 
-* Works on macOS and Ubuntu, check that also works on Windows
+* Works on macOS and Ubuntu, check that also works on Windows. In Win 10 with Visual Studio dev tools should be easy since Visual Studio nowadays support bash shells and importing cmake files.
 * Perhaps create an unit test framework for the library and server and forget the client; use Catch or something.
 * Also demonstrate static libraries?
 
