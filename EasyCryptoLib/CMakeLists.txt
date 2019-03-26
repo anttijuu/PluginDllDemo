@@ -4,7 +4,7 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 set(LIB_NAME EasyCrypto)
 
-add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLibBad.cpp EasyCryptoPrivReverse.cpp EasyCryptoPrivMatrix.cpp EasyCryptoLib.hpp EasyCryptoLibBad.hpp EasyCryptoPrivReverse.hpp EasyCryptoPrivMatrix.hpp ECMasterHeader.hpp)
+add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLibBad.cpp EasyCryptoPrivReverse.cpp EasyCryptoPrivMatrix.cpp EasyCryptoLib.hpp EasyCryptoLibBad.hpp EasyCryptoPriv.hpp EasyCryptoPrivReverse.hpp EasyCryptoPrivMatrix.hpp ECMasterHeader.hpp EasyCryptoExceptions.hpp)
 
 set_property(TARGET ${LIB_NAME} PROPERTY INTERFACE_LIB_VERSION 1.0.0)
 set_property(TARGET ${LIB_NAME} APPEND PROPERTY
