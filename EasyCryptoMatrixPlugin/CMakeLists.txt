@@ -6,7 +6,7 @@ set(LIB_NAME EasyCryptoMatrix)
 
 find_package(Boost 1.69.0 REQUIRED system filesystem)
 
-add_library(${LIB_NAME} SHARED EasyCryptoPrivMatrix.cpp EasyCryptoPrivMatrix.hpp)
+add_library(${LIB_NAME} SHARED EasyCryptoPlugin.cpp EasyCryptoPlugin.hpp)
 
 set_property(TARGET ${LIB_NAME} PROPERTY INTERFACE_LIB_VERSION 1.0.0)
 set_property(TARGET ${LIB_NAME} APPEND PROPERTY

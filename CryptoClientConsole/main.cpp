@@ -9,17 +9,17 @@
 #include <iostream>
 
 #include <EasyCryptoLib.hpp>
-#include <EasyCryptoLibBad.hpp>
+// #include <EasyCryptoLibBad.hpp>
 
 void usingGoodLib();
-void usingBadLib();
+// void usingBadLib();
 
 int main(int argc, const char * argv[]) {
    
    bool userWantsIt = false;
    do {
       usingGoodLib();
-      usingBadLib();
+//      usingBadLib();
       
       std::string result;
       std::cout << "Press y and enter to continue, or just enter to quit: ";
@@ -40,6 +40,10 @@ void usingGoodLib() {
    std::cout << std::endl << "Welcome to Good EasyCrypto(tm)!" << std::endl;
    
    using namespace EasyCrypto;
+   
+   std::cout << "Initializing crypto plugins." << std::endl;
+   
+   EasyCryptoLib::init("/usr/local/lib/ECPlugins");
    
    std::cout << "The supported crypto methods are: " << EasyCryptoLib::methods() << std::endl;
    
@@ -141,6 +145,8 @@ void usingGoodLib() {
    
 }
 
+/*
+
 #include "../EasyCryptoLib/EasyCryptoExceptions.hpp"
 
 void usingBadLib() {
@@ -190,5 +196,9 @@ void usingBadLib() {
    } catch (std::exception & e) {
       std::cout << "Exception: " << e.what() << std::endl;
    }
-   
+
 }
+
+*/
+
+// EOF

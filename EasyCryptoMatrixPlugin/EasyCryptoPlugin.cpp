@@ -1,5 +1,5 @@
 /*
- EasyCryptoPrivMatrix.cpp
+ EasyCryptoPlugin.cpp
  EasyCryptoLib
  
  Created by Antti Juustila on 4.5.2016.
@@ -28,23 +28,23 @@
 
 #include <boost/make_shared.hpp>
 
-#include "EasyCryptoPrivMatrix.hpp"
+#include "EasyCryptoPlugin.hpp"
 
 namespace EasyCrypto {
    
-   std::string EasyCryptoPrivMatrix::method() {
+   std::string EasyCryptoPlugin::method() {
       return "matrix";
    }
    
-   EasyCryptoPrivMatrix::~EasyCryptoPrivMatrix() {
+   EasyCryptoPlugin::~EasyCryptoPlugin() {
       
    }
    
-   std::size_t EasyCryptoPrivMatrix::size() {
-      return sizeof(EasyCryptoPrivMatrix);
+   std::size_t EasyCryptoPlugin::size() {
+      return sizeof(EasyCryptoPlugin);
    }
    
-   void EasyCryptoPrivMatrix::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
+   void EasyCryptoPlugin::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
       if (toEncrypt.length() < 1) {
          throw std::runtime_error("Empty string");
       }
@@ -73,7 +73,7 @@ namespace EasyCrypto {
       }
    }
    
-   void EasyCryptoPrivMatrix::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
+   void EasyCryptoPlugin::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
       if (toDecrypt.length() < 1) {
          throw std::runtime_error("Empty string");
       }
@@ -102,7 +102,7 @@ namespace EasyCrypto {
    }
    
    boost::shared_ptr<EasyCryptoPluginAPI> create_plugin() {
-      return boost::make_shared<EasyCryptoPrivMatrix>();
+      return boost::make_shared<EasyCryptoPlugin>();
    }
    
 } // namespace

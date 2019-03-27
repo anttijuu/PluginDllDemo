@@ -1,5 +1,5 @@
 /*
- EasyCryptoPrivMatrix.hpp
+ EasyCryptoPlugin.hpp
  EasyCryptoLib
  
  Created by Antti Juustila on 4.5.2016.
@@ -31,7 +31,7 @@
 
 namespace EasyCrypto {
    
-   class EasyCryptoPrivMatrix : public EasyCryptoPluginAPI
+   class EasyCryptoPlugin : public EasyCryptoPluginAPI
    {
    public:
       
@@ -39,7 +39,7 @@ namespace EasyCrypto {
       virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
       virtual std::string method();
       static std::size_t size();
-      virtual ~EasyCryptoPrivMatrix();
+      virtual ~EasyCryptoPlugin();
       
    private:
       
@@ -48,7 +48,6 @@ namespace EasyCrypto {
    boost::shared_ptr<EasyCryptoPluginAPI> create_plugin();
    BOOST_DLL_ALIAS(EasyCrypto::create_plugin,
                    create_plugin);
-   BOOST_DLL_ALIAS(EasyCrypto::EasyCryptoPluginAPI::encrypt, encrypt);
 } //namespace
 
 

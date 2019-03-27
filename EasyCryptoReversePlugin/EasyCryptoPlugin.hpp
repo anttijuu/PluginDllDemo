@@ -1,5 +1,5 @@
 /*
- EasyCryptoPrivReverse.hpp
+ EasyCryptoPlugin.hpp
  EasyCryptoLib
  
  Created by Antti Juustila on 4.5.2016.
@@ -25,26 +25,32 @@
 
 #include <string>
 
+#include <boost/dll.hpp>
+
 #include <EasyCrypto/EasyCryptoPluginAPI.hpp>
 
 namespace EasyCrypto {
-    
-    class EasyCryptoPrivReverse : public EasyCryptoPluginAPI
-    {
-    public:
-        
-        EasyCryptoPrivReverse() {};
-        EasyCryptoPrivReverse(const EasyCryptoPrivReverse &) = delete;
-        
-        virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
-        virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
-        
-        virtual std::string method();
-        
-    private:
-        
-    };
-    
+   
+   class EasyCryptoPlugin : public EasyCryptoPluginAPI
+   {
+   public:
+      
+      EasyCryptoPlugin() {};
+      EasyCryptoPlugin(const EasyCryptoPlugin &) = delete;
+      
+      virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
+      virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
+      static std::size_t size();
+      virtual std::string method();
+      
+   private:
+      
+   };
+   
+   boost::shared_ptr<EasyCryptoPluginAPI> create_plugin();
+   BOOST_DLL_ALIAS(EasyCrypto::create_plugin,
+                   create_plugin);
+   
 } //namespace
 
 

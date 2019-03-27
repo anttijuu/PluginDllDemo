@@ -35,7 +35,7 @@ namespace EasyCrypto {
     @author Antti Juustila
     @version 1.1.0
     */
-   class EasyCryptoPluginAPI
+   class BOOST_SYMBOL_EXPORT EasyCryptoPluginAPI
    {
    public:
       /*
@@ -56,13 +56,11 @@ namespace EasyCrypto {
        */
       virtual std::string method() = 0;
       
+      static std::size_t size();
+      
       virtual ~EasyCryptoPluginAPI() { /* Empty */ };
    };
    
-   boost::shared_ptr<EasyCryptoPluginAPI> create_plugin();
-   
-   BOOST_DLL_ALIAS(EasyCrypto::create_plugin,
-                   create_plugin)
 } // namespace
 
 

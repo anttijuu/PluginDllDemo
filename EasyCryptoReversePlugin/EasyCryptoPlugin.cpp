@@ -1,5 +1,5 @@
 /*
- EasyCryptoPrivReverse.cpp
+ EasyCryptoPlugin.cpp
  EasyCryptoLib
  
  Created by Antti Juustila on 4.5.2016.
@@ -26,17 +26,20 @@
 
 #include <boost/make_shared.hpp>
 
-#include "EasyCryptoPrivReverse.hpp"
+#include "EasyCryptoPlugin.hpp"
 
 
 namespace EasyCrypto {
     
-    std::string EasyCryptoPrivReverse::method() {
+    std::string EasyCryptoPlugin::method() {
         return "reverse";
     }
     
-    
-    void EasyCryptoPrivReverse::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
+   std::size_t EasyCryptoPlugin::size() {
+      return sizeof(EasyCryptoPlugin);
+   }
+   
+    void EasyCryptoPlugin::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
         if (toEncrypt.length() < 1) {
             throw std::runtime_error("Empty string");
         }
@@ -44,7 +47,7 @@ namespace EasyCrypto {
         std::reverse(toStoreTo.begin(), toStoreTo.end());
     };
     
-    void EasyCryptoPrivReverse::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
+    void EasyCryptoPlugin::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
         if (toDecrypt.length() < 1) {
             throw std::runtime_error("Empty string");
         }
@@ -52,7 +55,8 @@ namespace EasyCrypto {
     }
    
    boost::shared_ptr<EasyCryptoPluginAPI> create_plugin() {
-      return boost::make_shared<EasyCryptoPrivReverse>();
+      return boost::make_shared<EasyCryptoPlugin>();
    }
+   
 } // namespace
 

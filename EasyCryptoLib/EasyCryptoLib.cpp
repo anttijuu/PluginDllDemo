@@ -22,6 +22,7 @@
  */
 
 #include <memory>
+#include <iostream>
 
 #include <boost/dll/shared_library.hpp>
 #include <boost/make_shared.hpp>
@@ -96,6 +97,7 @@ namespace EasyCrypto {
       // Searching a folder for files with '.so' or '.dll' extension
       fs::recursive_directory_iterator endit;
       for (fs::recursive_directory_iterator it(pluginsDirectory); it != endit; ++it) {
+         std::cout << "Investigating file " << it->path() << std::endl;
          if (!fs::is_regular_file(*it)) {
             continue;
          }
@@ -122,15 +124,17 @@ namespace EasyCrypto {
    
    void EasyCryptoLib::init(const std::string & pathToPlugins) {
       pluginsDirectory = pathToPlugins;
+      loadPlugins();
    }
    
    std::string EasyCryptoLib::methods() {
       std::string methods;
       int pluginCount = plugins.size();
       int pluginCounter = 0;
+      std::cout << "Lib has " << pluginCount << " plugins." << std::endl;
       for (plugins_t::iterator iter = plugins.begin(); iter != plugins.end(); iter++, pluginCounter++) {
          methods += iter->first;
-         if (pluginCounter < pluginCount) {
+         if (pluginCounter < pluginCount-1) {
             methods += ",";
          }
       }
@@ -139,15 +143,18 @@ namespace EasyCrypto {
    
    EasyCryptoLib::Result EasyCryptoLib::encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method) {
       try {
-         if (method == "reverse") {
-            std::unique_ptr<EasyCryptoPriv<EasyCryptoPrivReverse>> theImpl(new EasyCryptoPrivReverse());
-            theImpl->encrypt(toEncrypt, toStoreTo);
-            return ESuccess;
-         } else if (method == "matrix") {
-            std::unique_ptr<EasyCryptoPriv<EasyCryptoPrivMatrix>> theImpl(new EasyCryptoPrivMatrix());
-            theImpl->encrypt(toEncrypt, toStoreTo);
-            return ESuccess;
+         boost::dll::shared_library & lib = plugins.at(method);
+         if (lib.is_loaded()) {
+            std::cout << "Lib is loaded." << std::endl;
+            if (lib.has("encrypt")) {
+               std::cout << "Lib has encrypt." << std::endl;
+            } else {
+               std::cout << "Lib does not have encrypt." << std::endl;
+            }
+         } else {
+            std::cout << "Lib is not loaded." << std::endl;
          }
+         return ESuccess;
       } catch (std::exception & e) {
          return EError;
       }
@@ -157,15 +164,7 @@ namespace EasyCrypto {
    
    EasyCryptoLib::Result EasyCryptoLib::decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method) {
       try {
-         if (method == "reverse") {
-            std::unique_ptr<EasyCryptoPriv<EasyCryptoPrivReverse>> theImpl(new EasyCryptoPrivReverse());
-            theImpl->decrypt(toDecrypt, toStoreTo);
-            return ESuccess;
-         } else if (method == "matrix") {
-            std::unique_ptr<EasyCryptoPriv<EasyCryptoPrivMatrix>> theImpl(new EasyCryptoPrivMatrix());
-            theImpl->decrypt(toDecrypt, toStoreTo);
-            return ESuccess;
-         }
+         return ESuccess;
       } catch (std::exception & e) {
          return EError;
       }
