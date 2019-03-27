@@ -1,5 +1,5 @@
 /*
- EasyCryptoPrivReverse.hpp
+ EasyCryptoPrivMatrix.hpp
  EasyCryptoLib
  
  Created by Antti Juustila on 4.5.2016.
@@ -19,36 +19,37 @@
  
  You should have received a copy of the GNU Lesser General Public License
  along with EasyCryptoLib.  If not, see <http://www.gnu.org/licenses/>.
+ 
  */
-
-#ifndef EasyCryptoPrivReverse_hpp
-#define EasyCryptoPrivReverse_hpp
+#pragma once
 
 #include <string>
 
-#include "EasyCryptoPriv.hpp"
+#include <boost/dll.hpp>
 
-#include "ECMasterHeader.hpp"
+#include <EasyCrypto/EasyCryptoPluginAPI.hpp>
 
 namespace EasyCrypto {
-    
-    class EC_LOCAL EasyCryptoPrivReverse : public EasyCryptoPriv<EasyCryptoPrivReverse>
-    {
-    public:
-        
-        EasyCryptoPrivReverse() {};
-        EasyCryptoPrivReverse(const EasyCryptoPrivReverse &) = delete;
-        
-        virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
-        virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
-        
-        static std::string method();
-        
-    private:
-        
-    };
-    
+   
+   class EasyCryptoPrivMatrix : public EasyCryptoPluginAPI
+   {
+   public:
+      
+      virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
+      virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
+      virtual std::string method();
+      static std::size_t size();
+      virtual ~EasyCryptoPrivMatrix();
+      
+   private:
+      
+   };
+   
+   boost::shared_ptr<EasyCryptoPluginAPI> create_plugin();
+   BOOST_DLL_ALIAS(EasyCrypto::create_plugin,
+                   create_plugin);
+   BOOST_DLL_ALIAS(EasyCrypto::EasyCryptoPluginAPI::encrypt, encrypt);
 } //namespace
 
 
-#endif /* EasyCryptoPrivReverse_hpp */
+// EOF

@@ -1,5 +1,5 @@
 /*
- EasyCryptoPrivReverse.cpp
+ EasyCryptoPrivReverse.hpp
  EasyCryptoLib
  
  Created by Antti Juustila on 4.5.2016.
@@ -21,33 +21,31 @@
  along with EasyCryptoLib.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <algorithm>
-#include <stdexcept>
+#pragma once
 
-#include "EasyCryptoPrivReverse.hpp"
+#include <string>
 
+#include <EasyCrypto/EasyCryptoPluginAPI.hpp>
 
 namespace EasyCrypto {
     
-    std::string EasyCryptoPrivReverse::method() {
-        return "reverse";
-    }
-    
-    
-    void EasyCryptoPrivReverse::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
-        if (toEncrypt.length() < 1) {
-            throw std::runtime_error("Empty string");
-        }
-        toStoreTo = toEncrypt;
-        std::reverse(toStoreTo.begin(), toStoreTo.end());
+    class EasyCryptoPrivReverse : public EasyCryptoPluginAPI
+    {
+    public:
+        
+        EasyCryptoPrivReverse() {};
+        EasyCryptoPrivReverse(const EasyCryptoPrivReverse &) = delete;
+        
+        virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
+        virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
+        
+        virtual std::string method();
+        
+    private:
+        
     };
     
-    void EasyCryptoPrivReverse::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
-        if (toDecrypt.length() < 1) {
-            throw std::runtime_error("Empty string");
-        }
-        encrypt(toDecrypt, toStoreTo);
-    }
-    
-} // namespace
+} //namespace
 
+
+// EOF
