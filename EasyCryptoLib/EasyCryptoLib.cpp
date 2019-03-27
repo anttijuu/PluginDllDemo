@@ -120,6 +120,10 @@ namespace EasyCrypto {
       return versionNumber;
    }
    
+   void EasyCryptoLib::init(const std::string & pathToPlugins) {
+      pluginsDirectory = pathToPlugins;
+   }
+   
    std::string EasyCryptoLib::methods() {
       std::string methods;
       int pluginCount = plugins.size();

@@ -63,6 +63,11 @@ public:
       ENotSupported  /*!< The method of en/decription is not supported by the library */
    };
    /**
+    Initializes the library by loading the crypto method plugin libraries from the specified location.
+    @param pathToPlugins The location where the plugin dll's are located.
+    */
+   static void init(const std::string & pathToPlugins);
+   /**
     Encrypts the given plaintext and stores it to the parameter to be used by the caller.
     @param toEncrypt Text to encrypt.
     @param toStoreTo A string to store the ecrypted text to.
