@@ -26,6 +26,8 @@
 #include <algorithm>
 #include <stdexcept>
 
+#include <boost/make_shared.hpp>
+
 #include "EasyCryptoPrivMatrix.hpp"
 
 namespace EasyCrypto {
@@ -90,5 +92,9 @@ namespace EasyCrypto {
             toStoreTo = tmp + toStoreTo;
         }
     }
-        
+   
+   boost::shared_ptr<EasyCryptoPluginAPI> create_plugin() {
+      return boost::make_shared<EasyCryptoPrivMatrix>();
+   }
+   
 } // namespace

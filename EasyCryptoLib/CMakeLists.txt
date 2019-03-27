@@ -4,7 +4,9 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 set(LIB_NAME EasyCrypto)
 
-add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLibBad.cpp EasyCryptoPrivReverse.cpp EasyCryptoPrivMatrix.cpp EasyCryptoLib.hpp EasyCryptoLibBad.hpp EasyCryptoPriv.hpp EasyCryptoPrivReverse.hpp EasyCryptoPrivMatrix.hpp ECMasterHeader.hpp EasyCryptoExceptions.hpp)
+find_package(Boost 1.69.0 REQUIRED system filesystem)
+
+add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLibBad.cpp EasyCryptoLib.hpp EasyCryptoLibBad.hpp EasyCryptoPluginAPI.hpp EasyCryptoExceptions.hpp)
 
 set_property(TARGET ${LIB_NAME} PROPERTY INTERFACE_LIB_VERSION 1.0.0)
 set_property(TARGET ${LIB_NAME} APPEND PROPERTY
@@ -15,10 +17,9 @@ set_target_properties(${LIB_NAME} PROPERTIES LINK_FLAGS "-Wl")
 set_target_properties(${LIB_NAME} PROPERTIES CXX_STANDARD 14)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_CXX_VISIBILITY_PRESET hidden)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_VISIBILITY_INLINES_HIDDEN 1)
-set_target_properties(${LIB_NAME} PROPERTIES DEFINE_SYMBOL "EC_DLL_EXPORTS" DEFINE_SYMBOL "EC_DLL")
 
-set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "ECMasterHeader.hpp;EasyCryptoLib.hpp;EasyCryptoLibBad.hpp")
-target_include_directories(${LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/.> $<INSTALL_INTERFACE:include/${LIB_NAME}>)
+set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "EasyCryptoLib.hpp;EasyCryptoLibBad.hpp;EasyCryptoPluginAPI.hpp")
+target_include_directories(${LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/.> $<INSTALL_INTERFACE:include/${LIB_NAME}> ${Boost_INCLUDE_DIRS})
 
 install(TARGETS ${LIB_NAME} EXPORT ${LIB_NAME}Targets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${LIB_NAME})
 install(EXPORT ${LIB_NAME}Targets FILE ${LIB_NAME}Targets.cmake NAMESPACE EasyCrypto:: DESTINATION lib/cmake/${LIB_NAME})

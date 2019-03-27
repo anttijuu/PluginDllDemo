@@ -21,22 +21,21 @@
  along with EasyCryptoLib.  If not, see <http://www.gnu.org/licenses/>.
  
  */
-#ifndef EasyCryptoPrivMatrix_hpp
-#define EasyCryptoPrivMatrix_hpp
+#pragma once
 
 #include <string>
 
-#include "EasyCryptoPriv.hpp"
+#include <EasyCrypto/EasyCryptoPluginAPI.hpp>
 
 namespace EasyCrypto {
     
-    class EC_LOCAL EasyCryptoPrivMatrix : public EasyCryptoPriv<EasyCryptoPrivMatrix>
+    class EasyCryptoPrivMatrix : public EasyCryptoPluginAPI
     {
     public:
         
         virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
         virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
-        static std::string method();
+        virtual std::string method();
                 
     private:
         
@@ -45,4 +44,4 @@ namespace EasyCrypto {
 } //namespace
 
 
-#endif /* EasyCryptoPrivMatrix_hpp */
+// EOF
