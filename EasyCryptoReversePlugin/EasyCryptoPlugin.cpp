@@ -30,29 +30,36 @@
 
 
 namespace EasyCrypto {
-    
-    std::string EasyCryptoPlugin::method() {
-        return "reverse";
-    }
-    
+   
+   EasyCryptoPlugin::EasyCryptoPlugin() {
+      // Empty
+   }
+   
+   EasyCryptoPlugin::~EasyCryptoPlugin() {
+      // Empty
+   }
+   std::string EasyCryptoPlugin::method() {
+      return "reverse";
+   }
+   
    std::size_t EasyCryptoPlugin::size() {
       return sizeof(EasyCryptoPlugin);
    }
    
-    void EasyCryptoPlugin::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
-        if (toEncrypt.length() < 1) {
-            throw std::runtime_error("Empty string");
-        }
-        toStoreTo = toEncrypt;
-        std::reverse(toStoreTo.begin(), toStoreTo.end());
-    };
-    
-    void EasyCryptoPlugin::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
-        if (toDecrypt.length() < 1) {
-            throw std::runtime_error("Empty string");
-        }
-        encrypt(toDecrypt, toStoreTo);
-    }
+   void EasyCryptoPlugin::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
+      if (toEncrypt.length() < 1) {
+         throw std::runtime_error("Empty string");
+      }
+      toStoreTo = toEncrypt;
+      std::reverse(toStoreTo.begin(), toStoreTo.end());
+   };
+   
+   void EasyCryptoPlugin::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
+      if (toDecrypt.length() < 1) {
+         throw std::runtime_error("Empty string");
+      }
+      encrypt(toDecrypt, toStoreTo);
+   }
    
    boost::shared_ptr<EasyCryptoPluginAPI> create_plugin() {
       return boost::make_shared<EasyCryptoPlugin>();

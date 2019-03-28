@@ -91,6 +91,8 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
    Json::Value response(Json::objectValue);
    switch (msgType) {
       case 1: { // capabilities request
+         // Refresh the available plugins.
+         EasyCrypto::EasyCryptoLib::init("/usr/local/lib/ECPlugins");
          response["msgtype"] = 2;
          response["version"] = EasyCryptoLib::version();
          Json::Value methodsArray(Json::arrayValue);

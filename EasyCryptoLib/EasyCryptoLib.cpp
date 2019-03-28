@@ -29,6 +29,10 @@
 #include <boost/container/map.hpp>
 #include <boost/filesystem.hpp>
 
+#include <boost/dll/smart_library.hpp>
+#include <boost/dll/import_mangled.hpp>
+#include <boost/dll/import_class.hpp>
+
 #include "EasyCryptoLib.hpp"
 #include "EasyCryptoPluginAPI.hpp"
 
@@ -36,7 +40,7 @@ namespace EasyCrypto {
 
    //MARK: - Static variables
    // Name => plugin
-   typedef boost::container::map<std::string, boost::dll::shared_library> plugins_t;
+   typedef boost::container::map<std::string, boost::dll::experimental::smart_library> plugins_t;
    
    static boost::filesystem::path         pluginsDirectory;
    static plugins_t                       plugins;
@@ -68,24 +72,23 @@ namespace EasyCrypto {
          ext.replace_extension().replace_extension().replace_extension();
          return ext;
       }
-      
       return lhs;
    }
 
    //MARK: - Loading plugins
 
-   void insertPlugin(BOOST_RV_REF(boost::dll::shared_library) lib) {
+   void insertPlugin(BOOST_RV_REF(boost::dll::experimental::smart_library) lib) {
       std::string plugin_name;
       if (lib.has("create_plugin")) {
-         plugin_name = lib.get_alias<boost::shared_ptr<EasyCryptoPluginAPI>()>("create_plugin")()->method();
+         plugin_name = lib.shared_lib().get_alias<boost::shared_ptr<EasyCryptoPluginAPI>()>("create_plugin")()->method();
       } else if (lib.has("plugin")) {
-         plugin_name = lib.get<EasyCryptoPluginAPI>("plugin").method();
+         plugin_name = lib.shared_lib().get<EasyCryptoPluginAPI>("plugin").method();
       } else {
          return;
       }
       
       if (plugins.find(plugin_name) == plugins.cend()) {
-         plugins[plugin_name] = boost::move(lib);
+         plugins.insert(std::pair<std::string, boost::dll::experimental::smart_library>(plugin_name, boost::move(lib)));
       }
    }
 
@@ -97,7 +100,6 @@ namespace EasyCrypto {
       // Searching a folder for files with '.so' or '.dll' extension
       fs::recursive_directory_iterator endit;
       for (fs::recursive_directory_iterator it(pluginsDirectory); it != endit; ++it) {
-         std::cout << "Investigating file " << it->path() << std::endl;
          if (!fs::is_regular_file(*it)) {
             continue;
          }
@@ -106,7 +108,7 @@ namespace EasyCrypto {
          }
          // We found a file. Trying to load it
          boost::system::error_code error;
-         boost::dll::shared_library plugin(it->path(), error);
+         boost::dll::experimental::smart_library plugin(it->path(), error);
          if (error) {
             continue;
          }
@@ -116,13 +118,14 @@ namespace EasyCrypto {
       }
    }
    
-   //MARK: --- CLASS EasyCryptoLib implementation.
+   //MARK: - API Class EasyCryptoLib implementation.
    const std::string & EasyCryptoLib::version() {
       static const std::string versionNumber("1.0.0");
       return versionNumber;
    }
    
    void EasyCryptoLib::init(const std::string & pathToPlugins) {
+      plugins.clear();
       pluginsDirectory = pathToPlugins;
       loadPlugins();
    }
@@ -131,7 +134,6 @@ namespace EasyCrypto {
       std::string methods;
       int pluginCount = plugins.size();
       int pluginCounter = 0;
-      std::cout << "Lib has " << pluginCount << " plugins." << std::endl;
       for (plugins_t::iterator iter = plugins.begin(); iter != plugins.end(); iter++, pluginCounter++) {
          methods += iter->first;
          if (pluginCounter < pluginCount-1) {
@@ -143,18 +145,14 @@ namespace EasyCrypto {
    
    EasyCryptoLib::Result EasyCryptoLib::encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method) {
       try {
-         boost::dll::shared_library & lib = plugins.at(method);
+         boost::dll::experimental::smart_library & lib = plugins.at(method);
          if (lib.is_loaded()) {
-            std::cout << "Lib is loaded." << std::endl;
-            if (lib.has("encrypt")) {
-               std::cout << "Lib has encrypt." << std::endl;
-            } else {
-               std::cout << "Lib does not have encrypt." << std::endl;
-            }
+            auto encrypter = lib.shared_lib().get_alias<boost::shared_ptr<EasyCryptoPluginAPI>()>("create_plugin")();
+            encrypter->encrypt(toEncrypt, toStoreTo);
+            return ESuccess;
          } else {
-            std::cout << "Lib is not loaded." << std::endl;
+            return EError;
          }
-         return ESuccess;
       } catch (std::exception & e) {
          return EError;
       }
@@ -164,7 +162,14 @@ namespace EasyCrypto {
    
    EasyCryptoLib::Result EasyCryptoLib::decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method) {
       try {
-         return ESuccess;
+         boost::dll::experimental::smart_library & lib = plugins.at(method);
+         if (lib.is_loaded()) {
+            auto decrypter = lib.shared_lib().get_alias<boost::shared_ptr<EasyCryptoPluginAPI>()>("create_plugin")();
+            decrypter->decrypt(toDecrypt, toStoreTo);
+            return ESuccess;
+         } else {
+            return EError;
+         }
       } catch (std::exception & e) {
          return EError;
       }

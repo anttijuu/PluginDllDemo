@@ -32,12 +32,16 @@
 
 namespace EasyCrypto {
    
+   EasyCryptoPlugin::EasyCryptoPlugin() {
+      // Empty
+   }
+   
    std::string EasyCryptoPlugin::method() {
       return "matrix";
    }
    
    EasyCryptoPlugin::~EasyCryptoPlugin() {
-      
+      // Empty
    }
    
    std::size_t EasyCryptoPlugin::size() {
