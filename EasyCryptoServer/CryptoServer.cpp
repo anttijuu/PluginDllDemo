@@ -92,6 +92,7 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
    switch (msgType) {
       case 1: { // capabilities request
          // Refresh the available plugins.
+         // If new plugings were installed after last init call, those are now loaded.
          EasyCrypto::EasyCryptoLib::init("/usr/local/lib/ECPlugins");
          response["msgtype"] = 2;
          response["version"] = EasyCryptoLib::version();

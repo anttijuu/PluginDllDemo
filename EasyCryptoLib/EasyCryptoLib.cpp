@@ -42,10 +42,13 @@ namespace EasyCrypto {
    // Name => plugin
    typedef boost::container::map<std::string, boost::dll::experimental::smart_library> plugins_t;
    
+   // Where to search for the plugin dlls. Must be set by calling EasyCryptoLib::init.
    static boost::filesystem::path         pluginsDirectory;
+   // Here in the map, the plugins are stored, searchable with the encryption method name.
    static plugins_t                       plugins;
    
    //MARK: - Helper functions
+   // Check if the file name contains a dynamic library extension.
    bool isSharedLibrary(const std::string& s) {
       return (s.find(".dll") != std::string::npos || s.find(".so") != std::string::npos || s.find(".dylib") != std::string::npos)
       && s.find(".lib") == std::string::npos
@@ -77,6 +80,7 @@ namespace EasyCrypto {
 
    //MARK: - Loading plugins
 
+   // Insert the plugin to the map with the encryption method name, if create_plugin function exists in the plugin dll.
    void insertPlugin(BOOST_RV_REF(boost::dll::experimental::smart_library) lib) {
       std::string plugin_name;
       if (lib.has("create_plugin")) {
@@ -86,18 +90,19 @@ namespace EasyCrypto {
       } else {
          return;
       }
-      
+      // Check that do not insert plugin with same method name twice.
       if (plugins.find(plugin_name) == plugins.cend()) {
          plugins.insert(std::pair<std::string, boost::dll::experimental::smart_library>(plugin_name, boost::move(lib)));
       }
    }
 
+   // Go recursively through the plugin directory to search for encryption plugin dll's.
    static void loadPlugins() {
       namespace fs = ::boost::filesystem;
       typedef fs::path::string_type string_type;
       const string_type extension = boost::dll::shared_library::suffix().native();
       
-      // Searching a folder for files with '.so' or '.dll' extension
+      // Searching a folder for files with dynamic library extensions (.so, .dll, .dylib)
       fs::recursive_directory_iterator endit;
       for (fs::recursive_directory_iterator it(pluginsDirectory); it != endit; ++it) {
          if (!fs::is_regular_file(*it)) {
@@ -119,6 +124,7 @@ namespace EasyCrypto {
    }
    
    //MARK: - API Class EasyCryptoLib implementation.
+   // For documentation, see header file.
    const std::string & EasyCryptoLib::version() {
       static const std::string versionNumber("1.0.0");
       return versionNumber;

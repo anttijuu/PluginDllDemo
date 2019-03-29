@@ -31,7 +31,7 @@
 namespace EasyCrypto {
    
    /*
-    An interface class for all cryptographic implementation plugins.
+    An interface class for all cryptographic implementation plugin dll's.
     @author Antti Juustila
     @version 1.1.0
     */
