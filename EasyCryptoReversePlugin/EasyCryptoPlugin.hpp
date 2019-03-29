@@ -39,7 +39,6 @@ namespace EasyCrypto {
       virtual ~EasyCryptoPlugin();
       virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo);
       virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo);
-      static std::size_t size();
       virtual std::string method();
       
    private:

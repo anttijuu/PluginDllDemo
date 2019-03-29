@@ -56,12 +56,9 @@ namespace EasyCrypto {
        */
       virtual std::string method() = 0;
       
-      static std::size_t size();
-      
       virtual ~EasyCryptoPluginAPI() { /* Empty */ };
    };
    
 } // namespace
-
 
 // EOF

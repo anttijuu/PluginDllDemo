@@ -42,10 +42,6 @@ namespace EasyCrypto {
       return "reverse";
    }
    
-   std::size_t EasyCryptoPlugin::size() {
-      return sizeof(EasyCryptoPlugin);
-   }
-   
    void EasyCryptoPlugin::encrypt(const std::string & toEncrypt, std::string & toStoreTo) {
       if (toEncrypt.length() < 1) {
          throw std::runtime_error("Empty string");
