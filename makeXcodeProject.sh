@@ -1,4 +1,4 @@
-mkdir xcodep
-cd xcodep
+mkdir xcode
+cd xcode
 cmake -GXcode ..
 
