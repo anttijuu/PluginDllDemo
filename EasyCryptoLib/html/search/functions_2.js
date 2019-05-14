@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['methods',['methods',['../class_easy_crypto_1_1_easy_crypto_lib.html#a1d3b8111d80ab8cccb2294e8da3115f6',1,'EasyCrypto::EasyCryptoLib']]]
+  ['init',['init',['../class_easy_crypto_1_1_easy_crypto_lib.html#a7ab2c1a0989866f62c942e1f6f2f8a50',1,'EasyCrypto::EasyCryptoLib']]]
 ];

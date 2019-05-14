@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>EasyCryptoLib: Class Members</title>
+<title>EasyCryptoLib: EasyCryptoLib</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,7 +47,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,41 +61,37 @@ $(function() {
 </iframe>
 </div>
 
+</div><!-- top -->
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">EasyCryptoLib </div>  </div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div><ul>
-<li>decrypt()
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#afaf2ae4427d2250b7749e256b15e9fc9">EasyCrypto::EasyCryptoLib</a>
-, <a class="el" href="class_easy_crypto_1_1_easy_crypto_plugin_a_p_i.html#a1216c1d7e9ca74ea0c744ef930b1d432">EasyCrypto::EasyCryptoPluginAPI</a>
-</li>
-<li>EError
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#aa4d987a1506921445812aa61e6e57e1ba2d37ed53a14870778fc535c3104d4a59">EasyCrypto::EasyCryptoLib</a>
-</li>
-<li>encrypt()
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a0bb13278fff62c0d0c7a58128827d465">EasyCrypto::EasyCryptoLib</a>
-, <a class="el" href="class_easy_crypto_1_1_easy_crypto_plugin_a_p_i.html#a8a10f81f7b210649610b5f2f82b2f48b">EasyCrypto::EasyCryptoPluginAPI</a>
-</li>
-<li>ENotSupported
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#aa4d987a1506921445812aa61e6e57e1bad960e5b89e56cbabdeaa056dd29a048a">EasyCrypto::EasyCryptoLib</a>
-</li>
-<li>ESuccess
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#aa4d987a1506921445812aa61e6e57e1ba9050c3f2afb564d7800072e6c502741c">EasyCrypto::EasyCryptoLib</a>
-</li>
-<li>init()
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a7ab2c1a0989866f62c942e1f6f2f8a50">EasyCrypto::EasyCryptoLib</a>
-</li>
-<li>method()
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_plugin_a_p_i.html#ae7f8f28c30d88210a0158c8599009816">EasyCrypto::EasyCryptoPluginAPI</a>
-</li>
-<li>methods()
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a1d3b8111d80ab8cccb2294e8da3115f6">EasyCrypto::EasyCryptoLib</a>
-</li>
-<li>Result
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#aa4d987a1506921445812aa61e6e57e1b">EasyCrypto::EasyCryptoLib</a>
-</li>
-<li>version()
-: <a class="el" href="class_easy_crypto_1_1_easy_crypto_lib.html#a4954fc71a08f92a14f6cac21090bccfb">EasyCrypto::EasyCryptoLib</a>
-</li>
+<div class="textblock"><p>Version 1.0 2019-05-14 (c) Antti Juustila</p>
+<p>The source code here implements a dynamic library called EasyCryptoLib, which is capable of encrypting and decrypting text using several methods of cryption. Methods supported in the current version are "reverse" and "matrix". Crypto methods are implemented as separate plugin dll's using Boost::DLL library.</p>
+<p>The library is implemented using C++17 and utilises the Standard Template Library as well as Boost version 1.70.</p>
+<p>The library is tested to work on Ubuntu as well as Mac OS X 10.14.</p>
+<h2>Building</h2>
+<p>Building is done using CMake. See the included CMakeLists.txt files for the library and the plugin dll's.</p>
+<p>The interface to the EasyCryptoLib consists of two files:</p>
+<ul>
+<li><a class="el" href="_easy_crypto_lib_8hpp_source.html">EasyCryptoLib.hpp</a>, the header file used by client apps</li>
+<li>EasyCrytoLib.dylib/.so/.dll, a shared (dynamic) library clients use at runtime</li>
 </ul>
+<p>Assumption is that after building, the interface consisting of these two files is copied to a shared include and library directory in the system and used from there by the client applications. Using CMake, this is done like this</p>
+<ol type="1">
+<li>mkdir build</li>
+<li>cd build</li>
+<li>cmake ..</li>
+<li>make</li>
+<li>sudo make install</li>
+</ol>
+<p>Note that you need to build and install the crypto plugin dll's separately. Build commands are as above, given in the plugin dll directories.</p>
+<p>In Ubuntu and Mac, the directory for the shared hpp file is /usr/local/include, and the directory for the shared library file is /usr/local/lib.</p>
+<p>NOTE: The version provided here also includes, for demonstration purposes, a file EasyCryptoLibBad.hpp and code for this interface class is also included in the shared library file. Please remove this interface class before seriously using the library, and rebuild and install the public interface using the commands as described above.</p>
+<p>Please see the provided LICENSE file for copyright.</p>
+<p>Oulu, May 14th, 2019 Antti Juustila <a href="#" onclick="location.href='mai'+'lto:'+'ant'+'ti'+'.ju'+'us'+'til'+'a@'+'oul'+'u.'+'fi'; return false;">antti<span style="display: none;">.nosp@m.</span>.juu<span style="display: none;">.nosp@m.</span>stila<span style="display: none;">.nosp@m.</span>@oul<span style="display: none;">.nosp@m.</span>u.fi</a> </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

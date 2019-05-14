@@ -36,10 +36,10 @@ namespace EasyCrypto {
  @brief This class is the public interface to the crypting library.
  
  The library supports multiple encrypting methods and also decrypts the encrypted text back
- to plain text.<br />
+ to plain text.<br/>
  All the methods in this class are static, so there is no need to instantiate the class.
  Implementation creates necessary internal objects which do the actual encrypting
- and decrypting.<br />
+ and decrypting.<br/>
  
  Usage:
  -# Query encryption methods you can use by calling methods(). Resulting string lists the methods separated by comma.</li>
@@ -72,7 +72,7 @@ public:
     Encrypts the given plaintext and stores it to the parameter to be used by the caller.
     @param toEncrypt Text to encrypt.
     @param toStoreTo A string to store the ecrypted text to.
-    @param m The method of encryption.
+    @param method The method of encryption.
     @returns Returns success code of the encryption. See Result enum for details.
     */
    static Result encrypt(const std::string & toEncrypt, std::string & toStoreTo, const std::string & method);
@@ -80,7 +80,7 @@ public:
     Decrypts the given encrypted text and stores it to the parameter to be used by the caller.
     @param toDecrypt Text to decrypt.
     @param toStoreTo A string to store the derypted plain text to.
-    @param m The method of decryption.
+    @param method The method of decryption.
     @returns Returns success code of the decryption. See Result enum for details.
     */
    static Result decrypt(const std::string & toDecrypt, std::string & toStoreTo, const std::string & method);

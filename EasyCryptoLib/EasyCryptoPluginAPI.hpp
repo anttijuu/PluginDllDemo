@@ -1,5 +1,5 @@
 /*
- EasyCryptoLibPriv.hpp
+ EasyCryptoPluginAPI.hpp
  EasyCryptoLib
  
  Created by Antti Juustila on 3.5.2016.
@@ -30,27 +30,29 @@
 
 namespace EasyCrypto {
    
-   /*
+   /**
     An interface class for all cryptographic implementation plugin dll's.
+    Your plugin library must implement this interface. For examples, see
+    the EasyCryptoMatrix/ReversePlugin projects.
     @author Antti Juustila
     @version 1.1.0
     */
    class BOOST_SYMBOL_EXPORT EasyCryptoPluginAPI
    {
    public:
-      /*
+      /**
        Encrypts a piece of text.
        @param toEncrypt Text to encrypt.
        @param toStoreTo The string where the encrypted text is stored into.
        */
       virtual void encrypt(const std::string & toEncrypt, std::string & toStoreTo) = 0;
-      /*
+      /**
        Decrypts a piece of text.
        @param toDecrypt Text to decrypt.
        @param toStoreTo The string where the decrypted text is stored into.
        */
       virtual void decrypt(const std::string & toDecrypt, std::string & toStoreTo) = 0;
-      /*
+      /**
        To query the encryption/decryption method name this object is using.
        @returns The name of the en/decryption method:
        */
