@@ -1,15 +1,15 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.14)
 project(EasyCryptoLibrary VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 set(LIB_NAME EasyCrypto)
 set(EasyCrypto_VERSION 1.0.0)
 
-find_package(Boost 1.69.0 REQUIRED system filesystem)
+find_package(Boost 1.70.0 REQUIRED system filesystem)
 
 add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLib.hpp EasyCryptoPluginAPI.hpp EasyCryptoExceptions.hpp)
 
-target_link_libraries(${LIB_NAME} PUBLIC ${Boost_LIBRARIES})
+target_link_libraries(${LIB_NAME} PRIVATE Boost::filesystem Boost::system)
 
 set_property(TARGET ${LIB_NAME} PROPERTY VERSION ${EasyCrypto_VERSION})
 set_property(TARGET ${LIB_NAME} PROPERTY SOVERSION 1)
@@ -20,9 +20,9 @@ set_property(TARGET ${LIB_NAME} APPEND PROPERTY
 
 set_property(TARGET ${LIB_NAME} PROPERTY INTERFACE_POSITION_INDEPENDENT_CODE ON)
 set_target_properties(${LIB_NAME} PROPERTIES LINK_FLAGS "-Wl")
-set_target_properties(${LIB_NAME} PROPERTIES CXX_STANDARD 14)
+set_target_properties(${LIB_NAME} PROPERTIES CXX_STANDARD 17)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_CXX_VISIBILITY_PRESET hidden)
-set_target_properties(${LIB_NAME} PROPERTIES CMAKE_VISIBILITY_INLINES_HIDDEN 1)
+set_target_properties(${LIB_NAME} PROPERTIES CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 
 set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "EasyCryptoLib.hpp;EasyCryptoPluginAPI.hpp")
 target_include_directories(${LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/.> $<INSTALL_INTERFACE:include/${LIB_NAME}> ${Boost_INCLUDE_DIRS})
