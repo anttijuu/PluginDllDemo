@@ -64,9 +64,15 @@ And then **build the client**
 
 After this, go to server build dir and start the server: `./CryptoServer 10000` listening to messages using port 10000. After this, start the client: `./CryptoClient localhost 10000`, providing the server address and port as a parameter.
 
+Query the *capabilities* of the encryption server. It will reply with the supported encryption methods (currently "matrix" and "reverse"). Use them both to see how they work.
+
+Remove either of the plugin dll:s from the /usr/local/lib/ECPlugins directory while the server is running. Then again query the supported methods. You can see that the server replied with one method missing. Put the dll back in the directory and again query the supported methods. Implmement additional new encryption methods using either matrix or reverse dll as an example. Install the plugin dll to see a new method taken into use.
+
+
 ## TODO
 
 * Works on macOS and Ubuntu, check that also works on Windows. In Win 10 with Visual Studio dev tools should be easy since Visual Studio nowadays support bash shells and importing projects from cmake files.
+* Modify the main and plugin dll libraries to use native data types only. 
 
 ## Who to talk to
 
