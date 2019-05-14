@@ -11,6 +11,8 @@ Notice that this is developed for *educational* purposes only. No real encryptio
 
 Current version has been tested on macOS 10.14 only. Earlier version has been tested to work on Ubuntu also. Since based on standard C++, boost and build using CMake, the system should be relatively easy to build and run on Windows too.
 
+This [YouTube video](https://youtu.be/zBy_anMAVbA) demonstrates how you can add functionality to a running server by dropping a new plugin dll in the directory where plugins are located.
+
 
 ## Dependencies
 
