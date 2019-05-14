@@ -1,13 +1,12 @@
 //
-//  ECMasterHeader.hpp
+//  EasyCryptoDefines.hpp
 //  EasyCryptoLib
 //
 //  Created by Antti Juustila on 19.4.2017.
 //  Copyright © 2017 Antti Juustila. All rights reserved.
 //
 
-#ifndef ECMasterHeader_hpp
-#define ECMasterHeader_hpp
+#pragma once
 
 // Generic helper definitions for shared library support
 #if defined _WIN32 || defined __CYGWIN__
@@ -42,5 +41,3 @@
 #define EC_LOCAL
 #endif // EC_DLL
 
-
-#endif /* ECMasterHeader_hpp */

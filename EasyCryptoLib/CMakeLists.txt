@@ -7,7 +7,7 @@ set(EasyCrypto_VERSION 1.0.0)
 
 find_package(Boost 1.70.0 REQUIRED system filesystem)
 
-add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLib.hpp EasyCryptoPluginAPI.hpp EasyCryptoExceptions.hpp)
+add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLib.hpp EasyCryptoPluginAPI.hpp)
 
 target_link_libraries(${LIB_NAME} PRIVATE Boost::filesystem Boost::system)
 

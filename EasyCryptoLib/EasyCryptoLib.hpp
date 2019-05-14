@@ -26,7 +26,7 @@
 
 #include <string>
 
-#include "ECMasterHeader.hpp"
+#include "EasyCryptoDefines.hpp"
 
 namespace EasyCrypto {
    
@@ -52,6 +52,7 @@ namespace EasyCrypto {
  Client app developers use these files when using the functionality of the library.
  @author Antti Juustila
  @version 1.0.0
+ @todo Only native types in library API, no std::string etc.
  */
 class EC_API EasyCryptoLib
 {
