@@ -1,9 +1,10 @@
-# README #
+# EasyCrypto #
 
 The EasyCrypto system demonstrates:
 
 1. a shared plugin dll library implemented using Boost.DLL,
-2. a client/server system using UDP protocol to exchange JSON messages for encrypt/decrypt.
+2. a client/server system using UDP protocol to exchange JSON messages for encrypt/decrypt,
+3. API design, both in library and over the network.
 
 Each plugin dll implements one encryption/decryption method. Plugins can be added to the system without rebooting it.
 
@@ -82,7 +83,8 @@ Implmement additional new encryption methods using either matrix or reverse dll 
 ## TODO
 
 * Works on macOS and Ubuntu, check that also works on Windows. In Win 10 with Visual Studio dev tools should be easy since Visual Studio nowadays support bash shells and importing projects from cmake files.
-* Modify the main and plugin dll libraries to use native data types only for better binary compatibility across compilers and platforms. 
+* Modify the main and plugin dll libraries to use basic data types only for better binary compatibility across compilers and platforms. 
+* Check if there are any issues with various char sets and languages.
 
 ## Who to talk to
 
