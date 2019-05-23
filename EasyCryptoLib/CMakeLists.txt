@@ -7,7 +7,7 @@ set(EasyCrypto_VERSION 1.0.0)
 
 find_package(Boost 1.70.0 REQUIRED system filesystem)
 
-add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLib.hpp EasyCryptoPluginAPI.hpp)
+add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLib.hpp EasyCryptoPluginAPI.hpp EasyCryptoDefines.hpp)
 
 target_link_libraries(${LIB_NAME} PRIVATE Boost::filesystem Boost::system)
 
@@ -24,7 +24,7 @@ set_target_properties(${LIB_NAME} PROPERTIES CXX_STANDARD 17)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_CXX_VISIBILITY_PRESET hidden)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 
-set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "EasyCryptoLib.hpp;EasyCryptoPluginAPI.hpp")
+set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "EasyCryptoLib.hpp;EasyCryptoPluginAPI.hpp;EasyCryptoDefines.hpp")
 target_include_directories(${LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/.> $<INSTALL_INTERFACE:include/${LIB_NAME}> ${Boost_INCLUDE_DIRS})
 
 write_basic_package_version_file(
