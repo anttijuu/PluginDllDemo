@@ -26,10 +26,10 @@ if (WIN32)
 endif(WIN32)
 
 find_package(EasyCryptoPlugin REQUIRED)
-find_package(Boost 1.70.0 REQUIRED COMPONENTS system)
+find_package(Boost 1.70.0 REQUIRED COMPONENTS system filesystem)
 find_package(nlohmann_json 3.2.0 REQUIRED)
 
-if (Boost_FOUND AND EasyCryptoPlugin_FOUND AND nlohmann_json_FOUND)
+if (Boost_FOUND AND EasyCryptoPlugin_FOUND AND nlohmann_json_FOUND)
    add_executable(${APP_NAME} main.cpp CryptoServer.cpp CryptoServer.hpp ServerAPI.hpp)
    target_include_directories(${APP_NAME} PUBLIC Boost::system EasyCryptoPlugin::EasyCryptoPlugin)
    target_link_libraries(${APP_NAME} Boost::system EasyCryptoPlugin::EasyCryptoPlugin nlohmann_json::nlohmann_json)
