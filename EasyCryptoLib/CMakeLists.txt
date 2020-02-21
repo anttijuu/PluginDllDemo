@@ -5,6 +5,24 @@ include(CMakePackageConfigHelpers)
 set(LIB_NAME EasyCryptoPlugin)
 set(EasyCrypto_VERSION 1.0.0)
 
+
+# Add a "doc" target to generate API documentation with Doxygen.
+# Doxygen is _not_ a component that ProcessorNode uses, but a _tool_
+# used in library document generation as part of the build process.
+# After "cmake ..", execute "make doc" to create docs.
+# When using Ninja, do "cmake -GNinja .." and "ninja doc" to create the docs.
+# There will be a docs directory in the build dir, containing the docs.
+find_package(Doxygen)
+if (DOXYGEN_FOUND)
+   configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/doxyfile @ONLY)
+   add_custom_target(doc
+      ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxyfile
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+      COMMENT "Generating API documentation with Doxygen" VERBATIM
+   )
+endif(DOXYGEN_FOUND)
+
+# Then find Boost and set up the lib project.
 find_package(Boost 1.72.0 REQUIRED system filesystem)
 
 add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp include/${LIB_NAME}/EasyCryptoLib.hpp include/${LIB_NAME}/EasyCryptoPluginAPI.hpp include/${LIB_NAME}/EasyCryptoDefines.hpp)

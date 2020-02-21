@@ -10,62 +10,36 @@ Each plugin dll implements one encryption/decryption method. Plugins can be adde
 
 Notice that this is developed for *educational* purposes only. No real encryption is implemented nor designed into the system. No security or other essential non-functional requirements have been considered.
 
-Current version has been tested on macOS 10.14 only. Earlier version has been tested to work on Ubuntu also. Since based on standard C++, boost and build using CMake, the system should be relatively easy to build and run on Windows too.
+Current version has been tested on macOS 10.15 only. Earlier version has been tested to work on Ubuntu also. Since based on standard C++, boost and build using CMake, the system should be relatively easy to build and run on Windows too. I am currently in the process of making sure this works also in Windows 10.
 
 This [YouTube video](https://youtu.be/zBy_anMAVbA) demonstrates how you can add functionality to a running server by dropping a new plugin dll in the directory where plugins are located.
 
 
-## Dependencies
+## Tools and dependencies
 
-* Boost-system library, using Boost 1.70 or newer.
-* jsoncpp
+Tools you need:
 
-Download and install [boost](https://boost.org) and build the system library at least (1.69 or newer do not require this). See instructions from Boost readme. Basically you must 1) run the boostrap command and then 2) the b2 command. After this, 3) run b2 again with sudo and install to install boost headers and libs in the usual place `/usr/local/include` and `/usr/local/lib`. 
+* git to clone the project to your computer
+* C++17 compiler
+* CMake
+* Ninja build tool
 
-Note that when using Boost 1.69 or newer, building the system library is no longer needed.
+And the following external libraries:
 
-Get jsoncpp from github in the root dir of your workspace (*not* in EasyCrypto directory):
-
-```
-git clone https://github.com/open-source-parsers/jsoncpp
-```
-
-Then run the amalgamate.py script and install (from the generated `dist`directory) the header subdirectory `json` to `/usr/local/include` and copy the `jsoncpp.cpp` file both to the Client and Server directories of EasyCrypto project.
+* Boost-system and filesystem libraries, using Boost 1.72 or newer.
+* nlohmann::json
 
 ## Building EasyCrypto
 
-Assuming you already have boost and jsoncpp installed (see Dependencies above), and [cmake](https://cmake.org) too.
+Assuming you already have the external libraries and tools installed, build the components of the system in this order:
 
-First build the **library**:
+1. EasyCryptoLib -- it needs to be build and installed first. See readme in this directory for details.
+1. EasyCryptoReversePlugin -- a toy encryption method, reversing the text.1. EasyCryptoServer -- a server app that uses EasyCryptoLib to provide crypto services to client apps.
+1. EasyCryptoClient -- a client app communicating with the server over UDP using JSON as a transport data format.
 
-1. cd EasyCryptoLib
-2. mkdir build
-3. cd build
-4. cmake ..
-5. make
-6. sudo make install
+Currently the Matrix plugin does not build, while I am researching how to encrypt Unicode.
 
-After this the library is "published" to `/usr/local/include` and `/usr/local/lib` and can be used by the apps.
-
-Then **build the plugin DLLs**, in their respective subdirectories (EasyCryptoMatrixPlugin and EasyCryptoReversePlugin). Plugin DLLs are installed to /usr/local/include/ECPlugins directory by default. Steps are the same as above with the "main" library.
-
-Then **build the server**:
-
-1. cd EasyCryptoServer
-2. mkdir build
-3. cd build
-4. cmake ..
-5. make
-
-And then **build the client**
-
-1. cd EasyCryptoClient
-2. mkdir build
-3. cd build
-4. cmake ..
-5. make
-
-Basically you then have the installation pictured below, one one developer machine. Obviously, you can put the client and server with libraries in different machines.
+Each directory has a readme instructing how to build and install (libs) the component.
 
 ![EasyCrypto Deployment](EasyCryptoDeployment.png)
 
@@ -84,8 +58,11 @@ Implmement additional new encryption methods using either matrix or reverse dll 
 
 * Works on macOS and Ubuntu, check that also works on Windows. In Win 10 with Visual Studio dev tools should be easy since Visual Studio nowadays support bash shells and importing projects from cmake files.
 * Modify the main and plugin dll libraries to use basic data types only for better binary compatibility across compilers and platforms. 
-* Check if there are any issues with various char sets and languages.
+* Check if there are any issues with various char sets and languages (yes, there are).
 
-## Who to talk to
+## License
 
-(c) Antti Juustila 2019
+The system is published under LGPL.  Please see the provided [LICENSE](LICENSE) file.
+
+(C) Antti Juustila, 2016-2020 All rights reserved.
+antti dot juustila at oulu.fi
