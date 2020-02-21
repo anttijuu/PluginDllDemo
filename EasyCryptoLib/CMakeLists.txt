@@ -9,7 +9,7 @@ find_package(Boost 1.72.0 REQUIRED system filesystem)
 
 add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp include/${LIB_NAME}/EasyCryptoLib.hpp include/${LIB_NAME}/EasyCryptoPluginAPI.hpp include/${LIB_NAME}/EasyCryptoDefines.hpp)
 
-target_link_libraries(${LIB_NAME} PRIVATE Boost::filesystem Boost::system)
+target_link_libraries(${LIB_NAME} Boost::filesystem Boost::system)
 
 set_property(TARGET ${LIB_NAME} PROPERTY VERSION ${EasyCrypto_VERSION})
 set_property(TARGET ${LIB_NAME} PROPERTY SOVERSION 1)

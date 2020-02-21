@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(EasyCryptoServer)
 set(APP_NAME CryptoServer)
 
+<<<<<<< HEAD
 if (WIN32)
     macro(get_WIN32_WINNT version)
         if (CMAKE_SYSTEM_VERSION)
@@ -32,5 +33,13 @@ if (Boost_FOUND AND EasyCryptoPlugin_FOUND)
    add_executable(${APP_NAME} main.cpp CryptoServer.cpp CryptoServer.hpp ServerAPI.hpp)
    target_include_directories(${APP_NAME} PUBLIC Boost::system EasyCryptoPlugin::EasyCryptoPlugin)
    target_link_libraries(${APP_NAME} Boost::system EasyCryptoPlugin::EasyCryptoPlugin nlohmann_json::nlohmann_json)
+=======
+find_package(EasyCrypto REQUIRED)
+find_package(Boost 1.70.0 REQUIRED COMPONENTS system filesystem)
+if (Boost_FOUND AND EasyCrypto_FOUND)
+   add_executable(${APP_NAME} main.cpp CryptoServer.cpp CryptoServer.hpp jsoncpp.cpp)
+   target_include_directories(${APP_NAME} PUBLIC ${Boost_INCLUDE_DIRS} ${EasyCrypto_INCLUDE_DIRS})
+   target_link_libraries(${APP_NAME} Boost::system Boost::filesystem EasyCrypto::EasyCrypto)
+>>>>>>> 3b1bb0ca7eec8c35547cd25bbbd7275cc6f8fc4f
    set_target_properties(${APP_NAME} PROPERTIES CXX_STANDARD 17)
 endif()
