@@ -26,7 +26,7 @@
 
 #include <string>
 
-#include "EasyCryptoDefines.hpp"
+#include <EasyCryptoPlugin/EasyCryptoDefines.hpp>
 
 namespace EasyCrypto {
    

@@ -13,6 +13,7 @@
 int main(int argc, const char * argv[]) {
    try
    {
+      // setlocale(LC_CTYPE, "");
       short port = 0;
       if (argc != 2)
       {

@@ -9,7 +9,7 @@
 #pragma once
 
 // Generic helper definitions for shared library support
-#if defined _WIN32 || defined __CYGWIN__
+#if defined WIN32 || defined __CYGWIN__
 #define EC_HELPER_DLL_IMPORT __declspec(dllimport)
 #define EC_HELPER_DLL_EXPORT __declspec(dllexport)
 #define EC_HELPER_DLL_LOCAL
@@ -29,15 +29,10 @@
 // EC_API is used for the public API symbols. It either DLL imports or DLL exports (or does nothing for static build)
 // EC_LOCAL is used for non-api symbols.
 
-#ifdef EC_DLL // defined if EC is compiled as a DLL
 #ifdef EC_DLL_EXPORTS // defined if we are building the EC DLL (instead of using it)
 #define EC_API EC_HELPER_DLL_EXPORT
 #else
 #define EC_API EC_HELPER_DLL_IMPORT
 #endif // EC_DLL_EXPORTS
-#define EC_LOCAL EC_HELPER_DLL_LOCAL
-#else // EC_DLL is not defined: this means EC is a static lib.
-#define EC_API
-#define EC_LOCAL
-#endif // EC_DLL
 
+#define EC_LOCAL EC_HELPER_DLL_LOCAL

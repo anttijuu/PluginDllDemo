@@ -19,9 +19,11 @@
 #include <boost/asio.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include <json/json.h>
 
 #include "Client.hpp"
+
+#include "../EasyCryptoServer/ServerAPI.hpp"
+
 
 
 
@@ -35,6 +37,7 @@ static const std::string clientVersion("1.0.0");
 
 
 int main (int argc, char* argv[]) {
+   //setlocale(LC_CTYPE, "");
    Client client;
    
    return client.mainFunc(argc, argv);
@@ -60,7 +63,7 @@ int Client::mainFunc(int argc, char* argv[]) {
    endpoint = *resolver.resolve({udp::v4(), argv[1], argv[2]});
    
    int command = 0;
-   char request[max_length];
+   char request[ECServerAPI::Constants::MaxPackageLen];
    do {
       try {
          std::cout << std::endl << "---------------------------------" << std::endl;
@@ -73,7 +76,7 @@ int Client::mainFunc(int argc, char* argv[]) {
          std::cout << "99 >> Toggle print details" << std::endl;
          std::cout << "0 or Enter >> Exit client" << std::endl;
          std::cout << "Enter command >> ";
-         std::cin.getline(request, max_length);
+         std::cin.getline(request, ECServerAPI::Constants::MaxPackageLen);
          command = std::atoi(request);
          switch (command) {
             case 1: {
@@ -118,9 +121,9 @@ void Client::handlePingMessage() {
    std::cout << " *** Sending Ping Message to Server *** " << std::endl;
    const std::string pingMsg("ping");
    s.send_to(boost::asio::buffer(pingMsg), endpoint);
-   char reply[max_length];
+   char reply[ECServerAPI::Constants::MaxPackageLen];
    udp::endpoint sender_endpoint;
-   size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
+   size_t reply_length = s.receive_from(boost::asio::buffer(reply, ECServerAPI::Constants::MaxPackageLen), sender_endpoint);
 
    std::string response(reply, reply_length);
    std::cout << "Server response to ping is: " << response << std::endl;
@@ -131,33 +134,29 @@ void Client::handleCapabilityRequest() {
    
    // Remove all code below in this method from code given to students.
    
-   Json::Value message(Json::objectValue);
-   message["msgtype"] = 1;
+   nlohmann::json message;
+   message["msgtype"] = ECServerAPI::Requests::Capability;
    message["version"] = clientVersion;
    
    printJsonMsg(message);
    
-   s.send_to(boost::asio::buffer(message.toStyledString()), endpoint);
+   s.send_to(boost::asio::buffer(message.dump()), endpoint);
    
-   char reply[max_length];
+   char reply[ECServerAPI::Constants::MaxPackageLen];
    udp::endpoint sender_endpoint;
-   size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
+   size_t reply_length = s.receive_from(boost::asio::buffer(reply, ECServerAPI::Constants::MaxPackageLen), sender_endpoint);
    
    std::string response(reply, reply_length);
    std::stringstream stream(response);
-   Json::Value value;
+   nlohmann::json value;
    stream >> value;
    printJsonMsg(value);
-   if (value.isObject()) {
-      int msgType = value["msgtype"].asInt();
-      if (msgType == 2) {
+   if (value.is_object()) {
+      int msgType = value["msgtype"].get<int>();
+      if (msgType == ECServerAPI::Response::Capabilities) {
          supportedMethods.clear();
-         Json::Value array(Json::arrayValue);
-         array = value["methods"];
-         for (Json::ArrayIndex index = 0; index < array.size(); index++) {
-            std::string method = array[index].asString();
-            supportedMethods.push_back(method);
-         }
+         nlohmann::json array;
+         supportedMethods = value["methods"].get<std::vector<std::string>>();
          printSupportedMethods();
       } else {
          throw new std::invalid_argument("wrong response to msgtype 1 from server");
@@ -179,33 +178,33 @@ void Client::handleEncryptionRequest() {
    
    int requestId = createRequestId();
    
-   Json::Value message(Json::objectValue);
-   message["msgtype"] = 3;
+   nlohmann::json message;
+   message["msgtype"] = ECServerAPI::Requests::Encrypt;
    message["text"] = text;
    message["method"] = method;
    message["requestid"] = requestId;
 
    printJsonMsg(message);
    
-   s.send_to(boost::asio::buffer(message.toStyledString()), endpoint);
+   s.send_to(boost::asio::buffer(message.dump()), endpoint);
    
-   char reply[max_length];
+   char reply[ECServerAPI::Constants::MaxPackageLen];
    udp::endpoint sender_endpoint;
-   size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
+   size_t reply_length = s.receive_from(boost::asio::buffer(reply, ECServerAPI::Constants::MaxPackageLen), sender_endpoint);
    
    std::string response(reply, reply_length);
    std::stringstream stream(response);
-   Json::Value value;
+   nlohmann::json value;
    stream >> value;
    printJsonMsg(value);
-   if (value.isObject()) {
-      int msgType = value["msgtype"].asInt();
-      if (msgType == 4) {
+   if (value.is_object()) {
+      int msgType = value["msgtype"].get<int>();
+      if (msgType == ECServerAPI::Response::Encrypted) {
          std::cout << "Encrypted text is: ";
-         std::cout << value["text"].asString() << std::endl;
-      } else if (msgType == 999) {
+         std::cout << value["text"].get<std::string>() << std::endl;
+      } else if (msgType == ECServerAPI::Response::Error) {
          std::cout << "ERROR from server: ";
-         std::cout << value["text"].asString() << std::endl;
+         std::cout << value["text"].get<std::string>() << std::endl;
       } else {
          std::cout << "UNEXPECTED happened, don't know what to do... :/" << std::endl;
       }
@@ -226,33 +225,33 @@ void Client::handleDecryptionRequest() {
    
    int requestId = createRequestId();
 
-   Json::Value message(Json::objectValue);
-   message["msgtype"] = 5;
+   nlohmann::json message;
+   message["msgtype"] = ECServerAPI::Requests::Decrypt;
    message["text"] = text;
    message["method"] = method;
    message["requestid"] = requestId;
    
    printJsonMsg(message);
    
-   s.send_to(boost::asio::buffer(message.toStyledString()), endpoint);
+   s.send_to(boost::asio::buffer(message.dump()), endpoint);
    
-   char reply[max_length];
+   char reply[ECServerAPI::Constants::MaxPackageLen];
    udp::endpoint sender_endpoint;
-   size_t reply_length = s.receive_from(boost::asio::buffer(reply, max_length), sender_endpoint);
+   size_t reply_length = s.receive_from(boost::asio::buffer(reply, ECServerAPI::Constants::MaxPackageLen), sender_endpoint);
    
    std::string response(reply, reply_length);
    std::stringstream stream(response);
-   Json::Value value;
+   nlohmann::json value;
    stream >> value;
    printJsonMsg(value);
-   if (value.isObject()) {
-      int msgType = value["msgtype"].asInt();
-      if (msgType == 6) {
+   if (value.is_object()) {
+      int msgType = value["msgtype"].get<int>();
+      if (msgType == ECServerAPI::Response::Decrypted) {
          std::cout << "Decrypted text is: ";
-         std::cout << value["text"].asString() << std::endl;
-      } else if (msgType == 999) {
+         std::cout << value["text"].get<std::string>() << std::endl;
+      } else if (msgType == ECServerAPI::Response::Error) {
          std::cout << "ERROR from server: ";
-         std::cout << value["text"].asString() << std::endl;
+         std::cout << value["text"].get<std::string>() << std::endl;
       } else {
          std::cout << "UNEXPECTED happened, don't know what to do... :/" << std::endl;
       }
@@ -291,9 +290,9 @@ int Client::createRequestId() const {
    return requestId;
 }
 
-void Client::printJsonMsg(const Json::Value & json) const {
+void Client::printJsonMsg(const nlohmann::json & json) const {
    if (printDetails) {
-      std::cout << json.toStyledString() << std::endl;
+      std::cout << json.dump() << std::endl;
    }
 }
 

@@ -23,13 +23,18 @@
 
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
+#include <codecvt>
 
 #include <boost/make_shared.hpp>
+
+// #include <utf8cpp/utf8.h>
 
 #include "EasyCryptoPlugin.hpp"
 
 
 namespace EasyCrypto {
+   
    
    EasyCryptoPlugin::EasyCryptoPlugin() {
       // Empty
@@ -46,9 +51,38 @@ namespace EasyCrypto {
       if (toEncrypt.length() < 1) {
          throw std::runtime_error("Empty string");
       }
-      toStoreTo = toEncrypt;
-      std::reverse(toStoreTo.begin(), toStoreTo.end());
+      toStoreTo.clear();
+      toStoreTo.resize(toEncrypt.size());
+      std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> cvt;
+      utf8::iterator iter(toEncrypt.begin(), toEncrypt.end(), toEncrypt.begin());
+      utf8::iterator end(toEncrypt.begin(), toEncrypt.begin(), toEncrypt.end());
+      // utf8::iterator target(toStoreTo.end(), toStoreTo.end(), toStoreTo.begin());
+      while (iter != end) {
+         utf8::append(*iter, toStoreTo);
+         // target.insert(toStoreTo.begin(), *iter);
+         iter++;
+      }
+//      for (char32_t c: cvt.from_bytes(toEncrypt)) {
+//         // toStoreTo += c;
+//         toStoreTo.insert(toStoreTo.begin(), c);
+//         std::cout << c << std::endl;
+//      }
+      //      toStoreTo.reserve(toEncrypt.size());
+      //      utf8::iterator iter(toEncrypt.end(), toEncrypt.begin(), toEncrypt.end());
+      //      utf8::iterator begin(toEncrypt.begin(), toEncrypt.begin(), toEncrypt.end());
+      //      // utf8::iterator target(toStoreTo.begin(), toStoreTo.begin(), toStoreTo.end());
+      //      int loopcount = 0;
+      //      auto target = toStoreTo.begin();
+      //      while (iter != begin) {
+      //         std::cout << "Loop #" << loopcount << std::endl;
+      //         // toStoreTo.push_back(*iter);
+      //         utf8::append(*iter, target);
+      //         --iter;
+      //      }
+      //toStoreTo = toEncrypt;
+      //std::reverse(toStoreTo.begin(), toStoreTo.end());
    };
+   
    
    void EasyCryptoPlugin::decrypt(const std::string & toDecrypt, std::string & toStoreTo) {
       if (toDecrypt.length() < 1) {

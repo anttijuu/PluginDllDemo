@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 3.14)
 project(EasyCryptoLibrary VERSION 1.0.0 LANGUAGES CXX)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
-set(LIB_NAME EasyCrypto)
+set(LIB_NAME EasyCryptoPlugin)
 set(EasyCrypto_VERSION 1.0.0)
 
-find_package(Boost 1.70.0 REQUIRED system filesystem)
+find_package(Boost 1.72.0 REQUIRED system filesystem)
 
-add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp EasyCryptoLib.hpp EasyCryptoPluginAPI.hpp EasyCryptoDefines.hpp)
+add_library(${LIB_NAME} SHARED EasyCryptoLib.cpp include/${LIB_NAME}/EasyCryptoLib.hpp include/${LIB_NAME}/EasyCryptoPluginAPI.hpp include/${LIB_NAME}/EasyCryptoDefines.hpp)
 
 target_link_libraries(${LIB_NAME} PRIVATE Boost::filesystem Boost::system)
 
@@ -19,13 +19,13 @@ set_property(TARGET ${LIB_NAME} APPEND PROPERTY
 )
 
 set_property(TARGET ${LIB_NAME} PROPERTY INTERFACE_POSITION_INDEPENDENT_CODE ON)
-set_target_properties(${LIB_NAME} PROPERTIES LINK_FLAGS "-Wl")
 set_target_properties(${LIB_NAME} PROPERTIES CXX_STANDARD 17)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_CXX_VISIBILITY_PRESET hidden)
+set_target_properties(${LIB_NAME} PROPERTIES CMAKE_CXX_VISIBILITY hidden)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 
-set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "EasyCryptoLib.hpp;EasyCryptoPluginAPI.hpp;EasyCryptoDefines.hpp")
-target_include_directories(${LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/.> $<INSTALL_INTERFACE:include/${LIB_NAME}> ${Boost_INCLUDE_DIRS})
+set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "include/${LIB_NAME}/EasyCryptoLib.hpp;include/${LIB_NAME}/EasyCryptoPluginAPI.hpp;include/${LIB_NAME}/EasyCryptoDefines.hpp")
+target_include_directories(${LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/> $<INSTALL_INTERFACE:include/${LIB_NAME}> ${Boost_INCLUDE_DIRS})
 
 write_basic_package_version_file(
    "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}/${LIB_NAME}ConfigVersion.cmake"
@@ -44,7 +44,7 @@ configure_file(cmake/${LIB_NAME}Config.cmake
 )
 set(ConfigPackageLocation lib/cmake/${LIB_NAME})
 
-install(EXPORT ${LIB_NAME}Targets FILE ${LIB_NAME}Targets.cmake NAMESPACE EasyCrypto:: DESTINATION ${ConfigPackageLocation})
+install(EXPORT ${LIB_NAME}Targets FILE ${LIB_NAME}Targets.cmake NAMESPACE EasyCryptoPlugin:: DESTINATION ${ConfigPackageLocation})
 
 install(FILES cmake/${LIB_NAME}Config.cmake
    "${CMAKE_CURRENT_BINARY_DIR}/${LIB_NAME}/${LIB_NAME}ConfigVersion.cmake"

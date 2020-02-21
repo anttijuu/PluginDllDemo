@@ -4,7 +4,7 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 set(LIB_NAME EasyCryptoMatrix)
 
-find_package(Boost 1.70.0 REQUIRED system filesystem)
+find_package(Boost 1.72.0 REQUIRED system filesystem)
 
 add_library(${LIB_NAME} SHARED EasyCryptoPlugin.cpp EasyCryptoPlugin.hpp)
 
@@ -13,7 +13,6 @@ set_property(TARGET ${LIB_NAME} APPEND PROPERTY
   COMPATIBLE_INTERFACE_STRING LIB_VERSION
 )
 set_property(TARGET ${LIB_NAME} PROPERTY INTERFACE_POSITION_INDEPENDENT_CODE ON)
-set_target_properties(${LIB_NAME} PROPERTIES LINK_FLAGS "-Wl")
 set_target_properties(${LIB_NAME} PROPERTIES CXX_STANDARD 17)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_CXX_VISIBILITY_PRESET hidden)
 set_target_properties(${LIB_NAME} PROPERTIES CMAKE_VISIBILITY_INLINES_HIDDEN YES)

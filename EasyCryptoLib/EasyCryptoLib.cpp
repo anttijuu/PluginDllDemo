@@ -33,8 +33,8 @@
 #include <boost/dll/import_mangled.hpp>
 #include <boost/dll/import_class.hpp>
 
-#include "EasyCryptoLib.hpp"
-#include "EasyCryptoPluginAPI.hpp"
+#include <EasyCryptoPlugin/EasyCryptoLib.hpp>
+#include <EasyCryptoPlugin/EasyCryptoPluginAPI.hpp>
 
 namespace EasyCrypto {
 
@@ -160,6 +160,7 @@ namespace EasyCrypto {
             return EError;
          }
       } catch (std::exception & e) {
+         std::cout << e.what() << std::endl;
          return EError;
       }
       return ENotSupported;

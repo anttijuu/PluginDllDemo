@@ -4,7 +4,8 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 set(LIB_NAME EasyCryptoReverse)
 
-find_package(Boost 1.70.0 REQUIRED system filesystem)
+find_package(Boost 1.72.0 REQUIRED system filesystem)
+find_package(utf8cpp REQUIRED)
 
 add_library(${LIB_NAME} SHARED EasyCryptoPlugin.cpp EasyCryptoPlugin.hpp)
 
@@ -20,6 +21,6 @@ set_target_properties(${LIB_NAME} PROPERTIES CMAKE_VISIBILITY_INLINES_HIDDEN YES
 
 target_include_directories(${LIB_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/.> $<INSTALL_INTERFACE:include/${LIB_NAME}> ${Boost_INCLUDE_DIRS})
 
-target_link_libraries(${LIB_NAME} Boost::system Boost::filesystem)
+target_link_libraries(${LIB_NAME} Boost::system Boost::filesystem utf8cpp)
 
 install(TARGETS ${LIB_NAME} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}/ECPlugins LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/ECPlugins RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}/ECPlugins)

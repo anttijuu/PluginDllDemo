@@ -14,10 +14,9 @@
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 
+#include <nlohmann/json.hpp>
 
-namespace Json {
-   class Value;
-}
+#include "ServerAPI.hpp"
 
 class CryptoServer
 {
@@ -28,14 +27,13 @@ private:
    void doReceive();
    void doSendResponse(std::size_t length);
    // Remove the method below when giving code to students
-   std::string handleRequest(int msgType, const Json::Value & value);
+   std::string handleRequest(int msgType, const nlohmann::json & value);
    
 private:
    boost::asio::ip::udp::socket socket_;
    boost::asio::ip::udp::endpoint sender_endpoint_;
-   enum { max_length = 4096 };
-   char data_[max_length];
-   
+   char data_[ECServerAPI::MaxPackageLen];
+   std::string response;
 
 };
 

@@ -11,9 +11,7 @@
 #include <vector>
 #include <string>
 
-#include <json/json.h>
-
-#include <EasyCrypto/EasyCryptoLib.hpp>
+#include <EasyCryptoPlugin/EasyCryptoLib.hpp>
 
 #include "CryptoServer.hpp"
 
@@ -23,12 +21,14 @@ CryptoServer::CryptoServer(boost::asio::io_service & io_service, short port)
 }
 
 void CryptoServer::doReceive() {
+   std::memset(data_, 0, sizeof data_);
    std::cout << "Start reading from socket..." << std::endl;
-   socket_.async_receive_from(boost::asio::buffer(data_, max_length), sender_endpoint_,
+   socket_.async_receive_from(boost::asio::buffer(data_, ECServerAPI::MaxPackageLen), sender_endpoint_,
                               [this](boost::system::error_code ec, std::size_t bytes_recvd)
                               {
                                  if (!ec && bytes_recvd > 0) {
                                     std::string arrived(data_, bytes_recvd);
+                                    response = arrived;
                                     std::cout << "Data arrived: " << arrived << std::endl;
                                     doSendResponse(bytes_recvd);
                                  } else {
@@ -43,8 +43,8 @@ void CryptoServer::doReceive() {
   Steps include:
   <ul><li>Parse the json request from data_ by creating a string 
   from data_ and putting it to a stringstream.</li>
-  <li>Stream the string to Json::Value.</li>
-  <li>Check if the value isObject, and then if yes,</li>
+  <li>Stream the string to nlohmann::json.</li>
+  <li>Check if the value is_object, and then if yes,</li>
   <li>Read what kind of message arrived.</li>
   <li>Then handle the request from the client.</li></ul>
   Handling should produce a string which then is sent
@@ -52,25 +52,23 @@ void CryptoServer::doReceive() {
   @param length The length of the data_.
 */
 void CryptoServer::doSendResponse(std::size_t length) {
-   std::string response(data_, length);
    if (response == "ping") {
       response = "pong";
    } else {
       // From the string, create a json "thing" and handle the request, creating a response.
       // Send the response to the server using the code after the else branch (see the code...).
-      // Remove starting from here when giving code to students... leave the line "try {" though!
-      Json::Value value;
+      nlohmann::json value;
       std::stringstream str(response);
       try {
          str >> value;
-         if (value.isObject()) {
-            int msgType = value["msgtype"].asInt();
+         if (value.is_object()) {
+            int msgType = value["msgtype"].get<int>();
             std::cout << "msgtype value: " << msgType << std::endl;
             response = handleRequest(msgType, value);
          }
-        // ..until here, code removed when giving code to students.
       } catch (std::exception & e) {
-         response = "invalid json message structure from client";
+         std::cout << "Exception in handleRequest: " << e.what() << std::endl;
+         response = "{ \"msgtype\":999, \"text\": \"Invalid json message structure from client.\"}";
       }
       
    }
@@ -85,56 +83,54 @@ void CryptoServer::doSendResponse(std::size_t length) {
 }
 
 // Remove the whole method below when giving code to students.
-std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) {
+std::string CryptoServer::handleRequest(int msgType, const nlohmann::json & value) {
    using namespace EasyCrypto;
    
-   Json::Value response(Json::objectValue);
+   nlohmann::json responseJson;
    switch (msgType) {
-      case 1: { // capabilities request
+      case ECServerAPI::Requests::Capability: { // capabilities request
          // Refresh the available plugins.
          // If new plugings were installed after last init call, those are now loaded.
          EasyCrypto::EasyCryptoLib::init("/usr/local/lib/ECPlugins");
-         response["msgtype"] = 2;
-         response["version"] = EasyCryptoLib::version();
-         Json::Value methodsArray(Json::arrayValue);
+         responseJson["msgtype"] = ECServerAPI::Response::Capabilities;
+         responseJson["version"] = EasyCryptoLib::version();
+         responseJson["ServerAPI"] = ECServerAPI::Constants::ServerAPIVersion;
+         
 
          std::string meths = EasyCryptoLib::methods();
          std::vector<std::string> supportedMethods;
          boost::split(supportedMethods, meths, boost::is_any_of(",;:"));
-
-         for (std::string method : supportedMethods) {
-            std::cout << "appending methods" << std::endl;
-            methodsArray.append(method);
-         }
+         nlohmann::json methodsArray = supportedMethods;
          std::cout << "appending array to response" << std::endl;
-         response["methods"] = methodsArray;
+         responseJson["methods"] = methodsArray;
          std::cout << "done with constructing response" << std::endl;
          break;
       }
-      case 3: { // encryption request
-         std::string plainText = value["text"].asString();
-         std::string method = value["method"].asString();
+      case ECServerAPI::Requests::Encrypt: { // encryption request
+         std::string plainText = value["text"].get<std::string>();
+         std::string method = value["method"].get<std::string>();
          std::string encrypted;
 
          EasyCryptoLib::Result r = EasyCryptoLib::encrypt(plainText, encrypted, method);
          
-         response["requestid"] = value["requestid"].asInt();
+         responseJson["requestid"] = value["requestid"].get<int>();
          switch (r) {
             case EasyCryptoLib::ESuccess: {
-               response["msgtype"] = 4;
-               response["text"] = encrypted;
+               responseJson["msgtype"] = ECServerAPI::Response::Encrypted;
+               responseJson["text"] = encrypted;
+               std::cout << "Success with encryption method: " << encrypted << std::endl;
                break;
             }
             case EasyCryptoLib::EError: {
-               response["msgtype"] = 999;
-               response["text"] = "ERROR IN ENCRYPTION";
-               std::cout << "Error with reverse method!" << std::endl;
+               responseJson["msgtype"] = ECServerAPI::Response::Error;
+               responseJson["text"] = "ERROR IN ENCRYPTION";
+               std::cout << "Error with encryption method!" << std::endl;
                break;
             }
             default:
             case EasyCryptoLib::ENotSupported: {
-               response["msgtype"] = 999;
-               response["text"] = "NOT SUPPORTED";
+               responseJson["msgtype"] = ECServerAPI::Response::Error;
+               responseJson["text"] = "NOT SUPPORTED";
                std::cout << "Method not supported!" << std::endl;
                break;
             }
@@ -142,31 +138,31 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          std::cout << "done with constructing response" << std::endl;
          break;
       }
-      case 5: { // decryption request
-         std::string encrypted = value["text"].asString();
-         std::string method = value["method"].asString();
+      case ECServerAPI::Requests::Decrypt: { // decryption request
+         std::string encrypted = value["text"].get<std::string>();
+         std::string method = value["method"].get<std::string>();
          std::string plainText;
          
          EasyCryptoLib::Result r = EasyCrypto::EasyCryptoLib::decrypt(encrypted, plainText, method);
 
-         response["requestid"] = value["requestid"].asInt();
+         responseJson["requestid"] = value["requestid"].get<int>();
          switch (r) {
             case EasyCryptoLib::ESuccess: {
-               response["msgtype"] = 6;
-               response["text"] = plainText;
+               responseJson["msgtype"] = ECServerAPI::Response::Decrypted;
+               responseJson["text"] = plainText;
                std::cout << "Success with decryption method!" << std::endl;
                break;
             }
             case EasyCryptoLib::EError: {
-               response["msgtype"] = 999;
-               response["text"] = "ERROR IN DECRYPTION";
+               responseJson["msgtype"] = ECServerAPI::Response::Error;
+               responseJson["text"] = "ERROR IN DECRYPTION";
                std::cout << "Error with decryption method!" << std::endl;
                break;
             }
             default:
             case EasyCryptoLib::ENotSupported: {
-               response["msgtype"] = 999;
-               response["text"] = "NOT SUPPORTED";
+               responseJson["msgtype"] = ECServerAPI::Response::Error;
+               responseJson["text"] = "NOT SUPPORTED";
                std::cout << "Method not supported!" << std::endl;
                break;
             }
@@ -175,15 +171,17 @@ std::string CryptoServer::handleRequest(int msgType, const Json::Value & value) 
          break;
       }
       default: {
-         response["requestid"] = value["requestid"].asInt();
-         response["msgtype"] = 999;
-         response["text"] = "NOT SUPPORTED";
+         responseJson["requestid"] = value["requestid"].get<int>();
+         responseJson["msgtype"] = ECServerAPI::Response::Error;
+         responseJson["text"] = "NOT SUPPORTED";
          std::cout << "Message type not supported!" << std::endl;
          break;
       }
    }
    std::cout << "convert response to string" << std::endl;
-   return response.toStyledString();
+   std::stringstream output;
+   output << responseJson;
+   return output.str();
 }
 
 
